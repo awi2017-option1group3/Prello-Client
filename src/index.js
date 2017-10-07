@@ -4,10 +4,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import registerServiceWorker from 'react-scripts/template/src/registerServiceWorker'
-
 import 'antd/dist/antd.css'
 
+import registerServiceWorker from './registerServiceWorker'
 import store, { history } from './store'
 import App from './components/app/App'
 
