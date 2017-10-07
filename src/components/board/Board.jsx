@@ -23,7 +23,7 @@ const Board = props => (
 Board.propTypes = {
   lists: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,

@@ -7,6 +7,9 @@ export const addList = () => (dispatch) => {
       request: {
         method: 'POST',
         url: '/cardLists',
+        data: {
+          title: 'New list',
+        },
       },
     },
   })
