@@ -3,6 +3,8 @@
 Study project attempting to make a Trello clone. 
 This is the **Client** of the project, see also the **API** [here](https://github.com/awi2017-option1group3/Prello-API).
 
+Read the documentation using the Wiki [here](https://github.com/awi2017-option1group3/Prello-Client/wiki) !
+
 ## Local installation
 
 ### Prerequisites
