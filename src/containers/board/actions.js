@@ -6,7 +6,7 @@ export const addList = () => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: '/cardLists',
+        url: '/lists',
         data: {
           title: 'New list',
         },
@@ -21,7 +21,7 @@ export const getAllLists = () => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: '/cardLists',
+        url: '/lists',
       },
     },
   })
