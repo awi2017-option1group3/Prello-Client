@@ -1,7 +1,23 @@
+.board {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.boardTitle {
+    padding: 20px;
+}
+
+.listWrapper {
+    height: inherit;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 0 50px 0 10px;
+}
+
 .addListButton {
-    display: inline-block;
-    margin: 25px 0 0 0;
-    position: absolute;
     opacity: 0.5;
+    margin: 0 10px 0 10px;
+    top: 20px;
     width: 300px;
 }

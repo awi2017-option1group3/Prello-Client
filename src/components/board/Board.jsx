@@ -5,18 +5,22 @@ import List from '../list/List'
 import './style.css'
 
 const Board = props => (
-  <div>
-    <h1>Board</h1>
-    {props.lists.map(list => (
-      <List key={list.id} {...list} />
-    ))}
-    <Button
-      className="addListButton"
-      onClick={props.addList}
-      disabled={props.isAddingList}
-      icon="plus"
-      size="large"
-    >New list</Button>
+  <div className="board">
+    <div className="boardTitle">
+      <h1>Board</h1>
+    </div>
+    <div className="listWrapper">
+      {props.lists.map(list => (
+        <List key={list.id} {...list} />
+      ))}
+      <Button
+        className="addListButton"
+        onClick={props.addList}
+        disabled={props.isAddingList}
+        icon="plus"
+        size="large"
+      >New list</Button>
+    </div>
   </div>
 )
 
