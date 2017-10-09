@@ -9,9 +9,7 @@ const { Content } = Layout
 const App = () => (
   <Layout className="appLayout">
     <Content className="appContent">
-      <main>
-        <Route exact path="/" component={BoardContainer} />
-      </main>
+      <Route exact path="/" component={BoardContainer} />
     </Content>
   </Layout>
 )
