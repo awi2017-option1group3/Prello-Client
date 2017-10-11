@@ -1,4 +1,4 @@
-import { ADD_LIST, GET_ALL_LISTS } from './constants'
+import { ADD_LIST, GET_ALL_LISTS, SAVE_LIST_RANK } from './constants'
 
 const initialState = {
   lists: [],
@@ -41,6 +41,11 @@ export default (state = initialState, action) => {
         ...state,
         error: action.error.message,
         isGettingAllLists: false,
+      }
+    case `${SAVE_LIST_RANK}_ERROR`:
+      return {
+        ...state,
+        error: action.error.message,
       }
     default:
       return state

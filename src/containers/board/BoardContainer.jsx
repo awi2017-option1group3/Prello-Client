@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addList, getAllLists } from './actions'
-import Board from '../../components/board/Board'
+import { addList, getAllLists, saveListRank } from './actions'
+import DroppableBoard from './DroppableBoard'
 
 class BoardContainer extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class BoardContainer extends Component {
 
   render() {
     return (
-      <Board {...this.props} />
+      <DroppableBoard {...this.props} />
     )
   }
 }
@@ -30,6 +30,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   addList,
   getAllLists,
+  saveListRank,
 }, dispatch)
 
 export default connect(
