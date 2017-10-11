@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'antd'
-import List from '../list/List'
+import DraggableList from '../../containers/list/DraggableList'
 import './style.css'
 
 const Board = props => (
@@ -10,16 +10,19 @@ const Board = props => (
       <h1>Board</h1>
     </div>
     <div className="listWrapper">
-      {props.lists.map(list => (
-        <List key={list.id} {...list} />
+      {props.lists.sort((a, b) => a.rank > b.rank).map(list => (
+        <DraggableList key={list.id} {...list} />
       ))}
-      <Button
-        className="addListButton"
-        onClick={props.addList}
-        disabled={props.isAddingList}
-        icon="plus"
-        size="large"
-      >New list</Button>
+      {props.droppableProvided.placeholder}
+      <div className="addListBlock">
+        <Button
+          className="addListButton"
+          onClick={() => props.addList(props.lists.length)}
+          disabled={props.isAddingList}
+          icon="plus"
+          size="large"
+        >New list</Button>
+      </div>
     </div>
   </div>
 )
@@ -33,6 +36,8 @@ Board.propTypes = {
   ).isRequired,
   addList: PropTypes.func.isRequired,
   isAddingList: PropTypes.bool.isRequired,
+  // React drag and drop related
+  droppableProvided: PropTypes.shape().isRequired,
 }
 
 export default Board

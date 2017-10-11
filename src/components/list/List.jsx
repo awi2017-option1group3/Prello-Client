@@ -4,12 +4,13 @@ import { Card as UIList } from 'antd' // A graphical card component is used to d
 import './style.css'
 
 const List = props => (
-  <UIList className="list" title={props.title} bordered={false}>Cards</UIList>
+  <UIList className="list" title={props.title} bordered={false}>Rank : {props.rank} <br /> Cards</UIList>
 )
 
 List.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  rank: PropTypes.number.isRequired,
 }
 
 export default List
