@@ -1,4 +1,4 @@
-import { ADD_LIST, GET_ALL_LISTS } from './constants'
+import { ADD_LIST, GET_ALL_LISTS, DELETE_LIST } from './constants'
 
 export const addList = () => (dispatch) => {
   dispatch({
@@ -22,6 +22,19 @@ export const getAllLists = () => (dispatch) => {
       request: {
         method: 'GET',
         url: '/lists',
+      },
+    },
+  })
+}
+
+export const deleteList = id => (dispatch) => {
+  dispatch({
+    type: DELETE_LIST,
+    listId: id,
+    payload: {
+      request: {
+        method: 'DELETE',
+        url: `/lists/${id}`,
       },
     },
   })

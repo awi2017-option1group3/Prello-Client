@@ -11,7 +11,7 @@ const Board = props => (
     </div>
     <div className="listWrapper">
       {props.lists.map(list => (
-        <List key={list.id} {...list} />
+        <List key={list.id} deleteList={() => props.deleteList(list.id)} {...list} />
       ))}
       <Button
         className="addListButton"
@@ -33,6 +33,7 @@ Board.propTypes = {
   ).isRequired,
   addList: PropTypes.func.isRequired,
   isAddingList: PropTypes.bool.isRequired,
+  deleteList: PropTypes.func.isRequired,
 }
 
 export default Board

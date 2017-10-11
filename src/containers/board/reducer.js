@@ -1,4 +1,4 @@
-import { ADD_LIST, GET_ALL_LISTS } from './constants'
+import { ADD_LIST, GET_ALL_LISTS, DELETE_LIST } from './constants'
 
 const initialState = {
   lists: [],
@@ -41,6 +41,23 @@ export default (state = initialState, action) => {
         ...state,
         error: action.error.message,
         isGettingAllLists: false,
+      }
+    case `${DELETE_LIST}_SENT`:
+      return {
+        ...state,
+        isRemovingList: true,
+      }
+    case `${DELETE_LIST}_SUCCESS`:
+      return {
+        ...state,
+        lists: state.lists.filter(list => list.id !== action.meta.previousAction.listId),
+        isRemovingList: false,
+      }
+    case `${DELETE_LIST}_ERROR`:
+      return {
+        ...state,
+        error: action.error.message,
+        isRemovingList: false,
       }
     default:
       return state
