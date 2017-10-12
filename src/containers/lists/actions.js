@@ -1,4 +1,4 @@
-import { ADD_LIST, GET_ALL_LISTS, SAVE_LIST_RANK } from './constants'
+import { ADD_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
 
 export const addList = lastRank => (dispatch) => {
   dispatch({
@@ -16,9 +16,9 @@ export const addList = lastRank => (dispatch) => {
   })
 }
 
-export const getAllLists = () => (dispatch) => {
+export const getAllListsInBoard = boardId => (dispatch) => {
   dispatch({
-    type: GET_ALL_LISTS,
+    type: GET_ALL_LISTS_IN_BOARD,
     payload: {
       request: {
         method: 'GET',

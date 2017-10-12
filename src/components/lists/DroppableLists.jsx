@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-import Board from '../../components/board/Board'
+import Lists from './Lists'
 import './style.css'
 
-class DroppableBoard extends Component {
+class DroppableLists extends Component {
   constructor(props) {
     super(props)
     this.onDragEnd = this.onDragEnd.bind(this)
@@ -42,8 +42,8 @@ class DroppableBoard extends Component {
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable-board" direction="horizontal">
           {provided => (
-            <div ref={provided.innerRef} className="droppableBoard">
-              <Board {...this.props} droppableProvided={provided} />
+            <div ref={provided.innerRef} className="droppableLists">
+              <Lists {...this.props} droppableProvided={provided} />
             </div>
           )}
         </Droppable>
@@ -52,14 +52,9 @@ class DroppableBoard extends Component {
   }
 }
 
-DroppableBoard.propTypes = {
-  lists: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+DroppableLists.propTypes = {
+  lists: PropTypes.array.isRequired,
   saveListRank: PropTypes.func.isRequired,
 }
 
-export default DroppableBoard
+export default DroppableLists

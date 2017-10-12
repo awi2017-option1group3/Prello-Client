@@ -3,3 +3,7 @@
     margin: 10px;
     width: 300px;
 }
+
+.draggableList {
+    display: inline-grid;
+}
