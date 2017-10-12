@@ -6,7 +6,7 @@ export const getAllCardsInList = listId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: '/cards',
+        url: `/lists/${listId}/cards`,
       },
     },
   })
