@@ -1,0 +1,1 @@
+export const GET_ALL_CARDS_IN_LIST = 'cards/GET_ALL_CARDS_IN_LIST'

@@ -1,9 +1,7 @@
-import { ADD_LIST, GET_ALL_LISTS, SAVE_LIST_RANK } from './constants'
+import { ADD_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
 
 const initialState = {
-  lists: [],
-  isAddingList: false,
-  isGettingAllLists: false,
+  data: [],
 }
 
 export default (state = initialState, action) => {
@@ -11,36 +9,30 @@ export default (state = initialState, action) => {
     case `${ADD_LIST}_SENT`:
       return {
         ...state,
-        isAddingList: true,
       }
     case `${ADD_LIST}_SUCCESS`:
       return {
         ...state,
-        lists: state.lists.concat([action.payload.data]),
-        isAddingList: false,
+        data: state.data.concat([action.payload.data]),
       }
     case `${ADD_LIST}_ERROR`:
       return {
         ...state,
         error: action.error.message,
-        isAddingList: false,
       }
-    case `${GET_ALL_LISTS}_SENT`:
+    case `${GET_ALL_LISTS_IN_BOARD}_SENT`:
       return {
         ...state,
-        isGettingAllLists: true,
       }
-    case `${GET_ALL_LISTS}_SUCCESS`:
+    case `${GET_ALL_LISTS_IN_BOARD}_SUCCESS`:
       return {
         ...state,
-        lists: action.payload.data,
-        isGettingAllLists: false,
+        data: action.payload.data,
       }
-    case `${GET_ALL_LISTS}_ERROR`:
+    case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
       return {
         ...state,
         error: action.error.message,
-        isGettingAllLists: false,
       }
     case `${SAVE_LIST_RANK}_ERROR`:
       return {
