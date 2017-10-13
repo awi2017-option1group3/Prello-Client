@@ -12,7 +12,7 @@ class List extends Component {
         <Menu.Item>
           <Modal
             title={'Delete'}
-            message={`Are you sure to delete the list ${this.props.title} ?`}
+            message={`Are you sure to delete this list named : ${this.props.title} ?`}
             okText={'Delete'}
             cancelText={'Cancel'}
             handleOk={() => { this.props.deleteList(this.props.id) }}
