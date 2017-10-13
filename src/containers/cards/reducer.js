@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case `${GET_ALL_CARDS_IN_LIST}_SUCCESS`:
       return {
         ...state,
-        data: action.payload.data,
+        data: state.data.concat(action.payload.data),
       }
     case `${GET_ALL_CARDS_IN_LIST}_ERROR`:
       return {
