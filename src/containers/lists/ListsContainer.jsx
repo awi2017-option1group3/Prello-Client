@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DroppableLists from '../../components/lists/DroppableLists'
-import { addList, getAllListsInBoard, saveListRank } from './actions'
+import { addList, deleteList, getAllListsInBoard, saveListRank } from './actions'
 
 class ListsContainer extends Component {
   componentWillMount() {
@@ -28,6 +28,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addList,
+  deleteList,
   getAllListsInBoard,
   saveListRank,
 }, dispatch)

@@ -1,4 +1,4 @@
-import { ADD_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
+import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
 
 export const addList = lastRank => (dispatch) => {
   dispatch({
@@ -11,6 +11,19 @@ export const addList = lastRank => (dispatch) => {
           title: 'New list',
           rank: (lastRank || 0) + 1,
         },
+      },
+    },
+  })
+}
+
+export const deleteList = listId => (dispatch) => {
+  dispatch({
+    type: DELETE_LIST,
+    listId,
+    payload: {
+      request: {
+        method: 'DELETE',
+        url: `/lists/${listId}`,
       },
     },
   })
