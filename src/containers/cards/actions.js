@@ -1,7 +1,6 @@
 import { ADD_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
 
 export const addCard = listId => (dispatch) => {
-  console.log(`List ID : ${listId}`)
   dispatch({
     type: ADD_CARD,
     payload: {

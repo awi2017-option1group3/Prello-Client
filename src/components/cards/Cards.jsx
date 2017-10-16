@@ -12,7 +12,6 @@ const Cards = props => (
     <div className="addCardBlock">
       <Button
         className="addCardButton"
-        // TODO : fix listID call in route.
         onClick={() => props.addCard(props.listId)}
         icon="plus"
         size="large"

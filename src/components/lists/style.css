@@ -2,7 +2,7 @@
     display: inline-flex;
     height: inherit;
     overflow-x: scroll;
-    margin: 0 0px 0 0px;
+    margin: 0;
 }
 
 .addListBlock {
