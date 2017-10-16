@@ -1,9 +1,14 @@
 .list {
     display: inline-grid;
     margin: 10px;
-    width: 300px;
+    width: 370px;
+    /*overflow-x: hidden;*/
 }
 
 .draggableList {
     display: inline-grid;
+}
+
+.list > .ant-card-body{
+    padding: 0!important;
 }

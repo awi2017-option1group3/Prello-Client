@@ -4,7 +4,7 @@ import { Card as UICard } from 'antd'
 import './style.css'
 
 const Card = props => (
-  <UICard title={props.title} />
+  <UICard className="card" title={props.title} />
 )
 
 Card.propTypes = {
