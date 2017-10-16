@@ -6,6 +6,7 @@
 
 .draggableList {
     display: inline-grid;
+    width: 390px;
 }
 
 .list > .ant-card-body {
