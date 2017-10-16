@@ -1,8 +1,8 @@
-.listWrapper {
+.listsWrapper {
     display: inline-flex;
     height: inherit;
     overflow-x: scroll;
-    padding: 0 50px 0 10px;
+    margin: 0;
 }
 
 .addListBlock {
