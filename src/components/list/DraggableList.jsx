@@ -11,11 +11,10 @@ const DraggableList = props => (
         <div
           ref={draggableProvided.innerRef}
           style={draggableProvided.draggableStyle}
-          {...draggableProvided.dragHandleProps}
         >
-          <List {...props} />
+          <List {...props} dragHandleProps={draggableProvided.dragHandleProps} />
         </div>
-        <div className="draggableList">
+        <div>
           {draggableProvided.placeholder}
         </div>
       </div>
