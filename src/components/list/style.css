@@ -14,5 +14,5 @@
 
 .draggableList {
     display: inline-grid;
-    width: 390px;
+    min-width: 390px;
 }

@@ -33,7 +33,7 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.props.title} extra={this.getDropdown()} />
+      <UICard title={this.props.title} extra={this.getDropdown()} className="card" />
     )
   }
 }
