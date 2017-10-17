@@ -1,7 +1,7 @@
 import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK } from './constants'
 
 
-export const addCard = listId => (dispatch) => {
+export const addCard = (listId, lastCardRank) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
     payload: {
@@ -11,6 +11,7 @@ export const addCard = listId => (dispatch) => {
         data: {
           title: 'New card',
           listId: listId,
+          rank: (lastCardRank || 0) + 1,
         },
       },
     },

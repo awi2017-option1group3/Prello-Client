@@ -40,7 +40,7 @@ class DroppableCards extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable-list" direction="vertical">
+        <Droppable droppableId={`droppable-list-${this.props.listId}`} >
           {provided => (
             <div ref={provided.innerRef} className="droppableCards">
               <Cards {...this.props} droppableProvided={provided} />
@@ -54,6 +54,7 @@ class DroppableCards extends Component {
 
 DroppableCards.propTypes = {
   cards: PropTypes.array.isRequired,
+  listId: PropTypes.string.isRequired,
   saveCardRank: PropTypes.func.isRequired,
 }
 

@@ -12,7 +12,7 @@ const Cards = props => (
     <div className="addCardBlock">
       <Button
         className="addCardButton"
-        onClick={() => props.addCard(props.listId)}
+        onClick={() => props.addCard(props.listId, props.cards.length)}
         icon="plus"
         size="large"
         type="primary"
