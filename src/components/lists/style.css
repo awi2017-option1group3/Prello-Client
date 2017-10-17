@@ -2,6 +2,7 @@
     display: inline-flex;
     height: inherit;
     overflow-x: scroll;
+    overflow-y: hidden;
     margin: 0;
 }
 
@@ -16,6 +17,5 @@
 }
 
 .droppableLists {
-    height: 100%;
     display: flex;
 }
