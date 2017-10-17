@@ -18,4 +18,5 @@
 
 .droppableLists {
     display: flex;
+    height: 100%;
 }
