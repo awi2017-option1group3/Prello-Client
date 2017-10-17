@@ -1,4 +1,5 @@
-import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
+import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK } from './constants'
+
 
 export const addCard = listId => (dispatch) => {
   dispatch({
@@ -36,6 +37,21 @@ export const getAllCardsInList = listId => (dispatch) => {
       request: {
         method: 'GET',
         url: `/lists/${listId}/cards`,
+      },
+    },
+  })
+}
+
+export const saveCardRank = card => (dispatch) => {
+  dispatch({
+    type: SAVE_CARD_RANK,
+    payload: {
+      request: {
+        method: 'PATCH',
+        url: `/lists/${card.listId}/cards/${card.id}`,
+        data: {
+          rank: card.rank,
+        },
       },
     },
   })

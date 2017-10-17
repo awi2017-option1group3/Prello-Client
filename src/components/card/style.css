@@ -2,3 +2,7 @@
     display: inline-grid;
     margin-top: 15px;
 }
+
+.draggableCard {
+    display: inline-grid;
+}

@@ -41,6 +41,7 @@ class Card extends Component {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
+  rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   deleteCard: PropTypes.func.isRequired,
 }

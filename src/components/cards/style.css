@@ -18,3 +18,8 @@
     margin-bottom: 25px;
     width: 100%;
 }
+
+.droppableCards {
+    height: 100%;
+    display: flex;
+}
