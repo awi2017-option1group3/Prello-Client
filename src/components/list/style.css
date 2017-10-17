@@ -4,11 +4,15 @@
     width: 370px;
 }
 
-.draggableList {
-    display: inline-grid;
-    width: 390px;
+.listHeader {
+    cursor: pointer;
 }
 
 .list > .ant-card-body {
     padding: 0;
+}
+
+.draggableList {
+    display: inline-grid;
+    width: 390px;
 }
