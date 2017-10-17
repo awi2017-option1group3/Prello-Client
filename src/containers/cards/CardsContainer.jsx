@@ -27,8 +27,8 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  deleteCard,
   addCard,
+  deleteCard,
   getAllCardsInList,
   saveCardRank,
 }, dispatch)
