@@ -3,6 +3,10 @@
     margin-top: 15px;
 }
 
+.cardHeader {
+    cursor: pointer;
+}
+
 .draggableCard {
     display: inline-grid;
 }

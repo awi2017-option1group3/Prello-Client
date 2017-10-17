@@ -11,11 +11,10 @@ const DraggableCard = props => (
         <div
           ref={draggableProvided.innerRef}
           style={draggableProvided.draggableStyle}
-          {...draggableProvided.dragHandleProps}
         >
-          <Card {...props} />
+          <Card {...props} dragHandleProps={draggableProvided.dragHandleProps}/>
         </div>
-        <div className="draggableCard">
+        <div>
           {draggableProvided.placeholder}
         </div>
       </div>
