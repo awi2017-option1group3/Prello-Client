@@ -6,6 +6,14 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 
 class List extends Component {
+  getHeader() {
+    return (
+      <div className="listHeader" {...this.props.dragHandleProps}>
+        {this.props.title}
+      </div>
+    )
+  }
+
   getMenu() {
     return (
       <Menu>
@@ -34,7 +42,7 @@ class List extends Component {
 
   render() {
     return (
-      <UIList className="list" title={this.props.title} extra={this.getDropdown()} bordered={false}>
+      <UIList className="list" title={this.getHeader()} extra={this.getDropdown()} bordered={false}>
         <CardsContainer listId={this.props.id} />
       </UIList>
     )
@@ -44,6 +52,7 @@ class List extends Component {
 List.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  dragHandleProps: PropTypes.object.isRequired,
   deleteList: PropTypes.func.isRequired,
 }
 
