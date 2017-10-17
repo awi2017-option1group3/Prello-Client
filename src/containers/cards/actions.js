@@ -1,4 +1,4 @@
-import { ADD_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
+import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
 
 export const addCard = listId => (dispatch) => {
   dispatch({
@@ -11,6 +11,19 @@ export const addCard = listId => (dispatch) => {
           title: 'New card',
           listId: listId,
         },
+      },
+    },
+  })
+}
+
+export const deleteCard = (listId, cardId) => (dispatch) => {
+  dispatch({
+    type: DELETE_CARD,
+    cardId,
+    payload: {
+      request: {
+        method: 'DELETE',
+        url: `/lists/${listId}/cards/${cardId}`,
       },
     },
   })
