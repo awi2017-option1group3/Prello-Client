@@ -3,11 +3,6 @@ import PropTypes from 'prop-types'
 import { Button, Card as UICard, Dropdown, Icon, Menu } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
-/*
-const Card = props => (
-  <UICard title={props.title} />
-) 
-*/
 
 class Card extends Component {
   getMenu() {
@@ -16,7 +11,7 @@ class Card extends Component {
         <Menu.Item>
           <Modal
             title={'Delete'}
-            message={`Are you sure to delete this list named : ${this.props.title} ?`}
+            message={`Are you sure to delete this card named : ${this.props.title} ?`}
             okText={'Delete'}
             cancelText={'Cancel'}
             handleOk={() => { this.props.deleteCard(this.props.listId, this.props.id) }}
