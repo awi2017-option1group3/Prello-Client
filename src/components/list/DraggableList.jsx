@@ -15,7 +15,7 @@ const DraggableList = props => (
         >
           <List {...props} />
         </div>
-        <div className="draggableList">
+        <div>
           {draggableProvided.placeholder}
         </div>
       </div>
