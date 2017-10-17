@@ -5,6 +5,14 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 
 class Card extends Component {
+  getHeader() {
+    return (
+      <div className="cardHeader" {...this.props.dragHandleProps}>
+        {this.props.title}
+      </div>
+    )
+  }
+
   getMenu() {
     return (
       <Menu>
@@ -33,7 +41,7 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.props.title} extra={this.getDropdown()} className="card" />
+      <UICard title={this.getHeader()} extra={this.getDropdown()} className="card" />
     )
   }
 }
@@ -44,6 +52,7 @@ Card.propTypes = {
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   deleteCard: PropTypes.func.isRequired,
+  dragHandleProps: PropTypes.object.isRequired,
 }
 
 export default Card
