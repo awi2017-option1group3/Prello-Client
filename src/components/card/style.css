@@ -1,6 +1,7 @@
 .card {
     display: inline-grid;
     margin-top: 15px;
+    width: 100%;
 }
 
 .cardHeader {
@@ -9,4 +10,5 @@
 
 .draggableCard {
     display: inline-grid;
+    margin-top: 15px;
 }

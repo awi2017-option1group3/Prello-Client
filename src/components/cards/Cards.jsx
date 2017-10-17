@@ -23,12 +23,7 @@ const Cards = props => (
 
 Cards.propTypes = {
   listId: PropTypes.string.isRequired,
-<<<<<<< master
-  cards: PropTypes.array.isRequired,
-  deleteCard: PropTypes.func.isRequired,
-=======
   cards: PropTypes.array.isRequired,  
->>>>>>> [FEAT] Drag Card : WIP
   addCard: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
 }
