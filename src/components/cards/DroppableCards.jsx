@@ -40,7 +40,7 @@ class DroppableCards extends Component {
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId={`droppable-list-${this.props.listId}`} >
+        <Droppable droppableId={`droppable-list-${this.props.listId}`} type="Card" >
           {provided => (
             <div ref={provided.innerRef} className="droppableCards">
               <Cards {...this.props} droppableProvided={provided} />
