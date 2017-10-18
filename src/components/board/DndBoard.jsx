@@ -20,11 +20,22 @@ class DndBoard extends Component {
           )
           break
         case ('list'):
-          this.moveCardInStructure(
-            result.source.index,
-            result.destination.index,
-            result.destination,
-          )
+          if (result.destination.droppableId.split('-')[2] === result.source.droppableId.split('-')[2]) {
+            this.moveCardInList(
+              result.source.index,
+              result.destination.index,
+              result.source.droppableId.split('-')[2],
+            )
+          } else {
+            const initialListId = result.source.droppableId.split('-')[2]
+            const destinationListId = result.destination.droppableId.split('-')[2]
+            this.moveCardBewteenLists(
+              result.source.index,
+              result.destination.index,
+              initialListId,
+              destinationListId,
+            )
+          }
           break
         default:
           console.log('result.destination.type mismatch')
@@ -51,23 +62,39 @@ class DndBoard extends Component {
     return result
   }
 
-  moveCardInStructure(originIndex, destinationIndex, destination) {
-    const result = Array.from(destination.cards)
+  moveCardInList(originIndex, destinationIndex, listId) {
+    const result = Array.from(this.props.cards.filter(card => card.listId === listId))
     const [removed] = result.splice(originIndex, 1)
     result.splice(destinationIndex, 0, removed)
     if (destinationIndex < originIndex) {
       for (let i = destinationIndex; i <= originIndex; i++) {
         result[i].rank = i + 1
-        this.props.saveCardRank(result[i], destination.id)
+        this.props.saveCardRank(result[i])
       }
     } else {
       for (let i = destinationIndex; i >= originIndex; i--) {
         result[i].rank = i + 1
-        result[i].listId = destination.id
+        result[i].listId = listId
         this.props.saveCardRank(result[i])
       }
     }
     return result
+  }
+
+  moveCardBewteenLists(originIndex, destinationIndex, initialListId, destinationListId) {
+    const cardToMove = this.props.cards.filter(card => card.listId === destinationListId
+      && card.rank === originIndex)[0]
+    // const originList = this.props.cards.filter(card => card.listId === initialListId)
+    const destinationList = Array.from(this.props.cards.filter(card => card.listId === destinationListId))
+    const [removed] = destinationList.splice(originIndex, 1)
+    destinationList.splice(destinationIndex, 0, removed)
+    for (let i = destinationIndex; i <= originIndex; i++) {
+      destinationList[i].rank = i + 1
+      destinationList[i].listId = destinationListId
+      this.props.saveCardRank(destinationList[i])
+    }
+    destinationList.push(cardToMove)
+    return destinationList
   }
 
   render() {
@@ -86,6 +113,7 @@ class DndBoard extends Component {
 }
 
 DndBoard.propTypes = {
+  cards: PropTypes.array.isRequired,
   lists: PropTypes.array.isRequired,
   saveListRank: PropTypes.func.isRequired,
   saveCardRank: PropTypes.func.isRequired,
