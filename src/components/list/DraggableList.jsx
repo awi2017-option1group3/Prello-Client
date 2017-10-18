@@ -5,7 +5,7 @@ import List from './List'
 import './style.css'
 
 const DraggableList = props => (
-  <Draggable draggableId={props.id}>
+  <Draggable draggableId={props.id} type="List">
     {draggableProvided => (
       <div className="draggableList">
         <div

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ListsContainer from '../../containers/lists/ListsContainer'
 import './style.css'
 
@@ -10,5 +11,9 @@ const Board = () => (
     <ListsContainer boardId="b1" />
   </div>
 )
+
+Board.propTypes = {
+  lists: PropTypes.array.isRequired,
+}
 
 export default Board

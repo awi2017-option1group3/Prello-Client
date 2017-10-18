@@ -51,6 +51,7 @@ export const saveCardRank = card => (dispatch) => {
         method: 'PATCH',
         url: `/lists/${card.listId}/cards/${card.id}`,
         data: {
+          listId: card.rank,
           rank: card.rank,
         },
       },
