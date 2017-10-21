@@ -4,12 +4,25 @@ import { Button, Card as UIList, Dropdown, Icon, Menu } from 'antd' // A graphic
 import CardsContainer from '../../containers/cards/CardsContainer'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
+import EditField from '../../commons/editField/EditField'
 
 class List extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: null,
+      title: this.props.title,
+    }
+  }
+      
   getHeader() {
     return (
       <div className="listHeader" {...this.props.dragHandleProps}>
-        {this.props.title}
+        <EditField
+          id={this.props.id}
+          text={this.props.title}
+          saveChange={(newTitle) => { this.props.saveTitleList(this.props.id, newTitle) }}
+        />
       </div>
     )
   }
@@ -42,7 +55,11 @@ class List extends Component {
 
   render() {
     return (
-      <UIList className="list" title={this.getHeader()} extra={this.getDropdown()} bordered={false}>
+      <UIList 
+        className="list" 
+        title={this.getHeader()} 
+        extra={this.getDropdown()} 
+        bordered={false}>
         <CardsContainer listId={this.props.id} />
       </UIList>
     )
@@ -54,6 +71,7 @@ List.propTypes = {
   title: PropTypes.string.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
   deleteList: PropTypes.func.isRequired,
+  saveTitleList: PropTypes.func.isRequired,
 }
 
 export default List
