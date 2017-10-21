@@ -1,4 +1,4 @@
-import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD } from './constants'
+import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST } from './constants'
 
 const initialState = {
   data: [],
@@ -44,6 +44,19 @@ export default (state = initialState, action) => {
         data: action.payload.data,
       }
     case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
+      return {
+        ...state,
+        error: action.error.message,
+      }
+    case `${RENAME_LIST}_SENT`:
+      return {
+        ...state,
+      }
+    case `${RENAME_LIST}_SUCCESS`:
+      return {
+        ...state,
+      }
+    case `${RENAME_LIST}_ERROR`:
       return {
         ...state,
         error: action.error.message,
