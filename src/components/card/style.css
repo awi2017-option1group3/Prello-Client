@@ -1,4 +1,13 @@
 .card {
     display: inline-grid;
     margin-top: 15px;
+    width: 100%;
+}
+
+.cardHeader {
+    cursor: pointer;
+}
+
+.draggableCard {
+    display: inline-grid;
 }

@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Draggable } from 'react-beautiful-dnd'
-import List from './List'
+import Card from './Card'
 import './style.css'
 
-const DraggableList = props => (
-  <Draggable draggableId={props.id} type="List">
+const DraggableCard = props => (
+  <Draggable draggableId={`droppable-card-${props.id}`} type="Card" >
     {draggableProvided => (
-      <div className="draggableList">
+      <div className="draggableCard">
         <div
           ref={draggableProvided.innerRef}
           style={draggableProvided.draggableStyle}
         >
-          <List {...props} dragHandleProps={draggableProvided.dragHandleProps} />
+          <Card {...props} dragHandleProps={draggableProvided.dragHandleProps} />
         </div>
         <div>
           {draggableProvided.placeholder}
@@ -22,8 +22,8 @@ const DraggableList = props => (
   </Draggable>
 )
 
-DraggableList.propTypes = {
+DraggableCard.propTypes = {
   id: PropTypes.string.isRequired,
 }
 
-export default DraggableList
+export default DraggableCard
