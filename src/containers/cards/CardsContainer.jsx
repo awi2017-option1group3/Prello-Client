@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Cards from '../../components/cards/Cards'
-import { getAllCardsInList } from './actions'
+import { addCard, deleteCard, getAllCardsInList } from './actions'
 
 class CardsContainer extends Component {
   componentWillMount() {
@@ -27,6 +27,8 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  deleteCard,
+  addCard,
   getAllCardsInList,
 }, dispatch)
 

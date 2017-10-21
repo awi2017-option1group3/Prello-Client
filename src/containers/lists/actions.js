@@ -1,4 +1,4 @@
-import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
+import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK, RENAME_LIST } from './constants'
 
 export const addList = lastRank => (dispatch) => {
   dispatch({
@@ -50,6 +50,21 @@ export const saveListRank = list => (dispatch) => {
         url: `/lists/${list.id}`,
         data: {
           rank: list.rank,
+        },
+      },
+    },
+  })
+}
+
+export const saveTitleList = (listId, listTitle) => (dispatch) => {
+  dispatch({
+    type: RENAME_LIST,
+    payload: {
+      request: {
+        method: 'PATCH',
+        url: `/lists/${listId}`,
+        data: {
+          title: listTitle,
         },
       },
     },

@@ -5,9 +5,9 @@ import DraggableList from '../list/DraggableList'
 import './style.css'
 
 const Lists = props => (
-  <div className="listWrapper">
+  <div className="listsWrapper">
     {props.lists.sort((a, b) => a.rank > b.rank).map(list => (
-      <DraggableList {...list} key={list.id} deleteList={props.deleteList} />
+      <DraggableList {...list} key={list.id} deleteList={props.deleteList} saveTitleList={props.saveTitleList} />
     ))}
     <div className="addListBlock">
       <Button
@@ -24,6 +24,7 @@ Lists.propTypes = {
   lists: PropTypes.array.isRequired,
   addList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
+  saveTitleList: PropTypes.func.isRequired
 }
 
 export default Lists
