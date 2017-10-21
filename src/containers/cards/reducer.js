@@ -1,4 +1,4 @@
-import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST} from './constants'
+import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
 
 const initialState = {
   data: [],
