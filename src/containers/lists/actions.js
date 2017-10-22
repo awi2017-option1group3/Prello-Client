@@ -1,4 +1,10 @@
-import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK, RENAME_LIST } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK, RENAME_LIST } from './constants'
+
+export const cleanState = () => (dispatch) => {
+  dispatch({
+    type: CLEAN_STATE,
+  })
+}
 
 export const getAllListsInBoard = boardId => (dispatch) => {
   dispatch({
@@ -6,19 +12,19 @@ export const getAllListsInBoard = boardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: '/lists',
+        url: `/boards/${boardId}/lists`,
       },
     },
   })
 }
 
-export const addList = lastRank => (dispatch) => {
+export const addList = (boardId, lastRank) => (dispatch) => {
   dispatch({
     type: ADD_LIST,
     payload: {
       request: {
         method: 'POST',
-        url: '/lists',
+        url: `/boards/${boardId}/lists`,
         data: {
           title: 'New list',
           rank: (lastRank || 0) + 1,

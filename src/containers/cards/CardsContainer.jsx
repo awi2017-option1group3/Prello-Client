@@ -23,7 +23,7 @@ CardsContainer.propTypes = {
 }
 
 const mapStateToProps = (state, props) => ({
-  cards: state.cards.data.filter(card => card.listId === props.listId),
+  cards: state.cards.filter(card => card.listId === props.listId),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

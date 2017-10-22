@@ -2,39 +2,31 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import DndBoard from '../../components/board/DndBoard'
-import { getAllListsInBoard, getAllCardsInList, saveCardRank, saveListRank } from './actions'
+import { getAllBoards } from './actions'
+import Boards from '../../components/boards/Boards'
 
 class BoardsContainer extends Component {
   componentWillMount() {
-    this.props.getAllListsInBoard(this.props.boardId)
+    this.props.getAllBoards() // TODO: need to use `getALlBoardsForUser(this.props.userId)` in the future
   }
 
   render() {
     return (
-      <DndBoard {...this.props} />
+      <Boards {...this.props} />
     )
   }
 }
 
 BoardsContainer.propTypes = {
-  boardId: PropTypes.string.isRequired,
-  getAllListsInBoard: PropTypes.func.isRequired,
-  getAllCardsInList: PropTypes.func.isRequired,
-  saveCardRank: PropTypes.func.isRequired,
-  saveListRank: PropTypes.func.isRequired,
+  getAllBoards: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, props) => ({
-  lists: state.lists.data, // .filter(list => list.boardId === props.boardId),
-  cards: state.cards.data,
+const mapStateToProps = state => ({
+  boards: state.boards,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getAllListsInBoard,
-  getAllCardsInList,
-  saveCardRank,
-  saveListRank,
+  getAllBoards,
 }, dispatch)
 
 export default connect(
