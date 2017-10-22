@@ -1,4 +1,4 @@
-import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
+import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_TITLE } from './constants'
 
 const initialState = {
   data: [],
@@ -44,6 +44,19 @@ export default (state = initialState, action) => {
         data: state.data.concat(action.payload.data),
       }
     case `${GET_ALL_CARDS_IN_LIST}_ERROR`:
+      return {
+        ...state,
+        error: action.error.message,
+      }
+    case `${SAVE_CARD_TITLE}_SENT`:
+      return {
+        ...state,
+      }
+    case `${SAVE_CARD_TITLE}_SUCCESS`:
+      return {
+        ...state,
+      }
+    case `${SAVE_CARD_TITLE}_ERROR`:
       return {
         ...state,
         error: action.error.message,
