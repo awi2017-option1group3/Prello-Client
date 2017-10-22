@@ -1,66 +1,35 @@
-import { ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST } from './constants'
 
-const initialState = {
-  data: [],
-}
+const initialState = []
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case `${CLEAN_STATE}`:
+      return []
     case `${ADD_LIST}_SENT`:
-      return {
-        ...state,
-      }
+      return state
     case `${ADD_LIST}_SUCCESS`:
-      return {
-        ...state,
-        data: state.data.concat(action.payload.data),
-      }
+      return state.concat(action.payload.data)
     case `${ADD_LIST}_ERROR`:
-      return {
-        ...state,
-        error: action.error.message,
-      }
+      return state
     case `${DELETE_LIST}_SENT`:
-      return {
-        ...state,
-      }
+      return state
     case `${DELETE_LIST}_SUCCESS`:
-      return {
-        ...state,
-        data: state.data.filter(list => list.id !== action.meta.previousAction.listId),
-      }
+      return state.filter(list => list.id !== action.meta.previousAction.listId)
     case `${DELETE_LIST}_ERROR`:
-      return {
-        ...state,
-        error: action.error.message,
-      }
+      return state
     case `${GET_ALL_LISTS_IN_BOARD}_SENT`:
-      return {
-        ...state,
-      }
+      return state
     case `${GET_ALL_LISTS_IN_BOARD}_SUCCESS`:
-      return {
-        ...state,
-        data: action.payload.data,
-      }
+      return action.payload.data
     case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
-      return {
-        ...state,
-        error: action.error.message,
-      }
+      return state
     case `${RENAME_LIST}_SENT`:
-      return {
-        ...state,
-      }
+      return state
     case `${RENAME_LIST}_SUCCESS`:
-      return {
-        ...state,
-      }
+      return state
     case `${RENAME_LIST}_ERROR`:
-      return {
-        ...state,
-        error: action.error.message,
-      }
+      return state
     default:
       return state
   }

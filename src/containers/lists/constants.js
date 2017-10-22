@@ -1,3 +1,4 @@
+export const CLEAN_STATE = 'lists/CLEAN_STATE'
 export const ADD_LIST = 'lists/ADD_LIST'
 export const DELETE_LIST = 'lists/DELETE_LIST'
 export const GET_ALL_LISTS_IN_BOARD = 'lists/GET_ALL_LISTS_IN_BOARD'

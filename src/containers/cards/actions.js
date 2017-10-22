@@ -1,4 +1,10 @@
-import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK, SAVE_CARD_TITLE } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK, SAVE_CARD_TITLE } from './constants'
+
+export const cleanState = () => (dispatch) => {
+  dispatch({
+    type: CLEAN_STATE,
+  })
+}
 
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
