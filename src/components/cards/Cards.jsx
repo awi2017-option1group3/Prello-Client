@@ -7,7 +7,7 @@ import './style.css'
 const Cards = props => (
   <div className="cardsWrapper">
     {props.cards.sort((a, b) => a.rank > b.rank).map(card => (
-      <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} />
+      <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} />
     ))}
     <div className="addCardBlock">
       <Button
@@ -26,6 +26,7 @@ Cards.propTypes = {
   cards: PropTypes.array.isRequired,  
   addCard: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
+  saveCardTitle: PropTypes.func.isRequired,
 }
 
 export default Cards

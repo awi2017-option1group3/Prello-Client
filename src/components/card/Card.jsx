@@ -3,12 +3,27 @@ import PropTypes from 'prop-types'
 import { Button, Card as UICard, Dropdown, Icon, Menu } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
+import EditField from '../../commons/editField/EditField'
+
 
 class Card extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: null,
+      title: this.props.title,
+    }
+  }
+
   getHeader() {
     return (
       <div className="cardHeader" {...this.props.dragHandleProps}>
-        {this.props.title}
+        <EditField
+          id={this.props.id}
+          listId={this.props.listId}
+          text={this.props.title}
+          saveChange={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
+        />
       </div>
     )
   }
