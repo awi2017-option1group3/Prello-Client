@@ -25,7 +25,7 @@ Lists.propTypes = {
   lists: PropTypes.array.isRequired,
   addList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
-  saveTitleList: PropTypes.func.isRequired
+  saveTitleList: PropTypes.func.isRequired,
 }
 
 export default Lists
