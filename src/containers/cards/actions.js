@@ -1,4 +1,4 @@
-import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK, RENAME_CARD } from './constants'
+import { ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK, SAVE_CARD_TITLE } from './constants'
 
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
@@ -59,7 +59,7 @@ export const saveCardRank = card => (dispatch) => {
 
 export const saveCardTitle = (cardId, cardTitle) => (dispatch) => {
   dispatch({
-    type: RENAME_CARD,
+    type: SAVE_CARD_TITLE,
     payload: {
       request: {
         method: 'PUT',

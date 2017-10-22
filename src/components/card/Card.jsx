@@ -7,20 +7,11 @@ import EditField from '../../commons/editField/EditField'
 
 
 class Card extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      editing: null,
-      title: this.props.title,
-    }
-  }
-
   getHeader() {
     return (
       <div className="cardHeader" {...this.props.dragHandleProps}>
         <EditField
           id={this.props.id}
-          listId={this.props.listId}
           text={this.props.title}
           saveChange={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
         />
