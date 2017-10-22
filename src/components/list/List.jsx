@@ -7,21 +7,13 @@ import './style.css'
 import EditField from '../../commons/editField/EditField'
 
 class List extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      editing: null,
-      title: this.props.title,
-    }
-  }
-      
   getHeader() {
     return (
-      <div className="listHeader" {...this.props.dragHandleProps}>
+      <div className="listHeader">
         <EditField
-          id={this.props.id}
           text={this.props.title}
-          saveChange={(newTitle) => { this.props.saveTitleList(this.props.id, newTitle) }}
+          save={(newTitle) => { this.props.saveTitleList(this.props.id, newTitle) }}
+          dragHandleProps={this.props.dragHandleProps}
         />
       </div>
     )
@@ -59,7 +51,8 @@ class List extends Component {
         className="list" 
         title={this.getHeader()} 
         extra={this.getDropdown()} 
-        bordered={false}>
+        bordered={false}
+      >
         <CardsContainer listId={this.props.id} />
       </UIList>
     )

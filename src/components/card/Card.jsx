@@ -9,11 +9,11 @@ import EditField from '../../commons/editField/EditField'
 class Card extends Component {
   getHeader() {
     return (
-      <div className="cardHeader" {...this.props.dragHandleProps}>
+      <div className="cardHeader">
         <EditField
-          id={this.props.id}
           text={this.props.title}
-          saveChange={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
+          save={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
+          dragHandleProps={this.props.dragHandleProps}
         />
       </div>
     )
@@ -60,6 +60,7 @@ Card.propTypes = {
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   deleteCard: PropTypes.func.isRequired,
+  saveCardTitle: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
 }
 

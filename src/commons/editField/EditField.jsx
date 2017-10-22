@@ -6,41 +6,50 @@ class EditField extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      editing: null,
+      editing: false,
       text: this.props.text,
     }
     this.onChangeText = this.onChangeText.bind(this)
+    this.enableEditing = this.enableEditing.bind(this)
+    this.saveChange = this.saveChange.bind(this)
   }
 
   onChangeText(e) {
-    this.setState({ text: e.target.value })
+    this.setState({
+      text: e.target.value,
+    })
   }
 
-  toggleEditing() {
-    this.setState({ editing: this.props.id })
+  enableEditing() {
+    this.setState({
+      editing: true,
+    })
   }
 
   saveChange() {
-    this.props.saveChange(this.state.text)
-    this.setState({ editing: null })
+    this.setState({
+      editing: false,
+    })
+    this.props.save(this.state.text)
   }
 
   renderItemOrEditField() {
-    if (this.state.editing === this.props.id) {
+    if (this.state.editing) {
       return (
         <Input
           value={this.state.text}
-          onPressEnter={() => { this.saveChange() }}
-          onBlur={() => { this.saveChange() }}
           onChange={this.onChangeText}
+          onPressEnter={this.saveChange}
+          onBlur={this.saveChange}
           onMouseDown={e => e.stopPropagation()}
+          autoFocus
         />
       )
     } 
     return (
-      <p onClick={this.toggleEditing.bind(this, this.props.id)}>
+      <span {...this.props.dragHandleProps} onClick={this.enableEditing}>
         {this.state.text}
-      </p>
+      </span>
     )
   }
 
@@ -50,9 +59,9 @@ class EditField extends Component {
 }
 
 EditField.propTypes = {
-  id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  saveChange: PropTypes.func.isRequired,
-
+  save: PropTypes.func.isRequired,
+  dragHandleProps: PropTypes.object.isRequired,
 }
+
 export default EditField
