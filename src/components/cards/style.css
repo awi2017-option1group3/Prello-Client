@@ -18,6 +18,10 @@
     text-align: center;
 }
 
+.cardsCreater {
+    text-align: center;
+}
+
 .addCardBlock {
     display: inline-flex;
     margin: 15px 0 0 0;

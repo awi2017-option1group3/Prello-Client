@@ -25,6 +25,7 @@ ListsContainer.propTypes = {
 const mapStateToProps = (state, props) => ({
   lists: state.lists.data.filter(list => list.boardId === props.boardId),
   isFetching: state.lists.isFetching,
+  isAdding: state.lists.isAdding,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

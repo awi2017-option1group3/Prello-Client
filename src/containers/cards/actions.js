@@ -22,6 +22,7 @@ export const getAllCardsInList = listId => (dispatch) => {
 export const addCard = (listId, lastCardRank) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
+    listId,
     payload: {
       request: {
         method: 'POST',

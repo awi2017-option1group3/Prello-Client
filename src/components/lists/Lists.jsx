@@ -16,14 +16,16 @@ const Lists = props => (
           <DraggableList {...list} key={list.id} deleteList={props.deleteList} saveTitleList={props.saveTitleList} />
         ))}
         <div className="addListBlock">
-          <Button
-            className="addListButton"
-            onClick={() => props.addList(props.boardId, props.lists.length)}
-            icon="plus"
-            size="large"
-          >
-            New list
-          </Button>
+          <Spin spinning={props.isAdding}>
+            <Button
+              className="addListButton"
+              onClick={() => props.addList(props.boardId, props.lists.length)}
+              icon="plus"
+              size="large"
+            >
+              New list
+            </Button>
+          </Spin>
         </div>
       </div>
     )}
@@ -34,6 +36,7 @@ Lists.propTypes = {
   boardId: PropTypes.string.isRequired,
   lists: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isAdding: PropTypes.bool.isRequired,
   addList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   saveTitleList: PropTypes.func.isRequired,
