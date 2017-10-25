@@ -47,9 +47,9 @@ class EditField extends Component {
       )
     } 
     return (
-      <span {...this.props.dragHandleProps} onClick={this.enableEditing}>
+      <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
         {this.state.text}
-      </span>
+      </div>
     )
   }
 
