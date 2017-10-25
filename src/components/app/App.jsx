@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { Layout } from 'antd'
 import BoardsContainer from '../../containers/boards/BoardsContainer'
 import RegisterContainer from '../../containers/register/RegisterContainer'
+import BoardContainer from '../../containers/board/BoardContainer'
 import Navbar from '../navbar/Navbar'
 import './style.css'
 

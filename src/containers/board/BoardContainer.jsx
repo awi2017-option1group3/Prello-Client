@@ -7,7 +7,7 @@ import { cleanState as cleanBoardState, getAllListsInBoard } from './actions'
 import { cleanState as cleanListsState, saveListRank } from '../lists/actions'
 import { cleanState as cleanCardsState, getAllCardsInList, saveCardRank } from '../cards/actions'
 
-class BoardsContainer extends Component {
+class BoardContainer extends Component {
   componentWillMount() {
     this.props.cleanBoardState()
     this.props.cleanListsState()
@@ -22,7 +22,7 @@ class BoardsContainer extends Component {
   }
 }
 
-BoardsContainer.propTypes = {
+BoardContainer.propTypes = {
   match: PropTypes.object.isRequired,
   cleanBoardState: PropTypes.func.isRequired,
   cleanListsState: PropTypes.func.isRequired,
@@ -51,4 +51,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BoardsContainer)
+)(BoardContainer)
