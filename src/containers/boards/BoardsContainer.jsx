@@ -22,7 +22,8 @@ BoardsContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  boards: state.boards,
+  boards: state.boards.data,
+  isFetching: state.boards.isFetching,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

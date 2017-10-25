@@ -9,6 +9,7 @@ export const cleanState = () => (dispatch) => {
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
     type: GET_ALL_CARDS_IN_LIST,
+    listId,
     payload: {
       request: {
         method: 'GET',

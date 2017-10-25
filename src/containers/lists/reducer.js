@@ -1,35 +1,39 @@
-import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD } from './constants'
 
-const initialState = []
+const initialState = {
+  data: [],
+  isFetching: false,
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case `${CLEAN_STATE}`:
-      return []
-    case `${ADD_LIST}_SENT`:
-      return state
+      return initialState
     case `${ADD_LIST}_SUCCESS`:
-      return state.concat(action.payload.data)
-    case `${ADD_LIST}_ERROR`:
-      return state
-    case `${DELETE_LIST}_SENT`:
-      return state
+      return {
+        ...state,
+        data: state.data.concat(action.payload.data),
+      }
     case `${DELETE_LIST}_SUCCESS`:
-      return state.filter(list => list.id !== action.meta.previousAction.listId)
-    case `${DELETE_LIST}_ERROR`:
-      return state
-    case `${GET_ALL_LISTS_IN_BOARD}_SENT`:
-      return state
+      return {
+        ...state,
+        data: state.data.filter(list => list.id !== action.meta.previousAction.listId),
+      }
+    case `${GET_ALL_LISTS_IN_BOARD}`:
+      return {
+        ...state,
+        isFetching: true,
+      }
     case `${GET_ALL_LISTS_IN_BOARD}_SUCCESS`:
-      return action.payload.data
+      return {
+        data: action.payload.data,
+        isFetching: false,
+      }
     case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
-      return state
-    case `${RENAME_LIST}_SENT`:
-      return state
-    case `${RENAME_LIST}_SUCCESS`:
-      return state
-    case `${RENAME_LIST}_ERROR`:
-      return state
+      return {
+        ...state,
+        isFetching: false,
+      }
     default:
       return state
   }

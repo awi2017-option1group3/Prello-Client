@@ -1,9 +1,20 @@
+.lists {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .listsWrapper {
     display: inline-flex;
     height: inherit;
     overflow-x: scroll;
     overflow-y: hidden;
     margin: 0;
+}
+
+.listsLoader {
+    padding: 50px;
+    text-align: center;
 }
 
 .addListBlock {
