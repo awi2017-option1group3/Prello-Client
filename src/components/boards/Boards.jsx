@@ -24,7 +24,6 @@ const Boards = props => (
                 onClick={() => props.addBoard()}
                 icon="plus"
                 size="large"
-                type="primary"
               >New Board</Button>
             </div>
           </Col>
