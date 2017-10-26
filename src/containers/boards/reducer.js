@@ -1,21 +1,29 @@
 import { GET_ALL_BOARDS, ADD_BOARD } from './constants'
 
-const initialState = []
+const initialState = {
+  data: [],
+  isFetching: false,
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `${GET_ALL_BOARDS}_SENT`:
-      return state
+    case `${GET_ALL_BOARDS}`:
+      return {
+        ...state,
+        isFetching: true,
+      }
     case `${GET_ALL_BOARDS}_SUCCESS`:
-      return action.payload.data
+      return {
+        data: action.payload.data,
+        isFetching: false,
+      }
     case `${GET_ALL_BOARDS}_ERROR`:
-      return state
-    case `${ADD_BOARD}_SENT`:
-      return state
+      return {
+        ...state,
+        isFetching: false,
+      }
     case `${ADD_BOARD}_SUCCESS`:
       return state.concat(action.payload.data)
-    case `${ADD_BOARD}_ERROR`:
-      return state
     default:
       return state
   }

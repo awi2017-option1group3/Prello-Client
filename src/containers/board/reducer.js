@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case `${CLEAN_STATE}`:
-      return {}
+      return initialState
     case `${GET_ALL_LISTS_IN_BOARD}_SENT`:
       return {
         ...state,

@@ -9,6 +9,7 @@ export const cleanState = () => (dispatch) => {
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
     type: GET_ALL_CARDS_IN_LIST,
+    listId,
     payload: {
       request: {
         method: 'GET',
@@ -21,6 +22,7 @@ export const getAllCardsInList = listId => (dispatch) => {
 export const addCard = (listId, lastCardRank) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
+    listId,
     payload: {
       request: {
         method: 'POST',
