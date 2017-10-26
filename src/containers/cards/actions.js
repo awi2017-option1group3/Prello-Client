@@ -52,10 +52,10 @@ export const saveCardRank = card => (dispatch) => {
     type: SAVE_CARD_RANK,
     payload: {
       request: {
-        method: 'PATCH',
-        url: `/lists/${card.listId}/cards/${card.id}`,
+        method: 'PUT',
+        url: `/cards/${card.id}`,
         data: {
-          listId: card.rank,
+          listId: card.listId,
           rank: card.rank,
         },
       },
