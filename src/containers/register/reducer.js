@@ -1,18 +1,20 @@
 import { REGISTER } from './constants'
 
 const initialState = {
-  data: [],
+  success: false,
+  error: '',
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `${REGISTER}_SENT`:
+    case `${REGISTER}`:
       return {
         ...state,
       }
     case `${REGISTER}_SUCCESS`:
       return {
         ...state,
+        success: true,
       }
     case `${REGISTER}_ERROR`:
       return {

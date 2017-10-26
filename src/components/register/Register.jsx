@@ -4,6 +4,8 @@ import { Form, Icon, Input, Button, Layout } from 'antd'
 import './style.css'
 
 const FormItem = Form.Item
+const { Content } = Layout
+
 
 class Register extends Component {
   constructor(props) {
@@ -20,13 +22,12 @@ class Register extends Component {
       }
     })
   }
-  render() {
-    const { Content } = Layout
-    const { getFieldDecorator } = this.props.form
 
+  render() {
+    const { getFieldDecorator } = this.props.form
     return (
       <Layout className="signupLayout">
-        <Content className="signupContent">
+        <Content className="signupContent" xs={20} sm={16} md={12} lg={8} xl={4}>
           <Form onSubmit={this.handleSubmit} className="signup-form" layout="vertical">
             <h1 >Register to Prello</h1>
             <p className="signupTitle"> by Gluon</p>
@@ -63,10 +64,8 @@ class Register extends Component {
               )}
             </FormItem>
             <FormItem className="signupFormItemFooter">
-              <Button type="primary" htmlType="submit" className="signup-form-button">
-            Sign up
-              </Button>
-           Or  <a href="/">Login</a>
+              <Button type="primary" htmlType="submit" className="signup-form-button"> Sign up </Button>
+              <div className="signupLogin">Or <a href="/">Login</a></div>
             </FormItem>
           </Form>
         </Content>
