@@ -12,15 +12,15 @@ class DndBoard extends Component {
 
   onDragEnd(result) {
     if (result.destination) {
-      switch (result.destination.droppableId.split('-')[1]) {
-        case 'board':
+      switch (result.type) {
+        case 'LIST':
           this.moveListInStructure(
             result.source.index,
             result.destination.index,
           )
           break
-        case ('list'):
-          if (result.destination.droppableId.split('-')[2] === result.source.droppableId.split('-')[2]) {
+        case 'CARD':
+          if (result.destination.droppableId === result.source.droppableId) {
             this.moveCardInList(
               result.source.index,
               result.destination.index,
@@ -38,54 +38,54 @@ class DndBoard extends Component {
           }
           break
         default:
-          console.log('result.destination.type mismatch')
           break
-      }   
+      }
     }
   }
 
   moveListInStructure(originIndex, destinationIndex) {
-    const result = Array.from(this.props.lists)
-      .sort((a, b) => a.rank > b.rank)
-    const [removed] = result.splice(originIndex, 1)
-    result.splice(destinationIndex, 0, removed)
-    for (let i = 0; i < result.length; i++) {
-      result[i].rank = i + 1
-      this.props.saveListRank(result[i])
+    const lists = this.props.lists.sort((a, b) => a.rank > b.rank)
+
+    const [removed] = lists.splice(originIndex, 1)
+    lists.splice(destinationIndex, 0, removed)
+
+    for (let i = 0; i < lists.length; i++) {
+      lists[i].rank = i + 1
+      this.props.saveListRank(lists[i])
     }
-    return result
   }
 
   moveCardInList(originIndex, destinationIndex, listId) {
-    const result = Array.from(this.props.cards.filter(card => card.listId === listId)
-      .sort((a, b) => a.rank > b.rank))
-    const [removed] = result.splice(originIndex, 1)
-    result.splice(destinationIndex, 0, removed)
-    for (let i = 0; i < result.length; i++) {
-      result[i].rank = i + 1
-      this.props.saveCardRank(result[i])
+    const cards = this.props.cards.filter(card => card.listId === listId)
+      .sort((a, b) => a.rank > b.rank)
+
+    const [removed] = cards.splice(originIndex, 1)
+    cards.splice(destinationIndex, 0, removed)
+
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].rank = i + 1
+      this.props.saveCardRank(cards[i])
     }
-    return result
   }
 
   moveCardBewteenLists(originIndex, destinationIndex, initialListId, destinationListId) {
-    const originList = this.props.cards.filter(card => card.listId === initialListId)
+    const originCards = this.props.cards.filter(card => card.listId === initialListId)
       .sort((a, b) => a.rank > b.rank)
-    const destinationList = Array.from(this.props.cards.filter(card => card.listId === destinationListId))
+    const destinationCards = this.props.cards.filter(card => card.listId === destinationListId)
       .sort((a, b) => a.rank > b.rank)
-    const [removed] = originList.splice(originIndex, 1)
-    // reorder origin list where the card was taken from
-    for (let i = 0; i < originList.length; i++) {
-      originList[i].rank = i + 1
-      this.props.saveCardRank(originList[i])
+
+    const [removed] = originCards.splice(originIndex, 1)
+    destinationCards.splice(destinationIndex, 0, removed)
+
+    for (let i = 0; i < originCards.length; i++) {
+      originCards[i].rank = i + 1
+      this.props.saveCardRank(originCards[i])
     }
-    destinationList.splice(destinationIndex, 0, removed)
-    for (let i = 0; i < destinationList.length; i++) {
-      destinationList[i].rank = i + 1
-      destinationList[i].listId = destinationListId
-      this.props.saveCardRank(destinationList[i])
+    for (let i = 0; i < destinationCards.length; i++) {
+      destinationCards[i].rank = i + 1
+      destinationCards[i].listId = destinationListId
+      this.props.saveCardRank(destinationCards[i])
     }
-    return (originList, destinationList)
   }
 
   render() {

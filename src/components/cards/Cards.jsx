@@ -12,9 +12,10 @@ const Cards = props => (
       </div>
     ) : (
       <div className="cardsWrapper">
-        {props.cards.sort((a, b) => a.rank > b.rank).map(card => (
+        { props.cards.sort((a, b) => a.rank > b.rank).map(card => (
           <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} />
         ))}
+        { props.droppableProvided.placeholder }
         { props.isAdding ? (
           <div className="cardsLoader">
             <Spin tip="Creating a card..." />
@@ -38,6 +39,7 @@ const Cards = props => (
 Cards.propTypes = {
   listId: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,
+  droppableProvided: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
   addCard: PropTypes.func.isRequired,

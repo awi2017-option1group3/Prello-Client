@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK } from './constants'
 
 const initialState = {
   data: [],
@@ -46,6 +46,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetchingListIds: state.isFetchingListIds.filter(id => id !== action.meta.previousAction.listId),
+      }
+    case `${SAVE_CARD_RANK}_SUCCESS`:
+      return {
+        ...state,
+        data: state.data.map(card => (card.id === action.meta.previousAction.cardId) ? action.payload.data : card),
       }
     default:
       return state

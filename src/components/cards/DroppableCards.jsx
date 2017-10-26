@@ -5,7 +5,7 @@ import Cards from './Cards'
 import './style.css'
 
 const DroppableCards = props => (
-  <Droppable droppableId={`droppable-list-${props.listId}`} listId={props.listId} type="Card" >
+  <Droppable droppableId={`droppable-cards-${props.listId}`} type="CARD" >
     {provided => (
       <div ref={provided.innerRef} className="droppableCards">
         <Cards {...props} droppableProvided={provided} />
