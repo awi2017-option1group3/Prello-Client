@@ -5,4 +5,12 @@
 .boardsLoader {
     padding: 50px;
     text-align: center;
+  
+.addBoardBlock {
+    margin: 13px 10px 0 10px;
+}
+
+.addBoardButton {
+    opacity: 0.5;
+    width: 100%;
 }

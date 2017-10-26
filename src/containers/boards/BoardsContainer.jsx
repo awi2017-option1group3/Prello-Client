@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getAllBoards } from './actions'
+import { getAllBoards, addBoard } from './actions'
 import Boards from '../../components/boards/Boards'
 
 class BoardsContainer extends Component {
@@ -19,6 +19,7 @@ class BoardsContainer extends Component {
 
 BoardsContainer.propTypes = {
   getAllBoards: PropTypes.func.isRequired,
+  addBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -28,6 +29,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getAllBoards,
+  addBoard,
 }, dispatch)
 
 export default connect(
