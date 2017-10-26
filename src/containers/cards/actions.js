@@ -50,6 +50,7 @@ export const deleteCard = (listId, cardId) => (dispatch) => {
 export const saveCardRank = card => (dispatch) => {
   dispatch({
     type: SAVE_CARD_RANK,
+    cardId: card.id,
     payload: {
       request: {
         method: 'PUT',

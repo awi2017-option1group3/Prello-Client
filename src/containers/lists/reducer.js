@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, RENAME_LIST, SAVE_LIST_RANK } from './constants'
 
 const initialState = []
 
@@ -29,6 +29,12 @@ export default (state = initialState, action) => {
     case `${RENAME_LIST}_SUCCESS`:
       return state
     case `${RENAME_LIST}_ERROR`:
+      return state
+    case `${SAVE_LIST_RANK}_SENT`:
+      return state
+    case `${SAVE_LIST_RANK}_SUCCESS`:
+      return state.map(list => (list.id === action.meta.previousAction.listId) ? action.payload.data : list)
+    case `${SAVE_LIST_RANK}_ERROR`:
       return state
     default:
       return state

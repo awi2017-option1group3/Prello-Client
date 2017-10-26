@@ -37,6 +37,7 @@ export const addList = (boardId, lastRank) => (dispatch) => {
 export const saveListRank = list => (dispatch) => {
   dispatch({
     type: SAVE_LIST_RANK,
+    listId: list.id,
     payload: {
       request: {
         method: 'PUT',

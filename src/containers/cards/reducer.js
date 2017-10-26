@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_TITLE } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_TITLE, SAVE_CARD_RANK } from './constants'
 
 const initialState = []
 
@@ -29,6 +29,12 @@ export default (state = initialState, action) => {
     case `${SAVE_CARD_TITLE}_SUCCESS`:
       return state
     case `${SAVE_CARD_TITLE}_ERROR`:
+      return state
+    case `${SAVE_CARD_RANK}_SENT`:
+      return state
+    case `${SAVE_CARD_RANK}_SUCCESS`:
+      return state.map(card => (card.id === action.meta.previousAction.cardId) ? action.payload.data : card)
+    case `${SAVE_CARD_RANK}_ERROR`:
       return state
     default:
       return state
