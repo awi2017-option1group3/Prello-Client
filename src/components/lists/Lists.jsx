@@ -12,7 +12,7 @@ const Lists = props => (
     <div className="addListBlock">
       <Button
         className="addListButton"
-        onClick={() => props.addList(props.lists.length)}
+        onClick={() => props.addList(props.boardId, props.lists.length)}
         icon="plus"
         size="large"
       >New list</Button>
@@ -21,10 +21,11 @@ const Lists = props => (
 )
 
 Lists.propTypes = {
+  boardId: PropTypes.string.isRequired,
   lists: PropTypes.array.isRequired,
   addList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
-  saveTitleList: PropTypes.func.isRequired
+  saveTitleList: PropTypes.func.isRequired,
 }
 
 export default Lists
