@@ -19,6 +19,9 @@ export const addBoard = () => (dispatch) => {
       request: {
         method: 'POST',
         url: '/boards/',
+        data: {
+          title: 'New board',
+        },
       },
     },
   })

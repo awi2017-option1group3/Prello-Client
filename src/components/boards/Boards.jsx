@@ -17,18 +17,21 @@ const Boards = props => (
               <BoardPreview {...board} />
             </Col>
           ))}
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <div className="addBoardBlock">
+              <Button
+                className="addBoardButton"
+                onClick={() => props.addBoard()}
+                icon="plus"
+                size="large"
+                type="primary"
+              >New Board</Button>
+            </div>
+          </Col>
         </Row>
       </Grid>
     </Content>
-    <div className="addBoardBlock">
-      <Button
-        className="addBoardButton"
-        onClick={() => props.addBoard()}
-        icon="plus"
-        size="large"
-        type="primary"
-      >New Board</Button>
-    </div>
+    
     
   </Layout>
 )
