@@ -1,4 +1,4 @@
-import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -13,6 +13,18 @@ export const getAllListsInBoard = boardId => (dispatch) => {
       request: {
         method: 'GET',
         url: `/boards/${boardId}/lists`,
+      },
+    },
+  })
+}
+
+export const getOneBoard = boardId => (dispatch) => {
+  dispatch({
+    type: GET_ONE_BOARD,
+    payload: {
+      request: {
+        method: 'GET',
+        url: `/boards/${boardId}`,
       },
     },
   })

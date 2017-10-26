@@ -6,14 +6,19 @@ import './style.css'
 const Board = props => (
   <div className="board">
     <div className="boardTitle">
-      <h1>Board</h1>
+      <h1>{props.title}</h1>
     </div>
     <ListsContainer boardId={props.boardId} />
   </div>
 )
 
+Board.defaultProps = {
+  title: '',
+}
+
 Board.propTypes = {
   boardId: PropTypes.string.isRequired,
+  title: PropTypes.string,
 }
 
 export default Board
