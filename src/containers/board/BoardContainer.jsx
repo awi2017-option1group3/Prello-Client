@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
-import { cleanState as cleanBoardState, getAllListsInBoard } from './actions'
+import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard } from './actions'
 import { cleanState as cleanListsState, saveListRank } from '../lists/actions'
 import { cleanState as cleanCardsState, getAllCardsInList, saveCardRank } from '../cards/actions'
 
@@ -13,11 +13,12 @@ class BoardContainer extends Component {
     this.props.cleanListsState()
     this.props.cleanCardsState()
     this.props.getAllListsInBoard(this.props.match.params.boardId)
+    this.props.getOneBoard(this.props.match.params.boardId)    
   }
 
   render() {
     return (
-      <DndBoard {...this.props} boardId={this.props.match.params.boardId} />
+      <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
     )
   }
 }
@@ -31,11 +32,13 @@ BoardContainer.propTypes = {
   getAllCardsInList: PropTypes.func.isRequired,
   saveCardRank: PropTypes.func.isRequired,
   saveListRank: PropTypes.func.isRequired,
+  getOneBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  lists: state.lists, // .filter(list => list.boardId === props.boardId),
-  cards: state.cards,
+  board: state.currentBoard,
+  lists: state.lists.data,
+  cards: state.cards.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -46,6 +49,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getAllCardsInList,
   saveCardRank,
   saveListRank,
+  getOneBoard,
 }, dispatch)
 
 export default connect(

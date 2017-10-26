@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^2.13.4",
+    "antd": "^2.13.7",
     "axios": "^0.16.2",
     "history": "^4.7.2",
     "moment": "^2.18.1",

@@ -23,7 +23,9 @@ CardsContainer.propTypes = {
 }
 
 const mapStateToProps = (state, props) => ({
-  cards: state.cards.filter(card => card.listId === props.listId),
+  cards: state.cards.data.filter(card => card.listId === props.listId),
+  isAdding: state.cards.isAddingListIds.includes(props.listId),
+  isFetching: state.cards.isFetchingListIds.includes(props.listId),
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

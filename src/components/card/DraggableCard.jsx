@@ -5,7 +5,7 @@ import Card from './Card'
 import './style.css'
 
 const DraggableCard = props => (
-  <Draggable draggableId={`droppable-card-${props.id}`} type="Card" >
+  <Draggable draggableId={`draggable-card-${props.id}`} type="CARD" >
     {draggableProvided => (
       <div className="draggableCard">
         <div

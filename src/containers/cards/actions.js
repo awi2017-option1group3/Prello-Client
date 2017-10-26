@@ -9,6 +9,7 @@ export const cleanState = () => (dispatch) => {
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
     type: GET_ALL_CARDS_IN_LIST,
+    listId,
     payload: {
       request: {
         method: 'GET',
@@ -21,6 +22,7 @@ export const getAllCardsInList = listId => (dispatch) => {
 export const addCard = (listId, lastCardRank) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
+    listId,
     payload: {
       request: {
         method: 'POST',
@@ -50,12 +52,13 @@ export const deleteCard = (listId, cardId) => (dispatch) => {
 export const saveCardRank = card => (dispatch) => {
   dispatch({
     type: SAVE_CARD_RANK,
+    cardId: card.id,
     payload: {
       request: {
-        method: 'PATCH',
-        url: `/lists/${card.listId}/cards/${card.id}`,
+        method: 'PUT',
+        url: `/cards/${card.id}`,
         data: {
-          listId: card.rank,
+          listId: card.listId,
           rank: card.rank,
         },
       },

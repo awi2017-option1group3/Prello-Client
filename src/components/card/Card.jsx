@@ -47,8 +47,10 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.getHeader()} extra={this.getDropdown()} className="card"> 
-        <p>Rank : {this.props.rank}</p>
+      <UICard title={this.getHeader()} extra={this.getDropdown()} className="card">
+        <p>Rank    : {this.props.rank}</p>
+        <p>List ID : {this.props.listId}</p>
+        <p>ID      : {this.props.id}</p>
       </UICard>
     )
   }

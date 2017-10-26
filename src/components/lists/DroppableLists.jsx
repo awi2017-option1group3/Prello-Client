@@ -7,7 +7,7 @@ import './style.css'
 class DroppableLists extends Component {
   render() {
     return (
-      <Droppable droppableId="droppable-board" direction="horizontal" type="List">
+      <Droppable droppableId="droppable-lists" direction="horizontal" type="LIST">
         {provided => (
           <div ref={provided.innerRef} className="droppableLists">
             <Lists {...this.props} droppableProvided={provided} />
