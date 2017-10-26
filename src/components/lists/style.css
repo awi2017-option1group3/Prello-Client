@@ -1,7 +1,7 @@
 .listsWrapper {
     display: inline-flex;
     height: inherit;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     margin: 0;
 }

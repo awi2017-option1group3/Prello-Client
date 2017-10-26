@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Layout } from 'antd'
+import { Layout, Button } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import BoardPreview from '../boardPreview/BoardPreview'
 import './style.css'
@@ -17,14 +17,27 @@ const Boards = props => (
               <BoardPreview {...board} />
             </Col>
           ))}
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <div className="addBoardBlock">
+              <Button
+                className="addBoardButton"
+                onClick={() => props.addBoard()}
+                icon="plus"
+                size="large"
+              >New Board</Button>
+            </div>
+          </Col>
         </Row>
       </Grid>
     </Content>
+    
+    
   </Layout>
 )
 
 Boards.propTypes = {
   boards: PropTypes.array.isRequired,
+  addBoard: PropTypes.func.isRequired,
 }
 
 export default Boards
