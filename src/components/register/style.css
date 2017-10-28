@@ -1,0 +1,20 @@
+.signupContent {
+    padding: 12px 30px;
+}
+
+.signupTitle {
+    padding: 0 0 3% 0;
+}
+
+.signupFormItem {
+    margin: 12px 0;
+}
+
+.signupFormItemFooter {
+    padding: 0 20%;
+    text-align: center;
+}
+
+.signupLogin {
+    padding: 0 5%;
+}

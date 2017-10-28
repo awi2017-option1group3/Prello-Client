@@ -23,15 +23,15 @@ const Boards = props => (
               </Col>
             ))}
             <Col xs={12} sm={6} md={4} lg={3}>
-            <div className="addBoardBlock">
-              <Button
-                className="addBoardButton"
-                onClick={() => props.addBoard()}
-                icon="plus"
-                size="large"
-              >New Board</Button>
-            </div>
-          </Col>
+              <div className="addBoardBlock">
+                <Button
+                  className="addBoardButton"
+                  onClick={() => props.addBoard()}
+                  icon="plus"
+                  size="large"
+                >New Board</Button>
+              </div>
+            </Col>
           </Row>
         </Grid>
       )}
