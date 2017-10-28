@@ -23,7 +23,10 @@ export default (state = initialState, action) => {
         isFetching: false,
       }
     case `${ADD_BOARD}_SUCCESS`:
-      return state.concat(action.payload.data)
+      return {
+        ...state,
+        data: state.data.concat(action.payload.data),
+      }
     default:
       return state
   }
