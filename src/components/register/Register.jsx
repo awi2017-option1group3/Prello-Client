@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Icon, Input, Button, Layout, Modal, Link } from 'antd'
+import { Link } from 'react-router-dom'
+import { Form, Icon, Input, Button, Layout, Modal } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import { history } from '../../store'
@@ -87,7 +88,7 @@ class Register extends Component {
                   </FormItem>
                   <FormItem className="signupFormItemFooter">
                     <Button type="primary" htmlType="submit" className="signup-form-button"> Sign up </Button>
-                    <div className="signupLogin">Or <Link href="/">Login</Link></div>
+                    <div className="signupLogin">Or <Link to={'/'}>Login</Link></div>
                   </FormItem>
                 </Form>
               </Col>
