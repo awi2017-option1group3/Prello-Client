@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Icon, Input, Button, Layout, Modal } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+
+import { history } from '../../store'
 import './style.css'
 
 
@@ -31,6 +33,7 @@ class Register extends Component {
       title: 'Registration successed ',
       content: `Welcome ${values.firstname} in the Prello team by Gluon!`,
       okText: 'Ok',
+      onOk: history.push('/'),
     })
   }
 
