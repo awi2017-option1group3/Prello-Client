@@ -11,3 +11,9 @@
 .draggableCard {
     display: inline-grid;
 }
+
+.labels {
+    display: inline-grid;
+    margin-top: 10px;
+    overflow-x: auto;
+}
