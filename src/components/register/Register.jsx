@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Icon, Input, Button, Layout } from 'antd'
+import { Form, Icon, Input, Button, Layout, Modal } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import './style.css'
+
 
 const FormItem = Form.Item
 const { Content } = Layout
@@ -12,15 +13,24 @@ class Register extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.registrationSuccessed = this.registrationSuccessed.bind(this)
   }
 
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(values)
         this.props.register(values)
+        this.registrationSuccessed(values)
       }
+    })
+  }
+
+  registrationSuccessed(values) {
+    Modal.success({
+      title: 'Registration successed ',
+      content: `Welcome ${values.firstname} in the Prello team by Gluon!`,
+      okText: 'Ok',
     })
   }
 
