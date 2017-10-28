@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Icon, Input, Button, Layout, Modal } from 'antd'
+import { Form, Icon, Input, Button, Layout, Modal, Link } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import { history } from '../../store'
@@ -39,7 +39,7 @@ class Register extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})')
+    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(?=.{8,})')
     return (
       <Layout className="signupLayout">
         <Content className="signupContent" >
@@ -79,7 +79,7 @@ class Register extends Component {
                       rules: [{
                         required: true, message: 'Please input your Password!',
                       }, {
-                        pattern: regExpPassword, message: 'Your password must contain at least one number, one special characters, one capital letter and be longer than 8 character!',
+                        pattern: regExpPassword, message: 'Your password must contain at least one number, one special character, one capital letter and be longer than 8 characters!',
                       }],
                     })(
                       <Input prefix={<Icon type="lock" style={{ fontSize: 14 }} />} type="password" placeholder="ex., *********" />,
@@ -87,7 +87,7 @@ class Register extends Component {
                   </FormItem>
                   <FormItem className="signupFormItemFooter">
                     <Button type="primary" htmlType="submit" className="signup-form-button"> Sign up </Button>
-                    <div className="signupLogin">Or <a href="/">Login</a></div>
+                    <div className="signupLogin">Or <Link href="/">Login</Link></div>
                   </FormItem>
                 </Form>
               </Col>
