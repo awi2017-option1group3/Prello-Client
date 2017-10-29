@@ -58,27 +58,41 @@ class Card extends Component {
   }
 
   getAssignees() {
-    if (this.props.assignees.length > 2) {
+    if (this.props.assignees.length > 3) {
       const members = this.props.assignees
+      if (this.props.cardResponsible === {}) {
+        // orders member by alphabetical order
+        members.sort((a, b) => a.initials < b.initials)
+      } else {
+        // if responsible is in members, sets responsible to be the firs user
+        if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
+          const indexOfResponsible = members.findIndex(this.props.cardResponsible)
+          members.splice(indexOfResponsible, 0)
+          // orders member by alphabetical order
+          members.sort((a, b) => a.initials < b.initials)
+          members.splice(0, 0, this.props.cardResponsible)
+        }
+      }
       const moreMembers = (
         <div>
-          {members.slice(2, members.length).map(assignee => (
-            <p key={this.props.id + assignee.id} className="assigneeInitials">
-              {assignee.initials.toUpperCase()}
-            </p>
-          ))}
+          {members.slice(2, members.length)
+            .map(assignee => (
+              <p key={this.props.id + assignee.id} className="assigneeInitials">
+                {assignee.initials.toUpperCase()}
+              </p>
+            ))}
         </div>
       )
       return (
         <div>
           {members.slice(0, 2).map(assignee => (
-            <Avatar key={this.props.id + assignee.id} className="assigneeInitials">
+            <Avatar key={this.props.id + assignee.id} style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}} className="assigneeInitials">
               {assignee.initials.toUpperCase()}
             </Avatar>
           ))}
           <Popover content={moreMembers} trigger="hover">
             <Avatar key={`${this.props.id}additionnals`} className="assigneeInitials">
-              + {(members.length - 2)}
+              +{(members.length - 2)}
             </Avatar>
           </Popover>
         </div>
@@ -87,7 +101,7 @@ class Card extends Component {
     return (
       <div>
         {this.props.assignees.map(assignee => (
-          <Avatar key={this.props.id + assignee.id} className="assigneeInitials">
+          <Avatar key={this.props.id + assignee.id} style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}} className="assigneeInitials">
             {assignee.initials.toUpperCase()}
           </Avatar>
         ))}
@@ -118,12 +132,17 @@ class Card extends Component {
   }
 }
 
+Card.defaultProps = {
+  cardResponsible: {},
+}
+
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   labels: PropTypes.array.isRequired,
+  cardResponsible: PropTypes.object,
   assignees: PropTypes.array.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
