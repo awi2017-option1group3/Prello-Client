@@ -14,6 +14,27 @@
 
 .labels {
     display: inline-grid;
+    margin-top: 17px;
+    overflow-x: auto;
+    float: left;
+}
+
+.assignees {
+    display: inline-grid;
     margin-top: 10px;
     overflow-x: auto;
+    float: right;
+}
+
+.cardFooter{
+    display: inline-grid;
+    overflow-x: auto;
+}
+
+.assigneeInitials {
+    margin-left: 5px;
+}
+
+.cardLabel {
+    margin-bottom: 7px;
 }
