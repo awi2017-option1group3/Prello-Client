@@ -12,18 +12,17 @@
     display: inline-grid;
 }
 
-.labels {
+.dueCompleteDisplay {
     display: inline-grid;
     margin-top: 17px;
-    overflow-x: auto;
     float: left;
 }
 
 .assignees {
     display: inline-grid;
-    margin-top: 10px;
-    overflow-x: auto;
+    margin-top: 9px;
     float: right;
+    height: 25px;
 }
 
 .assigneeInitials {
@@ -33,3 +32,8 @@
 .cardLabel {
     margin-bottom: 7px;
 }
+
+.clockIcon {
+    margin-right: 8px;
+}
+

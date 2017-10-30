@@ -60,10 +60,8 @@ class Card extends Component {
   getAssignees() {
     const maxNumberOfPeopleInALine = 3
     if (this.props.assignees.length > maxNumberOfPeopleInALine) {
-      const members = this.props.assignees
-      if (this.props.cardResponsible === {}) {
-        members.sort((a, b) => a.initials < b.initials)
-      } else {
+      const members = this.props.assignees.sort((a, b) => a.initials > b.initials)
+      if (this.props.cardResponsible !== {}) {
         // if responsible is in members, sets responsible to be the first user
         if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
           const indexOfResponsible = members.findIndex(this.props.cardResponsible)
@@ -87,7 +85,7 @@ class Card extends Component {
           {members.slice(0, maxNumberOfPeopleInALine - 1).map(assignee => (
             <Avatar
               key={this.props.id + assignee.id}
-              style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
+              style={(this.props.cardResponsible !== null && assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
               className="assigneeInitials"
             >
               {assignee.initials.toUpperCase()}
@@ -95,7 +93,7 @@ class Card extends Component {
           ))}
           <Popover content={moreMembers} trigger="hover">
             <Avatar key={`${this.props.id}additionnals`} className="assigneeInitials">
-              +{(members.length - maxNumberOfPeopleInALine - 1)}
+              +{(members.length - maxNumberOfPeopleInALine + 1)}
             </Avatar>
           </Popover>
         </div>
@@ -103,10 +101,10 @@ class Card extends Component {
     }
     return (
       <div>
-        {this.props.assignees.map(assignee => (
+        {this.props.assignees.sort((a, b) => a.initials > b.initials).map(assignee => (
           <Avatar
             key={this.props.id + assignee.id}
-            style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
+            style={(this.props.cardResponsible !== null && assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
             className="assigneeInitials"
           >
             {assignee.initials.toUpperCase()}
@@ -119,13 +117,22 @@ class Card extends Component {
   render() {
     return (
       <UICard title={this.getHeader()} extra={this.getDropdown()} className="card">
+        <div className="topLabels">
+          {this.getLabels()}
+        </div>
         <p>Rank    : {this.props.rank}</p>
         <p>List ID : {this.props.listId}</p>
         <p>ID      : {this.props.id}</p>
         <Row className="cardFooter">
           <Col span={12}>
-            <div className="labels">
-              {this.getLabels()}
+            <div className="dueCompleteDisplay">
+              <span>
+                <Icon
+                  type={this.props.dueComplete !== '' ? 'clock-circle-o' : ''}
+                  className="clockIcon"
+                />
+                {this.props.dueComplete.slice(0, 10)}
+              </span>
             </div>
           </Col>
           <Col span={12}>
@@ -141,6 +148,7 @@ class Card extends Component {
 
 Card.defaultProps = {
   cardResponsible: {},
+  dueComplete: '',
 }
 
 Card.propTypes = {
@@ -148,6 +156,7 @@ Card.propTypes = {
   listId: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  dueComplete: PropTypes.string,
   labels: PropTypes.array.isRequired,
   cardResponsible: PropTypes.object,
   assignees: PropTypes.array.isRequired,
