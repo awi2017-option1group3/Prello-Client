@@ -30,6 +30,7 @@ export const addBoard = () => (dispatch) => {
 export const deleteBoard = (boardId) => (dispatch) => {
   dispatch({
     type: DELETE_BOARD,
+    boardId,
     payload: {
       request: {
         method: 'DELETE',
