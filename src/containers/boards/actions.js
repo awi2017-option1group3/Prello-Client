@@ -6,7 +6,7 @@ export const getAllBoards = () => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: '/boards',
+        url: '/api/boards',
       },
     },
   })
@@ -18,7 +18,7 @@ export const addBoard = () => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: '/boards/',
+        url: '/api/boards/',
         data: {
           title: 'New board',
         },

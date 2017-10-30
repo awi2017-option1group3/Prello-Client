@@ -12,7 +12,7 @@ export const getAllListsInBoard = boardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/boards/${boardId}/lists`,
+        url: `/api/boards/${boardId}/lists`,
       },
     },
   })
@@ -24,7 +24,7 @@ export const getOneBoard = boardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/boards/${boardId}`,
+        url: `/api/boards/${boardId}`,
       },
     },
   })
