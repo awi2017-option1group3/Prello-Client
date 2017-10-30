@@ -6,9 +6,11 @@ import moment from 'moment'
 
 import BoardsContainer from '../../containers/boards/BoardsContainer'
 import LoginContainer from '../../containers/login/LoginContainer'
+import RegisterContainer from '../../containers/register/RegisterContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
-import './style.css'
+import Navbar from '../navbar/Navbar'
 import { history } from '../../store'
+import './style.css'
 
 const { Content } = Layout
 
@@ -37,9 +39,11 @@ class App extends Component {
     return (
       <ConnectedRouter history={history}>
         <Layout className="appLayout">
+          <Navbar />
           <Content className="appContent">
             <Switch>
               <Route exact path="/login" component={LoginContainer} />
+              <Route exact path="/register" component={RegisterContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
             </Switch>
