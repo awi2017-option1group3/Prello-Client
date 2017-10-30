@@ -1,7 +1,7 @@
 import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 const initialState = {
-  title: '',
+  data: [],
 }
 
 export default (state = initialState, action) => {

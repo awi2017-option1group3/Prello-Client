@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
-import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard } from './actions'
+import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard, saveBoardTitle } from './actions'
 import { cleanState as cleanListsState, saveListRank } from '../lists/actions'
 import { cleanState as cleanCardsState, getAllCardsInList, saveCardRank } from '../cards/actions'
 
@@ -33,6 +33,7 @@ BoardContainer.propTypes = {
   saveCardRank: PropTypes.func.isRequired,
   saveListRank: PropTypes.func.isRequired,
   getOneBoard: PropTypes.func.isRequired,
+  saveBoardTitle: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -50,6 +51,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   saveCardRank,
   saveListRank,
   getOneBoard,
+  saveBoardTitle,
 }, dispatch)
 
 export default connect(
