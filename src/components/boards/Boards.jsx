@@ -45,6 +45,7 @@ Boards.propTypes = {
   boards: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   addBoard: PropTypes.func.isRequired,
+  deleteBoard:  PropTypes.func.isRequired,
 }
 
 export default Boards

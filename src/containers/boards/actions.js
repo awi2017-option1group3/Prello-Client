@@ -1,4 +1,4 @@
-import { GET_ALL_BOARDS, ADD_BOARD } from './constants'
+import { GET_ALL_BOARDS, ADD_BOARD, DELETE_BOARD } from './constants'
 
 export const getAllBoards = () => (dispatch) => {
   dispatch({
@@ -22,6 +22,18 @@ export const addBoard = () => (dispatch) => {
         data: {
           title: 'New board',
         },
+      },
+    },
+  })
+}
+
+export const deleteBoard = (boardId) => (dispatch) => {
+  dispatch({
+    type: DELETE_BOARD,
+    payload: {
+      request: {
+        method: 'DELETE',
+        url: `/boards/${boardId}`,
       },
     },
   })
