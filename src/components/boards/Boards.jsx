@@ -19,7 +19,7 @@ const Boards = props => (
           <Row>
             {props.boards.map(board => (
               <Col xs={12} sm={6} md={4} lg={3} key={board.id}>
-                <BoardPreview {...board} />
+                <BoardPreview {...board} deleteBoard={props.deleteBoard} />
               </Col>
             ))}
             <Col xs={12} sm={6} md={4} lg={3}>
@@ -45,6 +45,7 @@ Boards.propTypes = {
   boards: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   addBoard: PropTypes.func.isRequired,
+  deleteBoard:  PropTypes.func.isRequired,
 }
 
 export default Boards

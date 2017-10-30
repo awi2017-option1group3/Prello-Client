@@ -1,4 +1,4 @@
-import { GET_ALL_BOARDS, ADD_BOARD } from './constants'
+import { GET_ALL_BOARDS, ADD_BOARD, DELETE_BOARD } from './constants'
 
 const initialState = {
   data: [],
@@ -26,6 +26,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: state.data.concat(action.payload.data),
+      }
+    case `${DELETE_BOARD}_SUCCESS`:
+      return {
+        ...state,
+        data: state.data.filter(board => board.id !== action.meta.previousAction.boardId),
       }
     default:
       return state

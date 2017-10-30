@@ -26,11 +26,6 @@
     float: right;
 }
 
-.cardFooter{
-    display: inline-grid;
-    overflow-x: auto;
-}
-
 .assigneeInitials {
     margin-left: 5px;
 }

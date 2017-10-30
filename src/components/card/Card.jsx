@@ -58,27 +58,44 @@ class Card extends Component {
   }
 
   getAssignees() {
-    if (this.props.assignees.length > 2) {
+    const maxNumberOfPeopleInALine = 3
+    if (this.props.assignees.length > maxNumberOfPeopleInALine) {
       const members = this.props.assignees
+      if (this.props.cardResponsible === {}) {
+        members.sort((a, b) => a.initials < b.initials)
+      } else {
+        // if responsible is in members, sets responsible to be the first user
+        if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
+          const indexOfResponsible = members.findIndex(this.props.cardResponsible)
+          members.splice(indexOfResponsible, 0)
+          members.sort((a, b) => a.initials < b.initials)
+          members.splice(0, 0, this.props.cardResponsible)
+        }
+      }
       const moreMembers = (
         <div>
-          {members.slice(2, members.length).map(assignee => (
-            <p key={this.props.id + assignee.id} className="assigneeInitials">
-              {assignee.initials.toUpperCase()}
-            </p>
-          ))}
+          {members.slice(maxNumberOfPeopleInALine - 1, members.length)
+            .map(assignee => (
+              <p key={this.props.id + assignee.id} className="assigneeInitials">
+                {assignee.initials.toUpperCase()}
+              </p>
+            ))}
         </div>
       )
       return (
         <div>
-          {members.slice(0, 2).map(assignee => (
-            <Avatar key={this.props.id + assignee.id} className="assigneeInitials">
+          {members.slice(0, maxNumberOfPeopleInALine - 1).map(assignee => (
+            <Avatar
+              key={this.props.id + assignee.id}
+              style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
+              className="assigneeInitials"
+            >
               {assignee.initials.toUpperCase()}
             </Avatar>
           ))}
           <Popover content={moreMembers} trigger="hover">
             <Avatar key={`${this.props.id}additionnals`} className="assigneeInitials">
-              + {(members.length - 2)}
+              +{(members.length - maxNumberOfPeopleInALine - 1)}
             </Avatar>
           </Popover>
         </div>
@@ -87,7 +104,11 @@ class Card extends Component {
     return (
       <div>
         {this.props.assignees.map(assignee => (
-          <Avatar key={this.props.id + assignee.id} className="assigneeInitials">
+          <Avatar
+            key={this.props.id + assignee.id}
+            style={(assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
+            className="assigneeInitials"
+          >
             {assignee.initials.toUpperCase()}
           </Avatar>
         ))}
@@ -118,12 +139,17 @@ class Card extends Component {
   }
 }
 
+Card.defaultProps = {
+  cardResponsible: {},
+}
+
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   labels: PropTypes.array.isRequired,
+  cardResponsible: PropTypes.object,
   assignees: PropTypes.array.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
