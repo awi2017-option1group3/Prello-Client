@@ -128,10 +128,10 @@ class Card extends Component {
             <div className="dueCompleteDisplay">
               <span>
                 <Icon
-                  type={this.props.dueComplete !== '' ? 'clock-circle-o' : ''}
+                  type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
                   className="clockIcon"
                 />
-                {this.props.dueComplete.slice(0, 10)}
+                {this.props.dueComplete !== null ? this.props.dueComplete.slice(0, 10) : ''}
               </span>
             </div>
           </Col>
