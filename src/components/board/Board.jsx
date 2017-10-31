@@ -7,10 +7,12 @@ import EditField from '../../commons/editField/EditField'
 class Board extends Component {
   getHeader() {
     return (
-      <EditField
-        text={this.props.title}
-        save={(newTitle) => { this.props.saveBoardTitle(this.props.id, newTitle) }}
-      />
+      <h1>
+        <EditField
+          text={this.props.title}
+          save={(newTitle) => { this.props.saveBoardTitle(this.props.id, newTitle) }}
+        />
+      </h1>
     )
   }
 
@@ -18,7 +20,7 @@ class Board extends Component {
     return (
       <div className="board">
         <div className="boardTitle">
-          <h1>{this.getHeader()}</h1>
+          {this.getHeader()}
         </div>
         <ListsContainer boardId={this.props.boardId} />
     </div>
