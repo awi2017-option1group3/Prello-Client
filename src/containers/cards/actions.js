@@ -13,7 +13,7 @@ export const getAllCardsInList = listId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/lists/${listId}/cards`,
+        url: `/api/lists/${listId}/cards`,
       },
     },
   })
@@ -26,7 +26,7 @@ export const addCard = (listId, lastCardRank) => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: `/lists/${listId}/cards`,
+        url: `/api/lists/${listId}/cards`,
         data: {
           title: 'New card',
           rank: (lastCardRank || 0) + 1,
@@ -43,7 +43,7 @@ export const deleteCard = (listId, cardId) => (dispatch) => {
     payload: {
       request: {
         method: 'DELETE',
-        url: `/cards/${cardId}`,
+        url: `/api/cards/${cardId}`,
       },
     },
   })
@@ -56,7 +56,7 @@ export const saveCardRank = card => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/cards/${card.id}`,
+        url: `/api/cards/${card.id}`,
         data: {
           listId: card.listId,
           rank: card.rank,
@@ -72,7 +72,7 @@ export const saveCardTitle = (cardId, cardTitle) => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/cards/${cardId}`,
+        url: `/api/cards/${cardId}`,
         data: {
           title: cardTitle,
         },

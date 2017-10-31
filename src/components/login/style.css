@@ -1,0 +1,20 @@
+.loginContent {
+    padding: 12px 30px;
+}
+
+.loginTitle {
+    padding: 0 0 3% 0;
+}
+
+.loginFormItem {
+    margin: 12px 0;
+}
+
+.loginFormItemFooter {
+    padding: 0 20%;
+    text-align: center;
+}
+
+.loginGoToRegister {
+    padding: 0 5%;
+}

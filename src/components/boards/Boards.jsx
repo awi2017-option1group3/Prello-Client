@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Layout, Spin } from 'antd'
+import { Button, Layout } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
 import BoardPreview from '../boardPreview/BoardPreview'
+import Loader from '../../commons/loader/Loader'
 import './style.css'
 
 const { Content } = Layout
@@ -11,9 +12,7 @@ const Boards = props => (
   <Layout className="boardsLayout">
     <Content className="boardsContent">
       { props.isFetching ? (
-        <div className="boardsLoader">
-          <Spin tip="Loading your boards..." />
-        </div>
+        <Loader message="Loading your boards..." />
       ) : (
         <Grid fluid>
           <Row>

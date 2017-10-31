@@ -15,10 +15,31 @@ const apiConnector = axios.create({
   responseType: 'json',
 })
 
+const axiosMiddlewareOptions = {
+  interceptors: {
+    request: [{
+      success: (config, req) => {
+        const auth = JSON.parse(localStorage.getItem('auth'))
+        if (auth) {
+          return {
+            ...req,
+            headers: {
+              common: {
+                Authorization: `Bearer ${auth.token}`,
+              },
+            },
+          }
+        }
+        return req
+      },
+    }],
+  },
+}
+
 const enhancers = []
 const middleware = [
   thunk,
-  axiosMiddleware(apiConnector),
+  axiosMiddleware(apiConnector, axiosMiddlewareOptions),
   routerMiddleware(history),
 ]
 

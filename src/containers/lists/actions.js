@@ -12,7 +12,7 @@ export const getAllListsInBoard = boardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/boards/${boardId}/lists`,
+        url: `/api/boards/${boardId}/lists`,
       },
     },
   })
@@ -24,7 +24,7 @@ export const addList = (boardId, lastRank) => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: `/boards/${boardId}/lists`,
+        url: `/api/boards/${boardId}/lists`,
         data: {
           title: 'New list',
           rank: (lastRank || 0) + 1,
@@ -41,7 +41,7 @@ export const saveListRank = list => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/lists/${list.id}`,
+        url: `/api/lists/${list.id}`,
         data: {
           rank: list.rank,
         },
@@ -56,7 +56,7 @@ export const saveTitleList = (listId, listTitle) => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/lists/${listId}`,
+        url: `/api/lists/${listId}`,
         data: {
           title: listTitle,
         },
@@ -72,7 +72,7 @@ export const deleteList = listId => (dispatch) => {
     payload: {
       request: {
         method: 'DELETE',
-        url: `/lists/${listId}`,
+        url: `/api/lists/${listId}`,
       },
     },
   })
