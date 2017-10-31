@@ -13,9 +13,11 @@ You need the following tools:
 - Node (version >= 8)
 - NPM
 
-You need to install the API (see [here](https://github.com/awi2017-option1group3/Prello-API)).
+You need to install the API before (see [here](https://github.com/awi2017-option1group3/Prello-API)).
 
 ### Installation
+
+#### Cloning
 
 You need to clone this repository on your computer:
 
@@ -24,6 +26,19 @@ You need to clone this repository on your computer:
 Go to the Client folder using:
 
 `cd Prello-Client`
+
+#### Configuring the environment
+
+Assuming you have installed the [API](https://github.com/awi2017-option1group3/Prello-API) and running it:
+* Go with you browser to [http://localhost:8000/auth/clients](http://localhost:8000/auth/clients) and fill the form to get your tokens
+* Create a `.env` file at the root of the Client (same level as `package.json`)
+* Fill it with the two tokens retrieved from the API Client Registration page as:
+```env
+REACT_APP_CLIENT_ID=yourClientIdHereWithoutQuotes
+REACT_APP_CLIENT_SECRET=yourClientSecretHereWithoutQuotes
+```
+
+#### Running
 
 Install the node_modules:
 
@@ -51,9 +66,19 @@ On the Heroku website:
 1. Create an Heroku app.
 2. Using the panel "Settings", set the React buildback to your app : `https://github.com/mars/create-react-app-buildpack.git`
 3. Using the panel "Settings", add the config variable `REACT_APP_API_URL` (replace `{api-name}` by the name of the other Heroku instance hosting the API): `https://{api-name}.herokuapp.com/`
-4. Using the panel "Deploy", link the github repository to your app (and enable automatic deploys).
-5. Using the panel "Deploy", deploy the master branch (at the end of the page). This action can take a while.
-6. Open the app using the "Open app" top-right button.
+
+In a new tab (keep the Heroku website in background), go to the API Client Registration page: `https://{api-name}.herokuapp.com/auth/clients` and fill the form to get your tokens.
+
+On the Heroku website:
+
+4. Always in the "Settings" panel, add also two other config variables retrieved from the API Client Registration page:
+  
+  * `REACT_APP_CLIENT_ID`, with the value of `client_id` 
+  * `REACT_APP_CLIENT_SECRET`, with the value of `client_secret`
+  
+5. Using the panel "Deploy", link the github repository to your app (and enable automatic deploys).
+6. Using the panel "Deploy", deploy the master branch (at the end of the page). This action can take a while.
+7. Open the app using the "Open app" top-right button.
 
 ### Usage
 
