@@ -8,6 +8,7 @@ import BoardsContainer from '../../containers/boards/BoardsContainer'
 import LoginContainer from '../../containers/login/LoginContainer'
 import RegisterContainer from '../../containers/register/RegisterContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
+import NotFound from '../../containers/notFound/NotFound'
 import Navbar from '../navbar/Navbar'
 import { history } from '../../store'
 import './style.css'
@@ -26,6 +27,7 @@ class App extends Component {
     const auth = JSON.parse(localStorage.getItem('auth'))
     return auth && moment().isBefore(auth.expiresAt) ? componentToRender : <Redirect to="/login" />
   }
+        
 
   boardsRender() {
     return this.checkLogged(<BoardsContainer />)
@@ -46,6 +48,7 @@ class App extends Component {
               <Route exact path="/register" component={RegisterContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
+              <Route exact path="*" component={NotFound} />
             </Switch>
           </Content>
         </Layout>
