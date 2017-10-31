@@ -13,7 +13,7 @@ class BoardContainer extends Component {
     this.props.cleanListsState()
     this.props.cleanCardsState()
     this.props.getAllListsInBoard(this.props.match.params.boardId)
-    this.props.getOneBoard(this.props.match.params.boardId)    
+    this.props.getOneBoard(this.props.match.params.boardId)
   }
 
   render() {
