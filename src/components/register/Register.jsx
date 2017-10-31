@@ -40,7 +40,7 @@ class Register extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(?=.{8,})')
+    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\\!@#$%&\\*\\_\\-\\"\'£€+/.?,;:=^])(?=.{8,})')
     return (
       <Layout className="signupLayout">
         <Content className="signupContent" >
