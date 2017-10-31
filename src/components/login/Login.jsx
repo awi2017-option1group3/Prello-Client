@@ -37,7 +37,7 @@ class Login extends Component {
                   <p className="loginTitle"> by Gluon</p>
 
                   { this.props.failedAuthentication &&
-                    <Alert message="It's a bad couple of email and password. So, we can't login you to Prello. Sorry, not sorry." type="error" />
+                    <Alert message="It's a bad couple of email and password, so we can't login you to Prello." type="error" />
                   }
                   
                   <FormItem className="loginFormItem">
