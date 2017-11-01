@@ -5,6 +5,7 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardDetails from '../card/Card'
+import moment from 'moment'
 
 
 class Card extends Component {
@@ -61,9 +62,16 @@ class Card extends Component {
   }
 
   getDueDate() {
+    let diff = 10000
+    if (this.props.dueComplete !== null) {
+      const dueDate = moment(this.props.dueComplete.slice(0, 10), "YYYY-MM-DD")
+      diff = dueDate.diff(moment(), 'days') + 1
+    }
     return (
       <div className="dueCompleteDisplay">
-        <span>
+        <span
+          className={this.updateStyle(diff)}
+        >
           <Icon
             type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
             className="clockIcon"
@@ -72,6 +80,19 @@ class Card extends Component {
         </span>
       </div>
     )
+  }
+
+  updateStyle(diffDays) {
+    const warning = 7
+    const urgent = 3
+    if (diffDays > warning) {
+      return ""
+
+    } else if ( diffDays <= warning && diffDays > urgent) {
+      return "dueDateWarning"
+    } else {
+      return "dueDateUrgent"
+    }
   }
 
   getComments() {
