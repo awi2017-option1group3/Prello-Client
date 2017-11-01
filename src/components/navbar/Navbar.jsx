@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Layout, Menu } from 'antd'
+import { Button, Layout, Menu } from 'antd'
 import routes from '../../config/routes'
 import './style.css'
 
@@ -22,8 +22,8 @@ class Navbar extends Component {
 
   render() {
     return (
-      <Header>
-        <div className="logo" />
+      <Header className="navbarHeader">
+        <div className="navbarLogo" />
         <Menu
           theme="dark"
           mode="horizontal"
@@ -32,6 +32,11 @@ class Navbar extends Component {
         >
           {this.renderLinks()}
         </Menu>
+        <Link to={routes.logout} className="navbarLogout">
+          <Button icon="logout">
+            Log out
+          </Button>
+        </Link>
       </Header>
     )
   }

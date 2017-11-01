@@ -1,6 +1,11 @@
-import { AUTHENTICATE, REFRESH_TOKEN } from './constants'
+import { CLEAN_STATE, AUTHENTICATE, REFRESH_TOKEN } from './constants'
 
-// TODO: Move in env variable the `client_id` and `client_secret`
+export const cleanState = () => (dispatch) => {
+  dispatch({
+    type: CLEAN_STATE,
+  })
+}
+
 export const authenticate = (email, password) => (dispatch) => {
   dispatch({
     type: AUTHENTICATE,
