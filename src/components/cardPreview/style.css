@@ -1,0 +1,43 @@
+.card {
+    display: inline-grid;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.cardHeader {
+    cursor: pointer;
+}
+
+.draggableCard {
+    display: inline-grid;
+}
+
+.dueCompleteDisplay {
+    display: inline-grid;
+    margin-top: 17px;
+    float: left;
+}
+
+.assignees {
+    display: inline-grid;
+    margin-top: 9px;
+    float: right;
+    height: 25px;
+}
+
+.assigneeInitials {
+    margin-left: 5px;
+}
+
+.cardLabel {
+    margin-bottom: 7px;
+}
+
+.clockIcon, .commentsIcon {
+    margin-right: 8px;
+}
+
+.commentsDisplay {
+    display: inline-grid;
+    margin-top: 17px;
+}

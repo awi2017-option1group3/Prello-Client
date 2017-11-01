@@ -1,39 +1,15 @@
-.card {
-    display: inline-grid;
-    margin-top: 15px;
-    width: 100%;
+.sider {
+    background: #fff;
+    width: 150px;
+    text-align: right;
+
 }
 
-.cardHeader {
-    cursor: pointer;
+.siderButton{
+    margin: 4px;
 }
 
-.draggableCard {
-    display: inline-grid;
-}
-
-.dueCompleteDisplay {
-    display: inline-grid;
-    margin-top: 17px;
-    float: left;
-}
-
-.assignees {
-    display: inline-grid;
-    margin-top: 9px;
-    float: right;
-    height: 25px;
-}
-
-.assigneeInitials {
-    margin-left: 5px;
-}
-
-.cardLabel {
-    margin-bottom: 7px;
-}
-
-.clockIcon {
-    margin-right: 8px;
+.content {
+    background: #fff;
 }
 
