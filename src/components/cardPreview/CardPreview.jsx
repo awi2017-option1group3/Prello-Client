@@ -60,6 +60,34 @@ class Card extends Component {
     )
   }
 
+  getDueDate() {
+    return (
+      <div className="dueCompleteDisplay">
+        <span>
+          <Icon
+            type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
+            className="clockIcon"
+          />
+          {this.props.dueComplete !== null ? this.props.dueComplete.slice(0, 10) : ''}
+        </span>
+      </div>
+    )
+  }
+
+  getComments() {
+    return (
+      <div>
+        <span>
+          <Icon
+            type={this.props.comments.length > 0 ? 'message' : ''}
+            className="commentsIcon"
+          />
+          {this.props.comments.length > 0 ? this.props.comments.length : ''}
+        </span>
+      </div>
+    )
+  }
+
   getAssignees() {
     const maxNumberOfPeopleInALine = 3
     if (this.props.assignees.length > maxNumberOfPeopleInALine) {
@@ -139,24 +167,21 @@ class Card extends Component {
         <p>Rank    : {this.props.rank}</p>
         <p>List ID : {this.props.listId}</p>
         <p>ID      : {this.props.id}</p>
-        <Row className="cardFooter">
-          <Col span={12}>
-            <div className="dueCompleteDisplay">
-              <span>
-                <Icon
-                  type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
-                  className="clockIcon"
-                />
-                {this.props.dueComplete !== null ? this.props.dueComplete.slice(0, 10) : ''}
-              </span>
-            </div>
-          </Col>
-          <Col span={12}>
-            <div className="assignees">
-              {this.getAssignees()}
-            </div>
-          </Col>
-        </Row>
+          <Row className="cardFooter">
+            <Col span={8}>
+              {this.getDueDate()}
+            </Col>
+            <Col span={3}>
+              <div className="commentsDisplay">
+                {this.getComments()}
+              </div>
+            </Col>
+            <Col span={12}>
+              <div className="assignees">
+                {this.getAssignees()}
+              </div>
+            </Col>
+          </Row>
         </div>
         <div>
           <UIModal
@@ -175,6 +200,8 @@ class Card extends Component {
 }
 
 Card.defaultProps = {
+  labels: [],
+  comments: [],
   cardResponsible: {},
   dueComplete: '',
 }
@@ -185,7 +212,8 @@ Card.propTypes = {
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   dueComplete: PropTypes.string,
-  labels: PropTypes.array.isRequired,
+  labels: PropTypes.array,
+  comments: PropTypes.array,
   cardResponsible: PropTypes.object,
   assignees: PropTypes.array.isRequired,
   deleteCard: PropTypes.func.isRequired,

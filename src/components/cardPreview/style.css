@@ -33,7 +33,12 @@
     margin-bottom: 7px;
 }
 
-.clockIcon {
+.clockIcon, .commentsIcon {
     margin-right: 8px;
+}
+
+.commentsDisplay {
+    display: inline-grid;
+    margin-top: 17px;
 }
 
