@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Layout, Menu } from 'antd'
+
 import routes from '../../config/routes'
+import { history } from '../../store'
 import './style.css'
 
 const { Header } = Layout
@@ -20,6 +22,19 @@ class Navbar extends Component {
     )
   }
 
+  renderLogout() {
+    const isLogoutRequired = history.location.pathname !== '/login' && history.location.pathname !== '/register'
+    return isLogoutRequired ? (
+      <Link to={routes.logout} className="navbarLogout">
+        <Button icon="logout">
+          Log out
+        </Button>
+      </Link>
+    ) : (
+      null
+    )
+  }
+
   render() {
     return (
       <Header className="navbarHeader">
@@ -32,11 +47,7 @@ class Navbar extends Component {
         >
           {this.renderLinks()}
         </Menu>
-        <Link to={routes.logout} className="navbarLogout">
-          <Button icon="logout">
-            Log out
-          </Button>
-        </Link>
+        {this.renderLogout()}
       </Header>
     )
   }
