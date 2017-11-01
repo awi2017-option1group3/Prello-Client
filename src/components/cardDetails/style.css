@@ -1,0 +1,13 @@
+.sider {
+    background: #fff;
+    width: 150px;
+    text-align: right;
+
+}
+
+.siderButton{
+    margin: 4px;
+}
+.content {
+    background: #fff;
+}

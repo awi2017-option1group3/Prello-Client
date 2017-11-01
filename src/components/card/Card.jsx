@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Tag, Avatar, Row, Col } from 'antd'
+import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Tag, Avatar, Row, Col, Modal as UIModal } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
+import CardDetails from '../cardDetails/CardDetails'
 
 
 class Card extends Component {
+  state = { visible: false }
+
   getHeader() {
     return (
       <div className="cardHeader">
@@ -114,12 +117,25 @@ class Card extends Component {
     )
   }
 
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false,
+    });
+  }
+
   render() {
     return (
       <UICard title={this.getHeader()} extra={this.getDropdown()} className="card">
         <div className="topLabels">
           {this.getLabels()}
         </div>
+        <div onClick={this.showModal}>
         <p>Rank    : {this.props.rank}</p>
         <p>List ID : {this.props.listId}</p>
         <p>ID      : {this.props.id}</p>
@@ -141,7 +157,19 @@ class Card extends Component {
             </div>
           </Col>
         </Row>
+        </div>
+        <div>
+          <UIModal
+            title={this.props.title}
+            visible={this.state.visible}
+            footer={null}
+            onCancel={this.handleCancel}
+          >
+            <CardDetails />
+          </UIModal>
+        </div>
       </UICard>
+
     )
   }
 }
