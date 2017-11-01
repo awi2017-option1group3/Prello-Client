@@ -42,3 +42,14 @@
     margin-top: 17px;
 }
 
+.dueDateWarning {
+    color: #ff7b1d;
+}
+
+.dueDateUrgent {
+    color: #FFFFFF;
+    background-color: #F50;
+    border-radius: 4px;
+    padding-right : 3px;
+    padding-left : 3px;
+}
