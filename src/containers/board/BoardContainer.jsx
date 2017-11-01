@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
+import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard } from './actions'
 import { cleanState as cleanListsState, saveListRank } from '../lists/actions'
 import { cleanState as cleanCardsState, getAllCardsInList, saveCardRank } from '../cards/actions'
@@ -13,13 +14,19 @@ class BoardContainer extends Component {
     this.props.cleanListsState()
     this.props.cleanCardsState()
     this.props.getAllListsInBoard(this.props.match.params.boardId)
-    this.props.getOneBoard(this.props.match.params.boardId)    
+    this.props.getOneBoard(this.props.match.params.boardId)
   }
 
   render() {
-    return (
-      <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
-    )
+    if (this.props.board.isFailure) {
+      return (
+        <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
+      )
+    }
+    else
+      return (
+        <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
+      )
   }
 }
 

@@ -2,6 +2,7 @@ import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 const initialState = {
   title: '',
+  isFailure: false,
 }
 
 export default (state = initialState, action) => {
@@ -17,9 +18,10 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload.data,
       }
-    case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
+    case `${GET_ALL_LISTS_IN_BOARD}_FAIL`:
       return {
         ...state,
+        isFailure: true,
       }
     case `${GET_ONE_BOARD}_SENT`:
       return {
@@ -30,9 +32,10 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload.data,
       }
-    case `${GET_ONE_BOARD}_ERROR`:
+    case `${GET_ONE_BOARD}_FAIL`:
       return {
         ...state,
+        isFailure: true,
       }
     default:
       return state

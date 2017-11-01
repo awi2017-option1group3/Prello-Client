@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 
 class NotFound extends Component {
   render() {
     return (
-      <p>Page not found.</p>
+      <ErrorDisplayer
+        icon="compass"
+        message="Page not found."
+      />
     )
   }
 }
