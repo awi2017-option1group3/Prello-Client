@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-import { CLEAN_STATE, AUTHENTICATE, REFRESH_TOKEN } from './constants'
+import { AUTHENTICATE, REFRESH_TOKEN } from './constants'
 
 const initialState = {
   token: '',
@@ -13,8 +13,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `${CLEAN_STATE}`:
-      return initialState
     case `${AUTHENTICATE}`:
       return {
         ...state,
