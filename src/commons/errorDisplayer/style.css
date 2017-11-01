@@ -4,6 +4,10 @@
     color: #f04134;
 }
 
-.errorDisplayer .anticon {
+.errorDisplayer>.anticon {
     font-size: 25px;
+}
+
+.errorDisplayer button {
+    margin-top: 25px;
 }
