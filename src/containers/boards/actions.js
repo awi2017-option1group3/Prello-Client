@@ -34,7 +34,7 @@ export const deleteBoard = (boardId) => (dispatch) => {
     payload: {
       request: {
         method: 'DELETE',
-        url: `/boards/${boardId}`,
+        url: `/api/boards/${boardId}`,
       },
     },
   })
