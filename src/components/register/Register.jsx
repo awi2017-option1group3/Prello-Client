@@ -54,14 +54,14 @@ class Register extends Component {
                     {getFieldDecorator('lastname', {
                       rules: [{ required: true, message: 'Please insert your last name!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Jon " />,
+                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Snow " />,
                     )}
                   </FormItem>
                   <FormItem className="signupFormItem" label="First Name">
                     {getFieldDecorator('firstname', {
                       rules: [{ required: true, message: 'Please insert your first name!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Snow " />,
+                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Jon " />,
                     )}
                   </FormItem>
                   <FormItem className="signupFormItem" label="Email" hasFeedback>
