@@ -1,8 +1,4 @@
-.navbarHeader {
-    display: flex;
-}
-
-.navbarLogo {
+.logo {
     width: 120px;
     height: 31px;
     background: #333;
@@ -13,9 +9,4 @@
 
 .navbarMenu {
     line-height: 64px;
-    width: 100%;
-}
-
-.navbarLogout {
-    float: right;
 }
