@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Spin } from 'antd'
-import DraggableCard from '../card/DraggableCard'
+import DraggableCard from '../cardPreview/DraggableCard'
 import Loader from '../../commons/loader/Loader'
 import './style.css'
 
