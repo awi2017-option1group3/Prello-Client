@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 import { Layout, Button } from 'antd'
+import EditArea from '../../commons/editArea/EditArea'
 
 const { Sider, Content } = Layout
 
@@ -13,7 +14,11 @@ class CardDetails extends Component {
         <Layout>
           <Layout>
             <Content className="content">
-              <p>Some contents...</p>
+              <EditArea
+                text=""
+                save={(newTitle) => null}
+                hint="A card has no description"
+              />
               <p>Some contents...</p>
               <p>Some contents...</p>
             </Content>
