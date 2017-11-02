@@ -1,12 +1,14 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import GooglePicker from 'react-google-picker'
 import { Layout, Button, Select } from 'antd'
 import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
 
 const { Sider, Content } = Layout
 
+const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 const Option = Select.Option
 
 
@@ -75,6 +77,19 @@ class Card extends Component {
                 {this.props.labels.map(label => <Option key={this.props.id + label.id}>{label.name}</Option>)}
               </Select>
               <Button type="primary" className="siderButton">Button drive</Button>
+              <GooglePicker
+                clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
+                developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
+                scope={SCOPE}
+                onChange={data => console.log('on change:', data)}
+                multiselect
+                navHidden
+                authImmediate={false}
+                mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
+                viewId={'DOCS'}
+              >
+                <Button type="primary" className="siderButton">Google Drive</Button>
+              </GooglePicker>
             </Sider>
           </Layout>
         </Layout>
