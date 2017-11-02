@@ -1,19 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Spin } from 'antd'
-import DraggableCard from '../card/DraggableCard'
+import DraggableCard from '../cardPreview/DraggableCard'
+import Loader from '../../commons/loader/Loader'
 import './style.css'
 
 const Cards = props => (
   <div className="cards">
     { props.isFetching ? (
-      <div className="cardsLoader">
-        <Spin tip="Loading..." />
-      </div>
+      <Loader message="Loading..." />
     ) : (
       <div className="cardsWrapper">
-        { props.cards.sort((a, b) => a.rank > b.rank).map(card => (
-          <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} />
+        { props.cards.sort((a, b) => a.pos > b.pos).map(card => (
+          <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} saveCardDesc={props.saveCardDesc} />
         ))}
         { props.droppableProvided.placeholder }
         { props.isAdding ? (

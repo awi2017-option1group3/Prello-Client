@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_POS } from './constants'
 
 const initialState = {
   data: [],
@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
       }
-    case `${SAVE_LIST_RANK}_SUCCESS`:
+    case `${SAVE_LIST_POS}_SUCCESS`:
       return {
         ...state,
         data: state.data.map(list => (list.id === action.meta.previousAction.listId) ? action.payload.data : list),

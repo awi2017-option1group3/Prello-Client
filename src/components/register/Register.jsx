@@ -40,7 +40,7 @@ class Register extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(?=.{8,})')
+    const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\\!@#$%&\\*\\_\\-\\"\'£€+/.?,;:=^])(?=.{8,})')
     return (
       <Layout className="signupLayout">
         <Content className="signupContent" >
@@ -54,14 +54,14 @@ class Register extends Component {
                     {getFieldDecorator('lastname', {
                       rules: [{ required: true, message: 'Please insert your last name!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Jon " />,
+                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Snow " />,
                     )}
                   </FormItem>
                   <FormItem className="signupFormItem" label="First Name">
                     {getFieldDecorator('firstname', {
                       rules: [{ required: true, message: 'Please insert your first name!' }],
                     })(
-                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Snow " />,
+                      <Input prefix={<Icon type="user" style={{ fontSize: 14 }} />} placeholder="Jon " />,
                     )}
                   </FormItem>
                   <FormItem className="signupFormItem" label="Email" hasFeedback>

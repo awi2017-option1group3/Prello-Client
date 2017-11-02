@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_RANK, RENAME_LIST } from './constants'
+import { CLEAN_STATE, ADD_LIST, DELETE_LIST, GET_ALL_LISTS_IN_BOARD, SAVE_LIST_POS, RENAME_LIST } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -12,38 +12,38 @@ export const getAllListsInBoard = boardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/boards/${boardId}/lists`,
+        url: `/api/boards/${boardId}/lists`,
       },
     },
   })
 }
 
-export const addList = (boardId, lastRank) => (dispatch) => {
+export const addList = (boardId, lastPos) => (dispatch) => {
   dispatch({
     type: ADD_LIST,
     payload: {
       request: {
         method: 'POST',
-        url: `/boards/${boardId}/lists`,
+        url: `/api/boards/${boardId}/lists`,
         data: {
           title: 'New list',
-          rank: (lastRank || 0) + 1,
+          pos: (lastPos || 0) + 1,
         },
       },
     },
   })
 }
 
-export const saveListRank = list => (dispatch) => {
+export const saveListPos = list => (dispatch) => {
   dispatch({
-    type: SAVE_LIST_RANK,
+    type: SAVE_LIST_POS,
     listId: list.id,
     payload: {
       request: {
         method: 'PUT',
-        url: `/lists/${list.id}`,
+        url: `/api/lists/${list.id}`,
         data: {
-          rank: list.rank,
+          pos: list.pos,
         },
       },
     },
@@ -56,7 +56,7 @@ export const saveTitleList = (listId, listTitle) => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/lists/${listId}`,
+        url: `/api/lists/${listId}`,
         data: {
           title: listTitle,
         },
@@ -72,7 +72,7 @@ export const deleteList = listId => (dispatch) => {
     payload: {
       request: {
         method: 'DELETE',
-        url: `/lists/${listId}`,
+        url: `/api/lists/${listId}`,
       },
     },
   })
