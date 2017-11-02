@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DroppableCards from '../../components/cards/DroppableCards'
-import { addCard, deleteCard, getAllCardsInList, saveCardRank, saveCardTitle } from './actions'
+import { addCard, deleteCard, getAllCardsInList, saveCardRank, saveCardTitle, saveCardDesc } from './actions'
 
 class CardsContainer extends Component {
   componentWillMount() {
@@ -34,6 +34,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getAllCardsInList,
   saveCardRank,
   saveCardTitle,
+  saveCardDesc,
 }, dispatch)
 
 export default connect(

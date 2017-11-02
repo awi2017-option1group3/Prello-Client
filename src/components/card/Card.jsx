@@ -15,8 +15,8 @@ class CardDetails extends Component {
           <Layout>
             <Content className="content">
               <EditArea
-                text=""
-                save={(newTitle) => null}
+                text={this.props.desc}
+                save={(newDesc) => { this.props.saveCardDesc(this.props.id, newDesc) }}
                 hint="A card has no description"
               />
               <p>Some contents...</p>
@@ -38,7 +38,7 @@ class CardDetails extends Component {
 CardDetails.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-
+  desc: PropTypes.string,
 }
 
 export default CardDetails
