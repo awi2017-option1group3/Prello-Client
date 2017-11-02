@@ -186,6 +186,7 @@ class Card extends Component {
           <p>Rank    : {this.props.rank}</p>
           <p>List ID : {this.props.listId}</p>
           <p>ID      : {this.props.id}</p>
+          <p>Desc    : {this.props.desc}</p>
           <Row className="cardFooter">
             <Col span={8}>
               {this.getDueDate()}
@@ -209,7 +210,7 @@ class Card extends Component {
             footer={null}
             onCancel={this.handleCancel}
           >
-            <CardDetails />
+            <CardDetails {...this.props} />
           </UIModal>
         </div>
       </UICard>
@@ -231,6 +232,7 @@ Card.propTypes = {
   listId: PropTypes.string.isRequired,
   rank: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
   comments: PropTypes.array,
@@ -238,6 +240,7 @@ Card.propTypes = {
   assignees: PropTypes.array,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
+  saveCardDesc: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
 }
 
