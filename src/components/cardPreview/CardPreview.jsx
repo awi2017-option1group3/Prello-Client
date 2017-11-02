@@ -87,7 +87,6 @@ class Card extends Component {
     const urgent = 3
     if (diffDays > warning) {
       return ""
-
     } else if ( diffDays <= warning && diffDays > urgent) {
       return "dueDateWarning"
     } else {
@@ -111,17 +110,16 @@ class Card extends Component {
 
   getAssignees() {
     const maxNumberOfPeopleInALine = 3
-    if (this.props.assignees.length > maxNumberOfPeopleInALine) {
-      const members = this.props.assignees.sort((a, b) => a.initials > b.initials)
-      if (this.props.cardResponsible !== {}) {
-        // if responsible is in members, sets responsible to be the first user
-        if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
-          const indexOfResponsible = members.findIndex(this.props.cardResponsible)
-          members.splice(indexOfResponsible, 0)
-          members.sort((a, b) => a.initials < b.initials)
-          members.splice(0, 0, this.props.cardResponsible)
-        }
+    const members = this.props.assignees.sort((a, b) => a.initials > b.initials).slice(0)
+    if (this.props.cardResponsible !== null) {
+      // if responsible is in members, sets responsible to be the first user
+      if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
+        const indexOfResponsible = members.findIndex(this.props.cardResponsible)
+        members.splice(indexOfResponsible, 0)
       }
+      members.splice(0, 0, this.props.cardResponsible)
+    }
+    if (members.length > maxNumberOfPeopleInALine) {
       const moreMembers = (
         <div>
           {members.slice(maxNumberOfPeopleInALine - 1, members.length)
@@ -153,7 +151,7 @@ class Card extends Component {
     }
     return (
       <div>
-        {this.props.assignees.sort((a, b) => a.initials > b.initials).map(assignee => (
+        {members.map(assignee => (
           <Avatar
             key={this.props.id + assignee.id}
             style={(this.props.cardResponsible !== null && assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
@@ -185,10 +183,10 @@ class Card extends Component {
           {this.getLabels()}
         </div>
         <div onClick={this.showModal}>
-        <p>Rank    : {this.props.rank}</p>
-        <p>List ID : {this.props.listId}</p>
-        <p>ID      : {this.props.id}</p>
-        <p>Desc    : {this.props.desc}</p>
+          <p>Rank    : {this.props.rank}</p>
+          <p>List ID : {this.props.listId}</p>
+          <p>ID      : {this.props.id}</p>
+          <p>Desc    : {this.props.desc}</p>
           <Row className="cardFooter">
             <Col span={8}>
               {this.getDueDate()}
@@ -224,6 +222,7 @@ class Card extends Component {
 Card.defaultProps = {
   labels: [],
   comments: [],
+  assignees: [],
   cardResponsible: {},
   dueComplete: '',
 }
@@ -238,7 +237,7 @@ Card.propTypes = {
   labels: PropTypes.array,
   comments: PropTypes.array,
   cardResponsible: PropTypes.object,
-  assignees: PropTypes.array.isRequired,
+  assignees: PropTypes.array,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
   saveCardDesc: PropTypes.func.isRequired,
