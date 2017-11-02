@@ -179,8 +179,12 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.getHeader()} extra={this.getDropdown()} 
-      {...this.props.dragHandleProps}  className="card">
+      <UICard
+        title={this.getHeader()}
+        extra={this.getDropdown()} 
+        {...this.props.dragHandleProps} 
+        className="card"
+      >
         <div className="topLabels">
           {this.getLabels()}
         </div>
