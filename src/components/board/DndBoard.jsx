@@ -44,47 +44,47 @@ class DndBoard extends Component {
   }
 
   moveListInStructure(originIndex, destinationIndex) {
-    const lists = this.props.lists.sort((a, b) => a.rank > b.rank)
+    const lists = this.props.lists.sort((a, b) => a.pos > b.pos)
 
     const [removed] = lists.splice(originIndex, 1)
     lists.splice(destinationIndex, 0, removed)
 
     for (let i = 0; i < lists.length; i++) {
-      lists[i].rank = i + 1
-      this.props.saveListRank(lists[i])
+      lists[i].pos = i + 1
+      this.props.saveListPos(lists[i])
     }
   }
 
   moveCardInList(originIndex, destinationIndex, listId) {
     const cards = this.props.cards.filter(card => card.listId === listId)
-      .sort((a, b) => a.rank > b.rank)
+      .sort((a, b) => a.pos > b.pos)
 
     const [removed] = cards.splice(originIndex, 1)
     cards.splice(destinationIndex, 0, removed)
 
     for (let i = 0; i < cards.length; i++) {
-      cards[i].rank = i + 1
-      this.props.saveCardRank(cards[i])
+      cards[i].pos = i + 1
+      this.props.saveCardPos(cards[i])
     }
   }
 
   moveCardBewteenLists(originIndex, destinationIndex, initialListId, destinationListId) {
     const originCards = this.props.cards.filter(card => card.listId === initialListId)
-      .sort((a, b) => a.rank > b.rank)
+      .sort((a, b) => a.pos > b.pos)
     const destinationCards = this.props.cards.filter(card => card.listId === destinationListId)
-      .sort((a, b) => a.rank > b.rank)
+      .sort((a, b) => a.pos > b.pos)
 
     const [removed] = originCards.splice(originIndex, 1)
     destinationCards.splice(destinationIndex, 0, removed)
 
     for (let i = 0; i < originCards.length; i++) {
-      originCards[i].rank = i + 1
-      this.props.saveCardRank(originCards[i])
+      originCards[i].pos = i + 1
+      this.props.saveCardPos(originCards[i])
     }
     for (let i = 0; i < destinationCards.length; i++) {
-      destinationCards[i].rank = i + 1
+      destinationCards[i].pos = i + 1
       destinationCards[i].listId = destinationListId
-      this.props.saveCardRank(destinationCards[i])
+      this.props.saveCardPos(destinationCards[i])
     }
   }
 
@@ -106,8 +106,8 @@ class DndBoard extends Component {
 DndBoard.propTypes = {
   cards: PropTypes.array.isRequired,
   lists: PropTypes.array.isRequired,
-  saveListRank: PropTypes.func.isRequired,
-  saveCardRank: PropTypes.func.isRequired,
+  saveListPos: PropTypes.func.isRequired,
+  saveCardPos: PropTypes.func.isRequired,
 }
 
 export default DndBoard

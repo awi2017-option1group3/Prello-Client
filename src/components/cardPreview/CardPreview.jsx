@@ -183,7 +183,7 @@ class Card extends Component {
           {this.getLabels()}
         </div>
         <div onClick={this.showModal}>
-          <p>Rank    : {this.props.rank}</p>
+          <p>Pos     : {this.props.pos}</p>
           <p>List ID : {this.props.listId}</p>
           <p>ID      : {this.props.id}</p>
           <p>Desc    : {this.props.desc}</p>
@@ -214,7 +214,6 @@ class Card extends Component {
           </UIModal>
         </div>
       </UICard>
-
     )
   }
 }
@@ -230,7 +229,7 @@ Card.defaultProps = {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
-  rank: PropTypes.number.isRequired,
+  pos: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   dueComplete: PropTypes.string,

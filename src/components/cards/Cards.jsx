@@ -11,7 +11,7 @@ const Cards = props => (
       <Loader message="Loading..." />
     ) : (
       <div className="cardsWrapper">
-        { props.cards.sort((a, b) => a.rank > b.rank).map(card => (
+        { props.cards.sort((a, b) => a.pos > b.pos).map(card => (
           <DraggableCard {...card} key={card.id} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} saveCardDesc={props.saveCardDesc} />
         ))}
         { props.droppableProvided.placeholder }

@@ -11,7 +11,7 @@ const Lists = props => (
       <Loader message="Loading the lists..." />
     ) : (
       <div className="listsWrapper">
-        {props.lists.sort((a, b) => a.rank > b.rank).map(list => (
+        {props.lists.sort((a, b) => a.pos > b.pos).map(list => (
           <DraggableList {...list} key={list.id} deleteList={props.deleteList} saveTitleList={props.saveTitleList} />
         ))}
         <div className="addListBlock">
