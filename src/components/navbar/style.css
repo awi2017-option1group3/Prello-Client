@@ -1,5 +1,6 @@
 .navbarHeader {
     display: flex;
+    line-height: 0;
 }
 
 .navbarLogo {
@@ -9,6 +10,13 @@
     border-radius: 6px;
     margin: 16px 24px 16px 0;
     float: left;
+    text-align: center;
+}
+
+.navbarLogo>img {
+    height: 20px;
+    position: relative;
+    top: 5px;
 }
 
 .navbarMenu {
@@ -18,4 +26,5 @@
 
 .navbarLogout {
     float: right;
+    line-height: 64px;
 }
