@@ -18,15 +18,11 @@ class BoardContainer extends Component {
   }
 
   render() {
-    if (this.props.board.isFailed) {
-      return (
-        <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
-      )
-    }
-    else
-      return (
-        <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
-      )
+    return this.props.board.isFailed ? ( 
+      <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
+    ) : (
+      <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
+    )
   }
 }
 
