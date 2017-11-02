@@ -18,7 +18,7 @@ class BoardContainer extends Component {
   }
 
   render() {
-    if (this.props.board.isFailure) {
+    if (this.props.board.isFailed) {
       return (
         <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
       )
