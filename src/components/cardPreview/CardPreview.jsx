@@ -185,7 +185,7 @@ class Card extends Component {
           {this.getLabels()}
         </div>
         <div onClick={this.showModal}>
-        <p>Rank    : {this.props.rank}</p>
+        <p>Pos     : {this.props.pos}</p>
         <p>List ID : {this.props.listId}</p>
         <p>ID      : {this.props.id}</p>
           <Row className="cardFooter">
@@ -230,7 +230,7 @@ Card.defaultProps = {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
-  rank: PropTypes.number.isRequired,
+  pos: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
