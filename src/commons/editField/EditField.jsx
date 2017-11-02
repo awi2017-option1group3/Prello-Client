@@ -58,10 +58,14 @@ class EditField extends Component {
   }
 }
 
+EditField.defaultProps = {
+  dragHandleProps: null,
+}
+
 EditField.propTypes = {
   text: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired,
-  dragHandleProps: PropTypes.object.isRequired,
+  dragHandleProps: PropTypes.object,
 }
 
 export default EditField
