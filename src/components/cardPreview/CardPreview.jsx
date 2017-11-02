@@ -17,7 +17,6 @@ class Card extends Component {
         <EditField
           text={this.props.title}
           save={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
-          dragHandleProps={this.props.dragHandleProps}
         />
       </div>
     )
@@ -180,7 +179,8 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.getHeader()} extra={this.getDropdown()} className="card">
+      <UICard title={this.getHeader()} extra={this.getDropdown()} 
+      {...this.props.dragHandleProps}  className="card">
         <div className="topLabels">
           {this.getLabels()}
         </div>
