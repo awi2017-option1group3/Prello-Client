@@ -9,6 +9,8 @@ const { Sider, Content } = Layout
 
 class CardDetails extends Component {
   render() {
+    console.log(' In cardDetails : this.props.card')
+    console.log(this.props.card)
     return (
       <div>
         <Layout>
@@ -19,8 +21,11 @@ class CardDetails extends Component {
                 save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
                 hint="Add a description"
               />
-              <p>Some contents...</p>
-              <p>Some contents...</p>
+              <p>Desc : {this.props.card.desc}</p>
+              <p>DueDate : {this.props.card.dueComplete}</p>
+              <p>Rank : {this.props.card.rank}</p>
+              <p>ID : {this.props.id}</p>
+              <p>More...</p>
             </Content>
             <Sider className="sider">
               <Button type="primary" className="siderButton">Button Members</Button>
@@ -37,7 +42,6 @@ class CardDetails extends Component {
 
 CardDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  /*
   card: PropTypes.object.isRequired,
   cleanCardState: PropTypes.func.isRequired,
   getOneCard: PropTypes.func.isRequired,
@@ -51,7 +55,6 @@ CardDetails.propTypes = {
   addResponsible: PropTypes.func.isRequired,
   updateDesc: PropTypes.func.isRequired,
   updateDueDate: PropTypes.func.isRequired,
-  */
 }
 
 export default CardDetails

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
   getOneCard, getAllAssigneesInBoard, getAllCommentsInBoard, getAllLabelsInBoard, getResponsibleForBoard,
   addComment, addLabel, addMember, addResponsible,
-  updateDesc, updateDueDate} from './actions'
+  updateDesc, updateDueDate } from './actions'
 import CardDetails from '../../components/card/Card'
 
 class CardContainer extends Component {
@@ -42,7 +42,7 @@ CardContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  card: state.currentCard.data,
+  card: state.currentCard,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -44,15 +44,19 @@ export default (state = initialState, action) => {
         ...state,
         responsible: action.payload.data,
       }
-    case GET_ONE_CARD:
-      return {
+    case `${GET_ONE_CARD}_SUCCESS`:
+      console.log('action.payload.data')
+      console.log(action.payload.data)
+      const ourCard = {
         ...state,
-        data: action.payload.data,
+        ...action.payload.data,
       }
+      console.log(ourCard)
+      return ourCard
     case `${ADD_COMMENT}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state.data(action.payload.data),
         isAddingComment: true,
       }
     case `${ADD_COMMENT}_FAIL`:
@@ -63,7 +67,7 @@ export default (state = initialState, action) => {
     case `${ADD_LABEL}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state(action.payload.data),
         isAddingLabel: true,
       }
     case `${ADD_LABEL}_FAIL`:
@@ -74,7 +78,7 @@ export default (state = initialState, action) => {
     case `${ADD_MEMBER}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state.data(action.payload.data),
         isAddingMember: true,
       }
     case `${ADD_MEMBER}_FAIL`:
@@ -85,7 +89,7 @@ export default (state = initialState, action) => {
     case `${ADD_RESPONSIBLE}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state.data(action.payload.data),
         isAddingMember: true,
       }
     case `${ADD_RESPONSIBLE}_FAIL`:
@@ -96,7 +100,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DESC}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state.data(action.payload.data),
         isAddingDesc: true,
       }
     case `${UPDATE_DESC}_FAIL`:
@@ -107,7 +111,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DUE_DATE}_SUCCESS`:
       return {
         ...state,
-        data: state.data.concat(action.payload.data),
+        data: state.data(action.payload.data),
         isAddingDueDate: true,
       }
     case `${UPDATE_DUE_DATE}_FAIL`:
