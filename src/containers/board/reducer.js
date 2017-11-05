@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case `${CLEAN_STATE}`:
       return initialState
-    case `${GET_ALL_LISTS_IN_BOARD}_SENT`:
+    case GET_ALL_LISTS_IN_BOARD:
       return {
         ...state,
       }
@@ -17,11 +17,11 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload.data,
       }
-    case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
+    case `${GET_ALL_LISTS_IN_BOARD}_FAIL`:
       return {
         ...state,
       }
-    case `${GET_ONE_BOARD}_SENT`:
+    case GET_ONE_BOARD:
       return {
         ...state,
       }
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload.data,
       }
-    case `${GET_ONE_BOARD}_ERROR`:
+    case `${GET_ONE_BOARD}_FAIL`:
       return {
         ...state,
       }
