@@ -18,6 +18,7 @@ class Card extends Component {
           text={this.props.title}
           save={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
           dragHandleProps={this.props.dragHandleProps}
+          hint="A card has no name"
         />
       </div>
     )

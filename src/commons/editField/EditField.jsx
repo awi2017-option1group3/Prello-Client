@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
+import './style.css'
 
 class EditField extends Component {
   constructor(props) {
@@ -45,8 +46,12 @@ class EditField extends Component {
           autoFocus
         />
       )
-    } 
-    return (
+    }
+    return this.state.text === "" ? (
+      <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
+        <span class="hintEdit">{this.props.hint}</span>
+      </div>
+    ) : (
       <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
         {this.state.text}
       </div>
@@ -58,10 +63,15 @@ class EditField extends Component {
   }
 }
 
+EditField.defaultProps = {
+  hint: "Click here to edit.",
+}
+
 EditField.propTypes = {
   text: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
+  hint: PropTypes.string,
 }
 
 export default EditField
