@@ -64,6 +64,7 @@ class EditField extends Component {
 }
 
 EditField.defaultProps = {
+  dragHandleProps: null,
   hint: "Click here to edit.",
 }
 
