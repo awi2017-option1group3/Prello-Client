@@ -1,6 +1,6 @@
 import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
-  ADD_COMMENT, ADD_LABEL, ADD_MEMBER, ADD_RESPONSIBLE,
+  ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC } from './constants'
 
 export const cleanState = () => (dispatch) => {
@@ -9,7 +9,7 @@ export const cleanState = () => (dispatch) => {
   })
 }
 
-export const getAllCommentsInBoard = cardId => (dispatch) => {
+export const getAllCommentsInCard = cardId => (dispatch) => {
   dispatch({
     type: GET_ALL_COMMENTS_IN_CARD,
     payload: {
@@ -21,19 +21,19 @@ export const getAllCommentsInBoard = cardId => (dispatch) => {
   })
 }
 
-export const getAllAssigneesInBoard = cardId => (dispatch) => {
+export const getAllAssigneesInCard = cardId => (dispatch) => {
   dispatch({
     type: GET_ALL_ASSIGNEES_IN_CARD,
     payload: {
       request: {
         method: 'GET',
-        url: `/api/cards/${cardId}/members`,
+        url: `/api/cards/${cardId}/assignees`,
       },
     },
   })
 }
 
-export const getAllLabelsInBoard = cardId => (dispatch) => {
+export const getAllLabelsInCard = cardId => (dispatch) => {
   dispatch({
     type: GET_ALL_LABELS_IN_CARD,
     payload: {
@@ -45,7 +45,7 @@ export const getAllLabelsInBoard = cardId => (dispatch) => {
   })
 }
 
-export const getResponsibleForBoard = cardId => (dispatch) => {
+export const getResponsibleForCard = cardId => (dispatch) => {
   dispatch({
     type: GET_RESPONSIBLE_FOR_CARD,
     payload: {
@@ -102,14 +102,14 @@ export const addLabel = (cardId, labelId) => (dispatch) => {
   })
 }
 
-export const addMember = (cardId, userId) => (dispatch) => {
+export const addAssignee = (cardId, userId) => (dispatch) => {
   dispatch({
-    type: ADD_MEMBER,
+    type: ADD_ASSIGNEE,
     cardId,
     payload: {
       request: {
         method: 'POST',
-        url: `/api/cards/${cardId}/members`,
+        url: `/api/cards/${cardId}/assignees`,
         data: {
           memberId: userId,
         },

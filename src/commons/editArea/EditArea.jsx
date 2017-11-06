@@ -50,13 +50,13 @@ class EditArea extends Component {
       )
     }
 
-    return this.state.text === "" ? (
+    return this.state.text === '' ? (
       <div onClick={this.enableEditing}>
-          <span class="hintEdit">{this.props.hint}</span>
+        <span className="hintEdit">{this.props.hint}</span>
       </div>
     ) : (
       <div onClick={this.enableEditing}> 
-          <ReactMarkdown source={this.state.text} escapeHtml={true} /> 
+        <ReactMarkdown source={this.state.text} escapeHtml /> 
       </div>
     )
   }
@@ -67,7 +67,7 @@ class EditArea extends Component {
 }
 
 EditArea.defaultProps = {
-  hint: "Click here to edit.",
+  hint: 'Click here to edit.',
 }
 
 EditArea.propTypes = {

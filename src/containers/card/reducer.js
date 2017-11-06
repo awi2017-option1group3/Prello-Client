@@ -1,6 +1,6 @@
 import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
-  ADD_COMMENT, ADD_LABEL, ADD_MEMBER, ADD_RESPONSIBLE,
+  ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC } from './constants'
 
 const initialState = {
@@ -14,7 +14,8 @@ const initialState = {
   assignees: [],
   comments: [],
   isAddingComment: false,
-  isAddingMember: false,
+  isAddingAssignee: false,
+  isAddingResponsible: false,
   isAddingLabel: false,
   isAddingDueDate: false,
   isAddingDesc: false,
@@ -22,7 +23,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `${CLEAN_STATE}`:
+    case CLEAN_STATE:
       return initialState
     case `${GET_ALL_COMMENTS_IN_CARD}_SUCCESS`:
       return {
@@ -45,18 +46,14 @@ export default (state = initialState, action) => {
         responsible: action.payload.data,
       }
     case `${GET_ONE_CARD}_SUCCESS`:
-      console.log('action.payload.data')
-      console.log(action.payload.data)
-      const ourCard = {
+      return {
         ...state,
         ...action.payload.data,
       }
-      console.log(ourCard)
-      return ourCard
     case `${ADD_COMMENT}_SUCCESS`:
       return {
         ...state,
-        data: state.data(action.payload.data),
+        comments: state.comments.concat(action.payload.data),
         isAddingComment: true,
       }
     case `${ADD_COMMENT}_FAIL`:
@@ -67,7 +64,7 @@ export default (state = initialState, action) => {
     case `${ADD_LABEL}_SUCCESS`:
       return {
         ...state,
-        data: state(action.payload.data),
+        labels: state.labels.concat(action.payload.data),
         isAddingLabel: true,
       }
     case `${ADD_LABEL}_FAIL`:
@@ -75,32 +72,32 @@ export default (state = initialState, action) => {
         ...state,
         isAddingLabel: false,
       }
-    case `${ADD_MEMBER}_SUCCESS`:
+    case `${ADD_ASSIGNEE}_SUCCESS`:
       return {
         ...state,
-        data: state.data(action.payload.data),
-        isAddingMember: true,
+        assignees: state.assignees.concat(action.payload.data),
+        isAddingAssignee: true,
       }
-    case `${ADD_MEMBER}_FAIL`:
+    case `${ADD_ASSIGNEE}_FAIL`:
       return {
         ...state,
-        isAddingMember: false,
+        isAddingAssignee: false,
       }
     case `${ADD_RESPONSIBLE}_SUCCESS`:
       return {
         ...state,
-        data: state.data(action.payload.data),
-        isAddingMember: true,
+        responsible: state.responsible(action.payload.data),
+        isAddingResponsible: true,
       }
     case `${ADD_RESPONSIBLE}_FAIL`:
       return {
         ...state,
-        isAddingMember: false,
+        isAddingResponsible: false,
       }
     case `${UPDATE_DESC}_SUCCESS`:
       return {
         ...state,
-        data: state.data(action.payload.data),
+        desc: state.desc(action.payload.data),
         isAddingDesc: true,
       }
     case `${UPDATE_DESC}_FAIL`:
@@ -111,8 +108,8 @@ export default (state = initialState, action) => {
     case `${UPDATE_DUE_DATE}_SUCCESS`:
       return {
         ...state,
-        data: state.data(action.payload.data),
-        isAddingDueDate: true,
+        dueComplete: state.dueComplete(action.payload.data),
+        isAddingDueDate: false,
       }
     case `${UPDATE_DUE_DATE}_FAIL`:
       return {

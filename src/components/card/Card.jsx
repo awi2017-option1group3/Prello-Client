@@ -7,10 +7,8 @@ import EditArea from '../../commons/editArea/EditArea'
 
 const { Sider, Content } = Layout
 
-class CardDetails extends Component {
+class Card extends Component {
   render() {
-    console.log(' In cardDetails : this.props.card')
-    console.log(this.props.card)
     return (
       <div>
         <Layout>
@@ -40,14 +38,9 @@ class CardDetails extends Component {
   }
 }
 
-CardDetails.propTypes = {
+Card.propTypes = {
   id: PropTypes.string.isRequired,
   card: PropTypes.object.isRequired,
-  cleanCardState: PropTypes.func.isRequired,
-  getOneCard: PropTypes.func.isRequired,
-  getAllAssigneesInBoard: PropTypes.func.isRequired,
-  getAllCommentsInBoard: PropTypes.func.isRequired,
-  getAllLabelsInBoard: PropTypes.func.isRequired,
   getResponsibleForBoard: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   addLabel: PropTypes.func.isRequired,
@@ -57,4 +50,4 @@ CardDetails.propTypes = {
   updateDueDate: PropTypes.func.isRequired,
 }
 
-export default CardDetails
+export default Card
