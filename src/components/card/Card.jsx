@@ -20,7 +20,7 @@ class Card extends Component {
                 hint="Add a description"
               />
               <p>Desc : {this.props.card.desc}</p>
-              <p>DueDate : {this.props.card.dueComplete.slice(0, 10)}</p>
+              <p>DueDate : {this.props.card.dueComplete}</p>
               <p>Rank : {this.props.card.rank}</p>
               <p>ID : {this.props.id}</p>
               <p>More...</p>
