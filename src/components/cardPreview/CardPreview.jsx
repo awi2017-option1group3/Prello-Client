@@ -5,6 +5,7 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardDetails from '../card/Card'
+import CardContainer from '../../containers/card/CardContainer'
 import moment from 'moment'
 
 
@@ -17,7 +18,7 @@ class Card extends Component {
         <EditField
           text={this.props.title}
           save={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
-          dragHandleProps={this.props.dragHandleProps}
+          hint="A card has no name"
         />
       </div>
     )
@@ -178,7 +179,12 @@ class Card extends Component {
 
   render() {
     return (
-      <UICard title={this.getHeader()} extra={this.getDropdown()} className="card">
+      <UICard
+        title={this.getHeader()}
+        extra={this.getDropdown()} 
+        {...this.props.dragHandleProps} 
+        className="card"
+      >
         <div className="topLabels">
           {this.getLabels()}
         </div>
@@ -210,7 +216,7 @@ class Card extends Component {
             footer={null}
             onCancel={this.handleCancel}
           >
-            <CardDetails {...this.props} />
+            <CardContainer id={this.props.id} />
           </UIModal>
         </div>
       </UICard>

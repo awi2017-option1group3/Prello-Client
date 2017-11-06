@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
         data: state.data.concat(action.payload.data),
         isAddingListIds: state.isAddingListIds.filter(id => id !== action.meta.previousAction.listId),
       }
-    case `${ADD_CARD}_ERROR`:
+    case `${ADD_CARD}_FAIL`:
       return {
         ...state,
         isAddingListIds: state.isAddingListIds.filter(id => id !== action.meta.previousAction.listId),
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
         data: state.data.concat(action.payload.data),
         isFetchingListIds: state.isFetchingListIds.filter(id => id !== action.meta.previousAction.listId),
       }
-    case `${GET_ALL_CARDS_IN_LIST}_ERROR`:
+    case `${GET_ALL_CARDS_IN_LIST}_FAIL`:
       return {
         ...state,
         isFetchingListIds: state.isFetchingListIds.filter(id => id !== action.meta.previousAction.listId),

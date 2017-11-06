@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
         data: state.data.concat(action.payload.data),
         isAdding: false,
       }
-    case `${ADD_LIST}_ERROR`:
+    case `${ADD_LIST}_FAIL`:
       return {
         ...state,
         isAdding: false,
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
         data: action.payload.data,
         isFetching: false,
       }
-    case `${GET_ALL_LISTS_IN_BOARD}_ERROR`:
+    case `${GET_ALL_LISTS_IN_BOARD}_FAIL`:
       return {
         ...state,
         isFetching: false,

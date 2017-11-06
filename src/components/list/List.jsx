@@ -14,6 +14,7 @@ class List extends Component {
           text={this.props.title}
           save={(newTitle) => { this.props.saveTitleList(this.props.id, newTitle) }}
           dragHandleProps={this.props.dragHandleProps}
+          hint="A list has no name"
         />
       </div>
     )

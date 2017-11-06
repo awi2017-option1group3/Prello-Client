@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         data: action.payload.data,
         isFetching: false,
       }
-    case `${GET_ALL_BOARDS}_ERROR`:
+    case `${GET_ALL_BOARDS}_FAIL`:
       return {
         ...state,
         isFetching: false,

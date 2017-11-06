@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
+import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard, saveBoardTitle } from './actions'
 import { cleanState as cleanListsState, saveListPos } from '../lists/actions'
 import { cleanState as cleanCardsState, getAllCardsInList, saveCardPos } from '../cards/actions'
@@ -17,7 +18,9 @@ class BoardContainer extends Component {
   }
 
   render() {
-    return (
+    return this.props.board.isFailed ? ( 
+      <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
+    ) : (
       <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
     )
   }
