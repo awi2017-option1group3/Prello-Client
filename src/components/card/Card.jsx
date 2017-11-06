@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import './style.css'
 import { Layout, Button } from 'antd'
+import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
 
 const { Sider, Content } = Layout
 
-class CardDetails extends Component {
+class Card extends Component {
   render() {
     return (
       <div>
@@ -15,12 +15,15 @@ class CardDetails extends Component {
           <Layout>
             <Content className="content">
               <EditArea
-                text={this.props.desc}
-                save={(newDesc) => { this.props.saveCardDesc(this.props.id, newDesc) }}
-                hint="A card has no description"
+                text={this.props.card.desc}
+                save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
+                hint="Add a description"
               />
-              <p>Some contents...</p>
-              <p>Some contents...</p>
+              <p>Desc : {this.props.card.desc}</p>
+              <p>DueDate : {this.props.card.dueComplete}</p>
+              <p>Rank : {this.props.card.rank}</p>
+              <p>ID : {this.props.id}</p>
+              <p>More...</p>
             </Content>
             <Sider className="sider">
               <Button type="primary" className="siderButton">Button Members</Button>
@@ -35,10 +38,16 @@ class CardDetails extends Component {
   }
 }
 
-CardDetails.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  desc: PropTypes.string,
+Card.propTypes = {
+  id: PropTypes.string.isRequired,
+  card: PropTypes.object.isRequired,
+  getResponsibleForBoard: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
+  addLabel: PropTypes.func.isRequired,
+  addMember: PropTypes.func.isRequired,
+  addResponsible: PropTypes.func.isRequired,
+  updateDesc: PropTypes.func.isRequired,
+  updateDueDate: PropTypes.func.isRequired,
 }
 
-export default CardDetails
+export default Card

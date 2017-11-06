@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
         ...state,
         success: true,
       }
-    case `${REGISTER}_ERROR`:
+    case `${REGISTER}_FAIL`:
       return {
         ...state,
         error: action.error.message,
