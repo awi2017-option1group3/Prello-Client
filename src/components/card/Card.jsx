@@ -20,7 +20,7 @@ class Card extends Component {
                 hint="Add a description"
               />
               <p>Desc : {this.props.card.desc}</p>
-              <p>DueDate : {this.props.card.dueComplete}</p>
+              <p>DueDate : {this.props.card.dueComplete.slice(0, 10)}</p>
               <p>Rank : {this.props.card.rank}</p>
               <p>ID : {this.props.id}</p>
               <p>More...</p>
@@ -41,10 +41,10 @@ class Card extends Component {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   card: PropTypes.object.isRequired,
-  getResponsibleForBoard: PropTypes.func.isRequired,
+  getResponsibleForCard: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   addLabel: PropTypes.func.isRequired,
-  addMember: PropTypes.func.isRequired,
+  addAssignee: PropTypes.func.isRequired,
   addResponsible: PropTypes.func.isRequired,
   updateDesc: PropTypes.func.isRequired,
   updateDueDate: PropTypes.func.isRequired,

@@ -4,7 +4,6 @@ import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Tag, Avatar, Row
 import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
-import CardDetails from '../card/Card'
 import CardContainer from '../../containers/card/CardContainer'
 import moment from 'moment'
 

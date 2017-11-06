@@ -47,9 +47,9 @@ class EditField extends Component {
         />
       )
     }
-    return this.state.text === "" ? (
+    return this.state.text === '' ? (
       <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
-        <span class="hintEdit">{this.props.hint}</span>
+        <span className="hintEdit">{this.props.hint}</span>
       </div>
     ) : (
       <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
@@ -65,13 +65,13 @@ class EditField extends Component {
 
 EditField.defaultProps = {
   dragHandleProps: null,
-  hint: "Click here to edit.",
+  hint: 'Click here to edit.',
 }
 
 EditField.propTypes = {
   text: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired,
-  dragHandleProps: PropTypes.object.isRequired,
+  dragHandleProps: PropTypes.object,
   hint: PropTypes.string,
 }
 
