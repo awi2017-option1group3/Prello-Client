@@ -1,7 +1,8 @@
 import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
-  UPDATE_DUE_DATE, UPDATE_DESC } from './constants'
+  UPDATE_DUE_DATE, UPDATE_DESC,
+  REMOVE_ASSIGNEE } from './constants'
 
 const initialState = {
   title: '',
@@ -13,6 +14,7 @@ const initialState = {
   labels: [],
   assignees: [],
   comments: [],
+  isFetchingUsers: false,
   isAddingComment: false,
   isAddingAssignee: false,
   isAddingResponsible: false,
@@ -115,6 +117,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAddingDueDate: false,
+      }
+    case `${REMOVE_ASSIGNEE}_SUCCESS`:
+      return {
+        ...state,
       }
     default:
       return state
