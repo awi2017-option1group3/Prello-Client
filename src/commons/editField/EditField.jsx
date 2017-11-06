@@ -53,7 +53,7 @@ class EditField extends Component {
     }
     return this.state.text === "" ? (
       <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
-        <span class="hintEdit">{this.props.hint}</span>
+        <span className="hintEdit">{this.props.hint}</span>
       </div>
     ) : (
       <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
