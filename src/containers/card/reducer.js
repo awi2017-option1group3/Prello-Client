@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
     case `${ADD_RESPONSIBLE}_SUCCESS`:
       return {
         ...state,
-        responsible: state.responsible(action.payload.data),
+        responsible: action.payload.data,
         isAddingResponsible: true,
       }
     case `${ADD_RESPONSIBLE}_FAIL`:
@@ -97,7 +97,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DESC}_SUCCESS`:
       return {
         ...state,
-        desc: state.desc(action.payload.data),
+        desc: action.payload.data,
         isAddingDesc: true,
       }
     case `${UPDATE_DESC}_FAIL`:
@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DUE_DATE}_SUCCESS`:
       return {
         ...state,
-        dueComplete: state.dueComplete(action.payload.data),
+        dueComplete: action.payload.data,
         isAddingDueDate: false,
       }
     case `${UPDATE_DUE_DATE}_FAIL`:
