@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
+import ReactMarkdown from 'react-markdown'
 import './style.css'
 
-class EditField extends Component {
+const { TextArea } = Input
+
+class EditArea extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -37,23 +40,23 @@ class EditField extends Component {
   renderItemOrEditField() {
     if (this.state.editing) {
       return (
-        <Input
+        <TextArea
           value={this.state.text}
           onChange={this.onChangeText}
-          onPressEnter={this.saveChange}
           onBlur={this.saveChange}
           onMouseDown={e => e.stopPropagation()}
           autoFocus
         />
       )
     }
+
     return this.state.text === "" ? (
-      <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
-        <span class="hintEdit">{this.props.hint}</span>
+      <div onClick={this.enableEditing}>
+          <span class="hintEdit">{this.props.hint}</span>
       </div>
     ) : (
-      <div {...this.props.dragHandleProps} onClick={this.enableEditing}>
-        {this.state.text}
+      <div onClick={this.enableEditing}> 
+          <ReactMarkdown source={this.state.text} escapeHtml={true} /> 
       </div>
     )
   }
@@ -63,16 +66,14 @@ class EditField extends Component {
   }
 }
 
-EditField.defaultProps = {
-  dragHandleProps: null,
+EditArea.defaultProps = {
   hint: "Click here to edit.",
 }
 
-EditField.propTypes = {
+EditArea.propTypes = {
   text: PropTypes.string.isRequired,
   save: PropTypes.func.isRequired,
-  dragHandleProps: PropTypes.object.isRequired,
   hint: PropTypes.string,
-}
-
-export default EditField
+} 
+ 
+export default EditArea

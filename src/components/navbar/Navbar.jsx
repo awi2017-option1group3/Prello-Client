@@ -38,7 +38,11 @@ class Navbar extends Component {
   render() {
     return (
       <Header className="navbarHeader">
-        <div className="navbarLogo" />
+        <a href="/">
+          <div className="navbarLogo">
+            <img src="/prello_white.png" alt="Prello" />
+          </div>
+        </a>
         <Menu
           theme="dark"
           mode="horizontal"

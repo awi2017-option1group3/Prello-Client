@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
 import { cleanState as cleanBoardState, getAllListsInBoard, getOneBoard } from './actions'
-import { cleanState as cleanListsState, saveListRank } from '../lists/actions'
-import { cleanState as cleanCardsState, getAllCardsInList, saveCardRank } from '../cards/actions'
+import { cleanState as cleanListsState, saveListPos } from '../lists/actions'
+import { cleanState as cleanCardsState, getAllCardsInList, saveCardPos } from '../cards/actions'
 
 class BoardContainer extends Component {
   componentWillMount() {
@@ -30,8 +30,8 @@ BoardContainer.propTypes = {
   cleanCardsState: PropTypes.func.isRequired,
   getAllListsInBoard: PropTypes.func.isRequired,
   getAllCardsInList: PropTypes.func.isRequired,
-  saveCardRank: PropTypes.func.isRequired,
-  saveListRank: PropTypes.func.isRequired,
+  saveCardPos: PropTypes.func.isRequired,
+  saveListPos: PropTypes.func.isRequired,
   getOneBoard: PropTypes.func.isRequired,
 }
 
@@ -47,8 +47,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   cleanCardsState,
   getAllListsInBoard,
   getAllCardsInList,
-  saveCardRank,
-  saveListRank,
+  saveCardPos,
+  saveListPos,
   getOneBoard,
 }, dispatch)
 

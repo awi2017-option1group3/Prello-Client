@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_RANK, SAVE_CARD_TITLE } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_POS, SAVE_CARD_TITLE, SAVE_CARD_DESC } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -19,7 +19,7 @@ export const getAllCardsInList = listId => (dispatch) => {
   })
 }
 
-export const addCard = (listId, lastCardRank) => (dispatch) => {
+export const addCard = (listId, lastCardPos) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
     listId,
@@ -29,7 +29,7 @@ export const addCard = (listId, lastCardRank) => (dispatch) => {
         url: `/api/lists/${listId}/cards`,
         data: {
           title: 'New card',
-          rank: (lastCardRank || 0) + 1,
+          pos: (lastCardPos || 0) + 1,
         },
       },
     },
@@ -49,9 +49,9 @@ export const deleteCard = (listId, cardId) => (dispatch) => {
   })
 }
 
-export const saveCardRank = card => (dispatch) => {
+export const saveCardPos = card => (dispatch) => {
   dispatch({
-    type: SAVE_CARD_RANK,
+    type: SAVE_CARD_POS,
     cardId: card.id,
     payload: {
       request: {
@@ -59,7 +59,7 @@ export const saveCardRank = card => (dispatch) => {
         url: `/api/cards/${card.id}`,
         data: {
           listId: card.listId,
-          rank: card.rank,
+          pos: card.pos,
         },
       },
     },
@@ -75,6 +75,21 @@ export const saveCardTitle = (cardId, cardTitle) => (dispatch) => {
         url: `/api/cards/${cardId}`,
         data: {
           title: cardTitle,
+        },
+      },
+    },
+  })
+}
+
+export const saveCardDesc = (cardId, cardDesc) => (dispatch) => {
+  dispatch({
+    type: SAVE_CARD_DESC,
+    payload: {
+      request: {
+        method: 'PUT',
+        url: `/api/cards/${cardId}`,
+        data: {
+          desc: cardDesc,
         },
       },
     },
