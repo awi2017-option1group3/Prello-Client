@@ -5,13 +5,16 @@ import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
   getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard,
   addComment, addLabel, addAssignee, addResponsible,
-  updateDesc, updateDueDate } from './actions'
+  updateDesc, updateDueDate,
+  removeAssigneeInCard } from './actions'
+import { getOneUser, getAllUsers } from '../users/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {
   componentWillMount() {
     this.props.cleanCardState()
     this.props.getOneCard(this.props.id)
+    this.props.getAllUsers()
     this.props.getAllAssigneesInCard(this.props.id)
     this.props.getAllCommentsInCard(this.props.id)
     this.props.getAllLabelsInCard(this.props.id)
@@ -33,10 +36,12 @@ CardContainer.propTypes = {
   getAllCommentsInCard: PropTypes.func.isRequired,
   getAllLabelsInCard: PropTypes.func.isRequired,
   getResponsibleForCard: PropTypes.func.isRequired,
+  getAllUsers: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   card: state.currentCard,
+  users: state.users.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -52,6 +57,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addResponsible,
   updateDesc,
   updateDueDate,
+  getAllUsers,
+  getOneUser,
+  removeAssigneeInCard,
 }, dispatch)
 
 export default connect(
