@@ -9,6 +9,7 @@ import LoginContainer from '../../containers/login/LoginContainer'
 import LogoutContainer from '../../containers/logout/LogoutContainer'
 import RegisterContainer from '../../containers/register/RegisterContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
+import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import Navbar from '../navbar/Navbar'
 import { history } from '../../store'
 import './style.css'
@@ -21,12 +22,14 @@ class App extends Component {
     this.checkLogged = this.checkLogged.bind(this)
     this.boardsRender = this.boardsRender.bind(this)
     this.boardRender = this.boardRender.bind(this)
+    this.pageNotFound = this.pageNotFound.bind(this)
   }
 
   checkLogged(componentToRender) {
     const auth = JSON.parse(localStorage.getItem('auth'))
     return auth && moment().isBefore(auth.expiresAt) ? componentToRender : <Redirect to="/login" />
   }
+        
 
   boardsRender() {
     return this.checkLogged(<BoardsContainer />)
@@ -34,6 +37,10 @@ class App extends Component {
 
   boardRender({ match }) {
     return this.checkLogged(<BoardContainer match={match} />)
+  }
+
+  pageNotFound() {
+    return (<ErrorDisplayer message="Page not found." icon="compass" />)
   }
 
   render() {
@@ -48,6 +55,7 @@ class App extends Component {
               <Route exact path="/register" component={RegisterContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
+              <Route exact path="*" render={this.pageNotFound} />
             </Switch>
           </Content>
         </Layout>

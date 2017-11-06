@@ -1,0 +1,13 @@
+.errorDisplayer {
+    padding: 50px;
+    text-align: center;
+    color: #f04134;
+}
+
+.errorDisplayer>.anticon {
+    font-size: 25px;
+}
+
+.errorDisplayer button {
+    margin-top: 25px;
+}
