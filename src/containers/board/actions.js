@@ -1,4 +1,4 @@
-import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD, SAVE_BOARD_TITLE } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -25,6 +25,21 @@ export const getOneBoard = boardId => (dispatch) => {
       request: {
         method: 'GET',
         url: `/api/boards/${boardId}`,
+      },
+    },
+  })
+}
+
+export const saveBoardTitle = (boardId, boardTitle) => (dispatch) => {
+  dispatch({
+    type: SAVE_BOARD_TITLE,
+    payload: {
+      request: {
+        method: 'PUT',
+        url: `/boards/${boardId}`,
+        data: {
+          title: boardTitle,
+        },
       },
     },
   })
