@@ -1,8 +1,10 @@
-import { CLEAN_STATE,
+import {
+  CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC,
-  REMOVE_ASSIGNEE, REMOVE_LABEL } from './constants'
+  REMOVE_ASSIGNEE, REMOVE_LABEL,
+  SET_IS_LOADING } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -16,7 +18,7 @@ export const getAllCommentsInCard = cardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/api/cards/${cardId}/comments`,
+        url: `/api/cards/${cardId}/comments/`,
       },
     },
   })
@@ -28,7 +30,7 @@ export const getAllAssigneesInCard = cardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/api/cards/${cardId}/assignees`,
+        url: `/api/cards/${cardId}/assignees/`,
       },
     },
   })
@@ -40,7 +42,7 @@ export const getAllLabelsInCard = cardId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/api/cards/${cardId}/labels`,
+        url: `/api/cards/${cardId}/labels/`,
       },
     },
   })
@@ -186,6 +188,15 @@ export const removeLabelInCard = (cardId, labelId) => (dispatch) => {
         method: 'DELETE',
         url: `/api/cards/${cardId}/labels/${labelId}`,
       },
+    },
+  })
+}
+
+export const setIsLoading = isLoading => (dispatch) => {
+  dispatch({
+    type: SET_IS_LOADING,
+    payload: {
+      isLoading,
     },
   })
 }

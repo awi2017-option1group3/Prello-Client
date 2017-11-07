@@ -2,7 +2,8 @@ import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC,
-  REMOVE_ASSIGNEE, REMOVE_LABEL } from './constants'
+  REMOVE_ASSIGNEE, REMOVE_LABEL,
+  SET_IS_LOADING } from './constants'
 
 const initialState = {
   title: '',
@@ -21,6 +22,7 @@ const initialState = {
   isAddingLabel: false,
   isAddingDueDate: false,
   isAddingDesc: false,
+  isLoading: true,
 }
 
 export default (state = initialState, action) => {
@@ -31,6 +33,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         comments: action.payload.data,
+      }
+    case `${SET_IS_LOADING}_SUCCESS`:
+      return {
+        ...state,
+        isLoading: action.payload.data,
       }
     case `${GET_ALL_LABELS_IN_CARD}_SUCCESS`:
       return {
@@ -121,10 +128,12 @@ export default (state = initialState, action) => {
     case `${REMOVE_ASSIGNEE}_SUCCESS`:
       return {
         ...state,
+        assignees: state.assignees.filter(assignee => assignee.id !== action.meta.previousAction.memberId),
       }
     case `${REMOVE_LABEL}_SUCCESS`:
       return {
         ...state,
+        labels: state.labels.filter(label => label.id !== action.meta.previousAction.memberId),
       }
     default:
       return state
