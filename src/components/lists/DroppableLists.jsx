@@ -20,6 +20,7 @@ class DroppableLists extends Component {
 
 DroppableLists.propTypes = {
   lists: PropTypes.array.isRequired,
+  boardId: PropTypes.string.isRequired,
 }
 
 export default DroppableLists

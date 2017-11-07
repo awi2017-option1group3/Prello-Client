@@ -4,6 +4,7 @@ import loginReducer from './containers/login/reducer'
 import boardsReducer from './containers/boards/reducer'
 import boardReducer from './containers/board/reducer'
 import listsReducer from './containers/lists/reducer'
+import labelsReducer from './containers/labels/reducer'
 import usersReducer from './containers/users/reducer'
 import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
@@ -16,6 +17,7 @@ export default combineReducers({
   currentBoard: boardReducer,
   lists: listsReducer,
   cards: cardsReducer,
+  labels: labelsReducer,
   users: usersReducer,
   currentCard: cardReducer,
   register: registerReducer,

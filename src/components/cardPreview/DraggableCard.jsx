@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Draggable } from 'react-beautiful-dnd'
-import Card from './CardPreview'
+import CardPreview from './CardPreview'
 import './style.css'
 
 const DraggableCard = props => (
@@ -12,7 +12,7 @@ const DraggableCard = props => (
           ref={draggableProvided.innerRef}
           style={draggableProvided.draggableStyle}
         >
-          <Card {...props} dragHandleProps={draggableProvided.dragHandleProps} />
+          <CardPreview {...props} dragHandleProps={draggableProvided.dragHandleProps} />
         </div>
         <div>
           {draggableProvided.placeholder}
@@ -24,6 +24,7 @@ const DraggableCard = props => (
 
 DraggableCard.propTypes = {
   id: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
 }
 
 export default DraggableCard

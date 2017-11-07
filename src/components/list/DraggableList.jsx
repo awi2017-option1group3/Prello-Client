@@ -24,6 +24,7 @@ const DraggableList = props => (
 
 DraggableList.propTypes = {
   id: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
 }
 
 export default DraggableList

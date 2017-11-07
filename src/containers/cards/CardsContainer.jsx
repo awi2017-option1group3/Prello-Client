@@ -19,6 +19,7 @@ class CardsContainer extends Component {
 
 CardsContainer.propTypes = {
   listId: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
   getAllCardsInList: PropTypes.func.isRequired,
 }
 
