@@ -36,7 +36,6 @@ class Card extends Component {
   }
 
   render() {
-    console.log(this.props.card.labels)
     return (
       <div>
         <Layout>
