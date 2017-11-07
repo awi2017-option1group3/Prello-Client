@@ -99,7 +99,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DESC}_SUCCESS`:
       return {
         ...state,
-        desc: action.payload.data,
+        ...action.payload.data,
         isAddingDesc: true,
       }
     case `${UPDATE_DESC}_FAIL`:

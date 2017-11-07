@@ -38,7 +38,7 @@ class Card extends Component {
               />
               <p>Desc : {this.props.card.desc}</p>
               <p>DueDate : {this.props.card.dueComplete}</p>
-              <p>Rank : {this.props.card.rank}</p>
+              <p>Pos : {this.props.card.pos}</p>
               <p>List ID : {this.props.card.listId}</p>
               <p>ID : {this.props.id}</p>
               <p>More...</p>
