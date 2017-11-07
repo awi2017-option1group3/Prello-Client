@@ -36,7 +36,7 @@ export const saveBoardTitle = (boardId, boardTitle) => (dispatch) => {
     payload: {
       request: {
         method: 'PUT',
-        url: `/boards/${boardId}`,
+        url: `/api/boards/${boardId}`,
         data: {
           title: boardTitle,
         },
