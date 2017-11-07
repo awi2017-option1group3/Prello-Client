@@ -2,7 +2,7 @@ import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC,
-  REMOVE_ASSIGNEE } from './constants'
+  REMOVE_ASSIGNEE, REMOVE_LABEL } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -173,6 +173,18 @@ export const removeAssigneeInCard = (cardId, memberId) => (dispatch) => {
       request: {
         method: 'DELETE',
         url: `/api/cards/${cardId}/assignees/${memberId}`,
+      },
+    },
+  })
+}
+
+export const removeLabelInCard = (cardId, labelId) => (dispatch) => {
+  dispatch({
+    type: REMOVE_LABEL,
+    payload: {
+      request: {
+        method: 'DELETE',
+        url: `/api/cards/${cardId}/labels/${labelId}`,
       },
     },
   })

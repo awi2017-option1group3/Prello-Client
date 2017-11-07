@@ -6,8 +6,9 @@ import { cleanState as cleanCardState,
   getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard,
   addComment, addLabel, addAssignee, addResponsible,
   updateDesc, updateDueDate,
-  removeAssigneeInCard } from './actions'
+  removeAssigneeInCard, removeLabelInCard } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
+import { getAllLabelsForBoard } from '../labels/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {
@@ -15,6 +16,7 @@ class CardContainer extends Component {
     this.props.cleanCardState()
     this.props.getOneCard(this.props.id)
     this.props.getAllUsers()
+    this.props.getAllLabelsForBoard(this.props.boardId)
     this.props.getAllAssigneesInCard(this.props.id)
     this.props.getAllCommentsInCard(this.props.id)
     this.props.getAllLabelsInCard(this.props.id)
@@ -30,6 +32,7 @@ class CardContainer extends Component {
 
 CardContainer.propTypes = {
   id: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
   cleanCardState: PropTypes.func.isRequired,
   getOneCard: PropTypes.func.isRequired,
   getAllAssigneesInCard: PropTypes.func.isRequired,
@@ -37,11 +40,13 @@ CardContainer.propTypes = {
   getAllLabelsInCard: PropTypes.func.isRequired,
   getResponsibleForCard: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
+  getAllLabelsForBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   card: state.currentCard,
   users: state.users.data,
+  labels: state.labels.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -57,9 +62,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addResponsible,
   updateDesc,
   updateDueDate,
+  removeAssigneeInCard,
+  removeLabelInCard,
   getAllUsers,
   getOneUser,
-  removeAssigneeInCard,
+  getAllLabelsForBoard,
 }, dispatch)
 
 export default connect(

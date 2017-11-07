@@ -54,7 +54,7 @@ class List extends Component {
         extra={this.getDropdown()} 
         bordered={false}
       >
-        <CardsContainer listId={this.props.id} />
+        <CardsContainer listId={this.props.id} boardId={this.props.boardId} />
       </UIList>
     )
   }
@@ -62,6 +62,7 @@ class List extends Component {
 
 List.propTypes = {
   id: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
   deleteList: PropTypes.func.isRequired,

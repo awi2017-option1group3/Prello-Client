@@ -215,7 +215,7 @@ class Card extends Component {
             footer={null}
             onCancel={this.handleCancel}
           >
-            <CardContainer id={this.props.id} />
+            <CardContainer id={this.props.id} boardId={this.props.boardId} />
           </UIModal>
         </div>
       </UICard>
@@ -234,6 +234,7 @@ Card.defaultProps = {
 Card.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
   pos: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,

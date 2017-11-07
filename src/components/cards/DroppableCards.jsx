@@ -17,6 +17,7 @@ const DroppableCards = props => (
 DroppableCards.propTypes = {
   cards: PropTypes.array.isRequired,
   listId: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
 }
 
 export default DroppableCards

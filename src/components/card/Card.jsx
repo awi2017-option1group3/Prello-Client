@@ -13,10 +13,11 @@ const Option = Select.Option
 class Card extends Component {
   constructor(props) {
     super(props)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChangeAssignee = this.handleChangeAssignee.bind(this)
+    this.handleChangeLabels = this.handleChangeLabels.bind(this)
   }
 
-  handleChange(value) {
+  handleChangeAssignee(value) {
     const memberId = value[value.length - 1].slice(this.props.id.length, value.toString().length)
     if (this.props.card.assignees.map(element => element.id).includes(memberId) === true) {
       this.props.removeAssigneeInCard(this.props.card.id, memberId)
@@ -25,7 +26,17 @@ class Card extends Component {
     }
   }
 
+  handleChangeLabels(value) {
+    const labelId = value[value.length - 1].slice(this.props.id.length, value.toString().length)
+    if (this.props.card.labels.map(element => element.id).includes(labelId) === true) {
+      this.props.removeLabelInCard(this.props.card.id, labelId)
+    } else {
+      this.props.addLabel(this.props.card.id, labelId)
+    }
+  }
+
   render() {
+    console.log(this.props.card.labels)
     return (
       <div>
         <Layout>
@@ -47,14 +58,23 @@ class Card extends Component {
               <Select
                 mode="tags"
                 style={{ width: '60%' }}
-                placeholder="Select users"
-                onChange={this.handleChange}
+                placeholder="Select users..."
+                onChange={this.handleChangeAssignee}
                 defaultValue={this.props.card.assignees.map(assignee => assignee.fullName)}
                 tokenSeparators={[',']}
               >
                 {this.props.users.map(user => <Option key={this.props.id + user.id}>{user.fullName}</Option>)}
               </Select>
-              <Button type="primary" className="siderButton">Button labels</Button>
+              <Select
+                mode="tags"
+                style={{ width: '60%' }}
+                placeholder="Select labels..."
+                onChange={this.handleChangeLabels}
+                defaultValue={this.props.card.labels.map(label => label.name)}
+                tokenSeparators={[',']}
+              >
+                {this.props.labels.map(label => <Option key={this.props.id + label.id}>{label.name}</Option>)}
+              </Select>
               <Button type="primary" className="siderButton">Button drive</Button>
             </Sider>
           </Layout>
@@ -69,6 +89,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   card: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
+  labels: PropTypes.array.isRequired,
   getResponsibleForCard: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   addLabel: PropTypes.func.isRequired,
@@ -79,6 +100,7 @@ Card.propTypes = {
   getAllUsers: PropTypes.func.isRequired,
   getOneUser: PropTypes.func.isRequired,
   removeAssigneeInCard: PropTypes.func.isRequired,
+  removeLabelInCard: PropTypes.func.isRequired,
 }
 
 export default Card
