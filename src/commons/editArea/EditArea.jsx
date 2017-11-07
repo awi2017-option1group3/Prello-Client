@@ -37,6 +37,10 @@ class EditArea extends Component {
     this.props.save(this.state.text)
   }
 
+  componentWillReceiveProps(nextProps){ 
+    this.setState({text: nextProps.text}) 
+  } 
+
   renderItemOrEditField() {
     if (this.state.editing) {
       return (
