@@ -21,7 +21,7 @@ class User extends Component {
     return (
       <div className="user">
         <Dropdown overlay={this.getMenu()}>
-          <Avatar className="userAvatar" size="large" >{this.props.user.infos.initials}</Avatar>
+          <Avatar className="userAvatar" size="large" >{this.props.user.infos.initials.toUpperCase()}</Avatar>
         </Dropdown>
       </div>
     )

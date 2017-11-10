@@ -7,6 +7,7 @@ import moment from 'moment'
 
 import { history } from '../../store'
 import { cleanState, getOneUserByToken, refreshToken } from './actions'
+import { cleanState as cleanBoardsState } from '../boards/actions'
 import User from '../../components/user/User'
 
 class UserContainer extends Component {
@@ -35,10 +36,10 @@ class UserContainer extends Component {
   }
 
   onLogOut() {
-    // Clean all relating to user
+    // Clean local storage
     localStorage.removeItem('auth')
-    this.props.cleanState()
-    history.push('/login')
+    // Hard routing to clean the entire state
+    window.location.replace('/login')
   }
 
   checkAuth() {
@@ -68,6 +69,7 @@ class UserContainer extends Component {
 UserContainer.propTypes = {
   user: PropTypes.object.isRequired,
   cleanState: PropTypes.func.isRequired,
+  cleanBoardsState: PropTypes.func.isRequired,
   getOneUserByToken: PropTypes.func.isRequired,
   refreshToken: PropTypes.func.isRequired,
 }
@@ -78,6 +80,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   cleanState,
+  cleanBoardsState,
   getOneUserByToken,
   refreshToken,
 }, dispatch)

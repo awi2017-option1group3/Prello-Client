@@ -1,26 +1,31 @@
-import { GET_ALL_BOARDS, ADD_BOARD, DELETE_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_BOARDS_FOR_USER, ADD_BOARD, DELETE_BOARD } from './constants'
 
 const initialState = {
   data: [],
-  isFetching: false,
+  areFetching: false,
+  areFetched: false,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `${GET_ALL_BOARDS}`:
+    case CLEAN_STATE:
+      return initialState
+    case `${GET_ALL_BOARDS_FOR_USER}`:
       return {
         ...state,
-        isFetching: true,
+        areFetching: true,
       }
-    case `${GET_ALL_BOARDS}_SUCCESS`:
+    case `${GET_ALL_BOARDS_FOR_USER}_SUCCESS`:
       return {
         data: action.payload.data,
-        isFetching: false,
+        areFetching: false,
+        areFetched: true,
       }
-    case `${GET_ALL_BOARDS}_FAIL`:
+    case `${GET_ALL_BOARDS_FOR_USER}_FAIL`:
       return {
         ...state,
-        isFetching: false,
+        areFetching: false,
+        areFetched: true,
       }
     case `${ADD_BOARD}_SUCCESS`:
       return {
