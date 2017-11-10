@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import WrappedRegister from '../../components/register/Register'
+import Register from '../../components/register/Register'
 import { register } from './actions'
 
 class RegisterContainer extends Component {
   render() {
     return (
-      <WrappedRegister {...this.props} register={this.props.register} />
+      <Register {...this.props} register={this.props.register} />
     )
   }
 }
