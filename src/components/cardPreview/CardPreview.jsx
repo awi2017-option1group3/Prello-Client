@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Tag, Avatar, Row, Col, Modal as UIModal } from 'antd'
+import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Avatar, Row, Col, Modal as UIModal } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardContainer from '../../containers/card/CardContainer'
+// import LabelsContainer from '../../containers/labels/LabelsContainer'
+import Labels from "../labels/Labels"
 import moment from 'moment'
 
 
@@ -50,15 +52,15 @@ class Card extends Component {
   }
 
   getLabels() {
+
     return (
-      <div>
-        {this.props.labels.map(label => (
-          <Tag color={label.color} key={this.props.id + label.id} className="cardLabel">
-            {label.name}
-          </Tag>
-        ))}
-      </div>
+      <Labels cardLabels={this.props.labels} cardId={this.props.id} />
     )
+    /*
+    return (
+      <LabelsContainer cardId={this.props.id} displayLabels={true} displaySelect={false} />
+    )
+    */
   }
 
   getDueDate() {

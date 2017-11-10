@@ -1,7 +1,8 @@
-import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ALL_LABELS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 const initialState = {
   title: '',
+  labels: [],
   isFailed: false,
 }
 
@@ -38,6 +39,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFailed: true,
+      }
+    case `${GET_ALL_LABELS_IN_BOARD}_SUCCESS`:
+      return {
+        ...state,
+        labels: action.payload.data,
       }
     default:
       return state
