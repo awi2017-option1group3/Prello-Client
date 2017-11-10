@@ -49,6 +49,7 @@ class UserContainer extends Component {
       if (auth) {
         // Refresh the token if it is expired
         if (moment().isAfter(auth.expiresAt)) {
+          localStorage.removeItem('auth')
           this.props.refreshToken(auth.tokenToRefresh)
         } else if (!this.props.user.infos.id) { // Fetch user if not already known
           this.props.getOneUserByToken(auth.token)

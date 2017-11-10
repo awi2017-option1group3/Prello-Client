@@ -1,17 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Button, Spin } from 'antd'
+import { Avatar, Button } from 'antd'
 
 import './style.css'
 
 const User = props => (
-  <div>
-    { props.user.infos.id ? (
-      <Avatar size="large" icon="user" >{props.user.infos.initials}</Avatar>
-    ) : (
-      <Spin />
-    )}
-    <Button icon="logout" onClick={props.onLogOut}>
+  <div className="user">
+    <Avatar className="userAvatar" size="large" >{props.user.infos.initials}</Avatar>
+    <Button className="userLogoutButton" icon="logout" onClick={props.onLogOut}>
       Log out
     </Button>
   </div>

@@ -1,4 +1,12 @@
-.logoutButton {
-    float: right;
-    line-height: 64px;
+.user {
+    display: flex;
+}
+
+.userAvatar {
+    margin: auto;
+    background-color: #0f8ee9;
+}
+
+.userLogoutButton {
+    margin: auto auto auto 10px;
 }
