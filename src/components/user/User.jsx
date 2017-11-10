@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Button } from 'antd'
+import { Avatar, Dropdown, Icon, Menu } from 'antd'
 
 import './style.css'
 
-const User = props => (
-  <div className="user">
-    <Avatar className="userAvatar" size="large" >{props.user.infos.initials}</Avatar>
-    <Button className="userLogoutButton" icon="logout" onClick={props.onLogOut}>
-      Log out
-    </Button>
-  </div>
-)
+class User extends Component {
+  getMenu() {
+    return (
+      <Menu>
+        <Menu.Item key="logout">
+          <span onClick={this.props.onLogOut}>
+            <Icon type="logout" /> Log out
+          </span>
+        </Menu.Item>
+      </Menu>
+    )
+  }
+
+  render() {
+    return (
+      <div className="user">
+        <Dropdown overlay={this.getMenu()}>
+          <Avatar className="userAvatar" size="large" >{this.props.user.infos.initials}</Avatar>
+        </Dropdown>
+      </div>
+    )
+  }
+}
+
 
 User.propTypes = {
   user: PropTypes.object.isRequired,
