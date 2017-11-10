@@ -12,7 +12,7 @@ export const getOneUser = userId => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: `/api/members/${userId}/`,
+        url: `/api/users/${userId}/`,
       },
     },
   })
@@ -24,7 +24,7 @@ export const getAllUsers = () => (dispatch) => {
     payload: {
       request: {
         method: 'GET',
-        url: '/api/members/',
+        url: '/api/users/',
       },
     },
   })

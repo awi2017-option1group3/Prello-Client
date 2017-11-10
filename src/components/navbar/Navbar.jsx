@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Layout, Menu } from 'antd'
+import { Link, withRouter } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
 
 import routes from '../../config/routes'
-import { history } from '../../store'
+import UserContainer from '../../containers/user/UserContainer'
 import './style.css'
 
 const { Header } = Layout
@@ -22,14 +22,10 @@ class Navbar extends Component {
     )
   }
 
-  renderLogout() {
-    const isLogoutRequired = history.location.pathname !== '/login' && history.location.pathname !== '/register'
-    return isLogoutRequired ? (
-      <Link to={routes.logout} className="navbarLogout">
-        <Button icon="logout">
-          Log out
-        </Button>
-      </Link>
+  renderUser() {
+    const showUser = this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register'
+    return showUser ? (
+      <UserContainer />
     ) : (
       null
     )
@@ -51,10 +47,10 @@ class Navbar extends Component {
         >
           {this.renderLinks()}
         </Menu>
-        {this.renderLogout()}
+        {this.renderUser()}
       </Header>
     )
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)
