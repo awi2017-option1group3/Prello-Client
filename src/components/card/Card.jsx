@@ -85,7 +85,7 @@ class Card extends Component {
                 multiselect
                 navHidden
                 authImmediate={false}
-                mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file', 'application/vnd.google-apps.spreadsheet']}
+                mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file', 'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder']}
                 viewId={'DOCS'}
               >
                 <Button type="primary" className="siderButton">Google Drive</Button>
