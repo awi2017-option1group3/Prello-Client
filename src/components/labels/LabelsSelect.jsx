@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Select } from 'antd' // A graphical card component is used to display a list
+import { Select } from 'antd'
 import './style.css'
 
 const Option = Select.Option
 
-class Labels extends Component {
+class LabelsSelect extends Component {
   constructor(props) {
     super(props)
     this.handleChangeLabels = this.handleChangeLabels.bind(this)
@@ -23,14 +23,9 @@ class Labels extends Component {
   render() {
     return (
       <Select
-        // mode="tags"
         style={{ width: '100%' }}
         placeholder="Select labels..."
-        // onSelect={this.selectLabels}
-        // onDeselect={this.unselectLabels}
         onChange={this.handleChangeLabels}
-        // defaultValue={''}
-        // value={this.props.card.labels.map(label => this.props.id + label.id)}
         tokenSeparators={[',']}
       >
         {this.props.boardLabels.map(label => <Option key={this.props.cardId + label.id} style={{ backgroundColor: label.color}} className="optionLabel">{label.name}</Option>)}
@@ -39,7 +34,7 @@ class Labels extends Component {
   }
 }
 
-Labels.propTypes = {
+LabelsSelect.propTypes = {
   cardId: PropTypes.string.isRequired,
   cardLabels: PropTypes.array.isRequired,
   boardLabels: PropTypes.array.isRequired,
@@ -47,4 +42,4 @@ Labels.propTypes = {
   addLabelInCard: PropTypes.func.isRequired,
 }
 
-export default Labels
+export default LabelsSelect

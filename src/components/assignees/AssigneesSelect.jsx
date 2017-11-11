@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Select } from 'antd' // A graphical card component is used to display a list
+import { Select } from 'antd'
 import './style.css'
 
 const Option = Select.Option
@@ -24,10 +24,8 @@ class AssigneesSelect extends Component {
     return (
       <Select
         className="cardAssignees"
-        // mode="tags"
         placeholder="Choose assignees..."
         onChange={this.handleChangeAssignee}
-        // value={props.assignees.sort((a, b) => a.initials > b.initials).map(assignee => props.cardId + assignee.id)}
         style={{ width: '100%' }}
         tokenSeparators={[',']}
       >

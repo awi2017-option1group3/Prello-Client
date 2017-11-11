@@ -5,6 +5,7 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardContainer from '../../containers/card/CardContainer'
+import Assignees from '../assignees/Assignees'
 // import LabelsContainer from '../../containers/labels/LabelsContainer'
 import Labels from "../labels/Labels"
 import moment from 'moment'
@@ -111,13 +112,21 @@ class Card extends Component {
   }
 
   getAssignees() {
+    return (
+      <Assignees cardId={this.props.id}
+                 cardResponsible={this.props.cardResponsible}
+                 assignees={this.props.assignees}
+                 maxNumberOfPeopleInALine={3}
+      />
+    )
+    /*
     const maxNumberOfPeopleInALine = 3
     const members = this.props.assignees.sort((a, b) => a.initials > b.initials).slice(0)
     if (this.props.cardResponsible !== null) {
       // if responsible is in members, sets responsible to be the first user
       if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
         const indexOfResponsible = members.findIndex(this.props.cardResponsible)
-        members.splice(indexOfResponsible, 0)
+        members.splice(indexOfResponsible, 1)
       }
       members.splice(0, 0, this.props.cardResponsible)
     }
@@ -164,18 +173,19 @@ class Card extends Component {
         ))}
       </div>
     )
+    */
   }
 
   showModal = () => {
     this.setState({
       visible: true,
-    });
+    })
   }
 
   handleCancel = () => {
     this.setState({
       visible: false,
-    });
+    })
   }
 
   render() {

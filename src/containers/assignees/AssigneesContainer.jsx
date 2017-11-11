@@ -6,6 +6,7 @@ import { Row, Col } from 'antd'
 import { getAllAssigneesInCard, getResponsibleForCard, addAssigneeToCard, addResponsibleToCard, removeAssigneeFromCard, removeResponsibleFromCard } from './actions'
 import Assignees from '../../components/assignees/Assignees'
 import AssigneesSelect from '../../components/assignees/AssigneesSelect'
+import ResponsibleSelect from '../../components/assignees/ResponsibleSelect'
 
 class AssigneesContainer extends Component {
   componentWillMount() {
@@ -15,24 +16,41 @@ class AssigneesContainer extends Component {
 
   render() {
     return (
-      <Row className="cardDetailLabels">
-        { this.props.displayAssignees ? (
-          <Col span={11}>
-            <Assignees {...this.props} maxNumberOfPeopleInALine={4} />
-          </Col>
+      <div>
+        <Row className="cardDetailAssignees">
+          {this.props.displayAssignees ? (
+            <Col span={11}>
+              <Assignees {...this.props} maxNumberOfPeopleInALine={4}/>
+            </Col>
+          ) : (
+            <Col span={0} />
+          )}
+          {this.props.displaySelectAssignees ? (
+            <Col span={9} className="cardSelector">
+              <AssigneesSelect {...this.props} />
+            </Col>
+          ) : (
+            <Col span={0} />
+          )}
+        </Row>
+        {this.props.displaySelectResponsible ? (
+          <Row>
+            <Col span={12} className="cardSelector">
+              <ResponsibleSelect {...this.props} />
+            </Col>
+          </Row>
         ) : (
-          <Col span={0} />
-        )}
-        { this.props.displaySelect ? (
-          <Col span={9} className="cardSelector">
-            <AssigneesSelect {...this.props} />
-          </Col>
-        ) : (
-          <Col span={0} />
-        )}
-      </Row>
+          <div />
+        )
+        }
+      </div>
     )
   }
+}
+
+
+AssigneesContainer.defaultProps = {
+  displaySelectResponsible: false,
 }
 
 AssigneesContainer.propTypes = {
@@ -40,12 +58,13 @@ AssigneesContainer.propTypes = {
   getAllAssigneesInCard: PropTypes.func.isRequired,
   getResponsibleForCard: PropTypes.func.isRequired,
   displayAssignees: PropTypes.bool.isRequired,
-  displaySelect: PropTypes.bool.isRequired,
+  displaySelectAssignees: PropTypes.bool.isRequired,
+  displaySelectResponsible: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
   assignees: state.cardAssignees.assignees,
-  cardResponsible: state.cardAssignees.cardResponsible,
+  cardResponsible: state.cardAssignees.responsible,
   allUsers: state.users.data,
 })
 
