@@ -2,41 +2,49 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getAllBoardsForUser, addBoard, deleteBoard } from './actions'
-import Boards from '../../components/boards/Boards'
-import Loader from '../../commons/loader/Loader'
+import { getOwnedBoardsForUser, getContributingBoardsForUser, addBoard, deleteBoard } from './actions'
+import OwnedBoards from '../../components/boards/OwnedBoards'
+import ContributingBoards from '../../components/boards/ContributingBoards'
 
 class BoardsContainer extends Component {
   componentDidUpdate() {
-    if (!this.props.boards.areFetched && !this.props.boards.areFetching && this.props.userId) {
-      this.props.getAllBoardsForUser(this.props.userId)
+    if (!this.props.ownedBoards.areFetched && !this.props.ownedBoards.areFetching && this.props.userId) {
+      this.props.getOwnedBoardsForUser(this.props.userId)
+    }
+    if (!this.props.contributingBoards.areFetched && !this.props.contributingBoards.areFetching && this.props.userId) {
+      this.props.getContributingBoardsForUser(this.props.userId)
     }
   }
 
   render() {
-    return this.props.boards.areFetched ? (
-      <Boards {...this.props} />
-    ) : (
-      <Loader message="Loading your boards2..." />
+    return (
+      <div>
+        <OwnedBoards boards={this.props.ownedBoards} {...this.props} />
+        <ContributingBoards boards={this.props.contributingBoards} {...this.props} />
+      </div>
     )
   }
 }
 
 BoardsContainer.propTypes = {
-  boards: PropTypes.object.isRequired,
+  ownedBoards: PropTypes.object.isRequired,
+  contributingBoards: PropTypes.object.isRequired,
   userId: PropTypes.string.isRequired,
-  getAllBoardsForUser: PropTypes.func.isRequired,
+  getOwnedBoardsForUser: PropTypes.func.isRequired,
+  getContributingBoardsForUser: PropTypes.func.isRequired,
   addBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  boards: state.boards,
+  ownedBoards: state.boards.ownedBoards,
+  contributingBoards: state.boards.contributingBoards,
   userId: state.user.infos.id,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getAllBoardsForUser,
+  getOwnedBoardsForUser,
+  getContributingBoardsForUser,
   addBoard,
   deleteBoard,
 }, dispatch)
