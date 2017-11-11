@@ -1,8 +1,10 @@
-import { CLEAN_STATE,
+import {
+  CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC,
-  REMOVE_ASSIGNEE, REMOVE_LABEL } from './constants'
+  REMOVE_ASSIGNEE, REMOVE_LABEL, ADD_ATTACHMENT
+} from './constants'
 
 const initialState = {
   title: '',
@@ -19,6 +21,7 @@ const initialState = {
   isAddingComment: false,
   isAddingAssignee: false,
   isAddingResponsible: false,
+  isAddingAttachment: false,
   isAddingLabel: false,
   isAddingDueDate: false,
   isAddingDesc: false,
@@ -96,6 +99,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAddingResponsible: false,
+      }
+    case `${ADD_ATTACHMENT}_SUCCESS`:
+      return {
+        ...state,
+        attachments: state.attachments.concat(action.payload.data),
+        isAddingAttachment: true,
+      }
+    case `${ADD_ATTACHMENT}_FAIL`:
+      return {
+        ...state,
+        isAddingAttachment: false,
       }
     case `${UPDATE_DESC}_SUCCESS`:
       return {

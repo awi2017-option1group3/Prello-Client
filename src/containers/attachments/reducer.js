@@ -1,7 +1,6 @@
 import { GET_ALL_ATTACHMENTS_IN_CARD, REMOVE_ATTACHMENT_IN_CARD } from './constants'
 
 const initialState = {
-  attachments: [],
 }
 
 export default (state = initialState, action) => {
@@ -14,7 +13,7 @@ export default (state = initialState, action) => {
     case `${REMOVE_ATTACHMENT_IN_CARD}_SUCCESS`:
       return {
         ...state,
-        attachments: action.payload.data,
+        attachments: state.attachments.filter(attachment => attachment.id !== action.meta.previousAction.attachmentId),
       }
     default:
       return state
