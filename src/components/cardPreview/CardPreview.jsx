@@ -116,7 +116,8 @@ class Card extends Component {
       <Assignees cardId={this.props.id}
                  cardResponsible={this.props.cardResponsible}
                  assignees={this.props.assignees}
-                 maxNumberOfPeopleInALine={3}
+                 maxDisplayedAssignees={2}
+                 target="cardPreview"
       />
     )
     /*

@@ -19,7 +19,13 @@ class Card extends Component {
 
   getAssignees() {
     return (
-      <AssigneesContainer cardId={this.props.id} displayAssignees displaySelectAssignees displaySelectResponsible />
+      <AssigneesContainer
+        cardId={this.props.id}
+        target="cardDetails"
+        displayAssignees
+        displaySelectAssignees
+        displaySelectResponsible
+      />
     )
   }
 

@@ -1,88 +1,79 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Popover } from 'antd'
+import { Popover } from 'antd'
+
 import './style.css'
 
-
 class Assignees extends Component {
-  getAssignees() {
-    const members = this.props.assignees.sort((a, b) => a.initials > b.initials).slice(0)
-    if (this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined') {
-      // if responsible is in members, sets responsible to be the first user
-      if (members.map(element => element.id).includes(this.props.cardResponsible.id) === true) {
-        const indexOfResponsible = members.findIndex(x => x.id === this.props.cardResponsible.id)
-        members.splice(indexOfResponsible, 1)
-      }
-      members.splice(0, 0, this.props.cardResponsible)
-    }
-
-    if (members.length > this.props.maxNumberOfPeopleInALine) {
-      const moreMembers = (
-        <div>
-          {members.slice(this.props.maxNumberOfPeopleInALine - 1, members.length)
-            .map(assignee => (
-              <p key={this.props.cardId + assignee.id} className="assigneeInitials">
-                {assignee.initials.toUpperCase()}
-              </p>
-            ))}
-        </div>
-      )
-      return (
-        <div>
-          {members.slice(0, this.props.maxNumberOfPeopleInALine - 1).map(assignee => (
-            <Avatar
-              key={this.props.cardId + assignee.id}
-              style={(this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' && assignee.id === this.props.cardResponsible.id) ?
-                { backgroundColor: '#3586EA' }
-                :
-                {}}
-              className="assigneeInitials"
-            >
-              {assignee.initials.toUpperCase()}
-            </Avatar>
-          ))}
-          <Popover content={moreMembers} trigger="hover">
-            <Avatar key={`${this.props.cardId}additionnals`} className="assigneeInitials">
-              +{(members.length - this.props.maxNumberOfPeopleInALine + 1)}
-            </Avatar>
-          </Popover>
-        </div>
-      )
-    }
-    return (
-      <div>
-        {members.map(assignee => (
-          <Avatar
-            key={this.props.cardId + assignee.id}
-            style={(this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' && assignee.cardId === this.props.cardResponsible.id) ?
-              { backgroundColor: '#3586EA' }
-              :
-              {}}
-            className="assigneeInitials"
-          >
-            {assignee.initials.toUpperCase()}
-          </Avatar>
-        ))}
+  renderReponsible() {
+    return this.props.cardResponsible !== null ? (
+      <div
+        key={this.props.target + this.props.cardId + this.props.cardResponsible}
+        className="cardAvatar responsible"
+      >
+        <span>{this.props.cardResponsible.initials.toUpperCase()}</span>
       </div>
+    ) : (null)
+  }
+
+  renderAssignees() {
+    const sortedAssignees = this.props.assignees.sort((a, b) => a.initials.toUpperCase() > b.initials.toUpperCase())
+    const displayedAssignees = sortedAssignees.slice(0, this.props.maxDisplayedAssignees)
+    const hiddenAssignees = sortedAssignees.slice(this.props.maxDisplayedAssignees, sortedAssignees.length)
+    return (
+      <span>
+        {displayedAssignees.map(assignee => (
+          <div
+            key={this.props.target + this.props.cardId + assignee.id}
+            className="cardAvatar assignee"
+          >
+            <span>{assignee.initials.toUpperCase()}</span>
+          </div>
+        ))}
+        {hiddenAssignees.length > 0 ? (
+          <Popover content={this.renderHiddenAssignees(hiddenAssignees)} trigger="hover">
+            <div
+              key={`${this.props.target}${this.props.cardId}additionnals`}
+              className="cardAvatar assignee"
+            >
+              <span>{`+${hiddenAssignees.length}`}</span>
+            </div>
+          </Popover>
+        ) : (null)}
+      </span>
+    )
+  }
+
+  renderHiddenAssignees(hiddenAssignees) {
+    return (
+      hiddenAssignees.map(assignee => (
+        <div key={this.props.target + this.props.cardId + assignee.id} >
+          {assignee.fullName}
+        </div>
+      ))
     )
   }
 
   render() {
     return (
-      this.getAssignees()
+      <div>
+        { this.renderReponsible() }
+        { this.renderAssignees() }
+      </div>
     )
   }
 }
-/*
+
 Assignees.defaultProps = {
   cardResponsible: null,
 }
-*/
+
 Assignees.propTypes = {
+  target: PropTypes.string.isRequired,
   cardId: PropTypes.string.isRequired,
   assignees: PropTypes.array.isRequired,
-  cardResponsible: PropTypes.object.isRequired,
-  maxNumberOfPeopleInALine: PropTypes.number.isRequired,
+  cardResponsible: PropTypes.object,
+  maxDisplayedAssignees: PropTypes.number.isRequired,
 }
 
 export default Assignees

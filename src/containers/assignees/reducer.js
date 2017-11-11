@@ -4,7 +4,7 @@ import {
 
 const initialState = {
   assignees: [],
-  responsible: {},
+  responsible: null,
 }
 
 export default (state = initialState, action) => {
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
     case `${REMOVE_RESPONSIBLE_FROM_CARD}_SUCCESS`:
       return {
         ...state,
-        responsible: action.payload.data,
+        responsible: null,
       }
     default:
       return state

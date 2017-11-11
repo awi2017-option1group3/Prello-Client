@@ -17,10 +17,10 @@ class AssigneesContainer extends Component {
   render() {
     return (
       <div>
-        <Row className="cardDetailAssignees">
+        <Row>
           {this.props.displayAssignees ? (
             <Col span={11}>
-              <Assignees {...this.props} maxNumberOfPeopleInALine={4}/>
+              <Assignees {...this.props} maxDisplayedAssignees={2} />
             </Col>
           ) : (
             <Col span={0} />
