@@ -2,34 +2,41 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getAllBoards, addBoard, deleteBoard } from './actions'
+import { getAllBoardsForUser, addBoard, deleteBoard } from './actions'
 import Boards from '../../components/boards/Boards'
+import Loader from '../../commons/loader/Loader'
 
 class BoardsContainer extends Component {
-  componentWillMount() {
-    this.props.getAllBoards() // TODO: need to use `getALlBoardsForUser(this.props.userId)` in the future
+  componentDidUpdate() {
+    if (!this.props.boards.areFetched && !this.props.boards.areFetching && this.props.userId) {
+      this.props.getAllBoardsForUser(this.props.userId)
+    }
   }
 
   render() {
-    return (
+    return this.props.boards.areFetched ? (
       <Boards {...this.props} />
+    ) : (
+      <Loader message="Loading your boards2..." />
     )
   }
 }
 
 BoardsContainer.propTypes = {
-  getAllBoards: PropTypes.func.isRequired,
+  boards: PropTypes.object.isRequired,
+  userId: PropTypes.string.isRequired,
+  getAllBoardsForUser: PropTypes.func.isRequired,
   addBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  boards: state.boards.data,
-  isFetching: state.boards.isFetching,
+  boards: state.boards,
+  userId: state.user.infos.id,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getAllBoards,
+  getAllBoardsForUser,
   addBoard,
   deleteBoard,
 }, dispatch)

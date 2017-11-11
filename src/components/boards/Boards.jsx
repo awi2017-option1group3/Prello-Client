@@ -11,12 +11,12 @@ const { Content } = Layout
 const Boards = props => (
   <Layout className="boardsLayout">
     <Content className="boardsContent">
-      { props.isFetching ? (
+      { props.boards.areFetching ? (
         <Loader message="Loading your boards..." />
       ) : (
         <Grid fluid>
           <Row>
-            {props.boards.map(board => (
+            {props.boards.data.map(board => (
               <Col xs={12} sm={6} md={4} lg={3} key={board.id}>
                 <BoardPreview {...board} deleteBoard={props.deleteBoard} />
               </Col>
@@ -25,7 +25,7 @@ const Boards = props => (
               <div className="addBoardBlock">
                 <Button
                   className="addBoardButton"
-                  onClick={() => props.addBoard()}
+                  onClick={() => props.addBoard(props.userId)}
                   icon="plus"
                   size="large"
                 >New Board</Button>
@@ -35,16 +35,14 @@ const Boards = props => (
         </Grid>
       )}
     </Content>
-    
-    
   </Layout>
 )
 
 Boards.propTypes = {
-  boards: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  boards: PropTypes.object.isRequired,
+  userId: PropTypes.string.isRequired,
   addBoard: PropTypes.func.isRequired,
-  deleteBoard:  PropTypes.func.isRequired,
+  deleteBoard: PropTypes.func.isRequired,
 }
 
 export default Boards

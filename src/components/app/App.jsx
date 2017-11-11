@@ -6,7 +6,6 @@ import moment from 'moment'
 
 import BoardsContainer from '../../containers/boards/BoardsContainer'
 import LoginContainer from '../../containers/login/LoginContainer'
-import LogoutContainer from '../../containers/logout/LogoutContainer'
 import RegisterContainer from '../../containers/register/RegisterContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
 import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
@@ -51,7 +50,6 @@ class App extends Component {
           <Content className="appContent">
             <Switch>
               <Route exact path="/login" component={LoginContainer} />
-              <Route exact path="/logout" component={LogoutContainer} />
               <Route exact path="/register" component={RegisterContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
