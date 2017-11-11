@@ -17,6 +17,7 @@ class Card extends Component {
     super(props)
     this.handleChangeAssignee = this.handleChangeAssignee.bind(this)
     this.handleChangeLabels = this.handleChangeLabels.bind(this)
+    this.handleChangeGooglePicker = this.handleChangeGooglePicker.bind(this)
   }
 
   handleChangeAssignee(value) {
@@ -34,6 +35,12 @@ class Card extends Component {
       this.props.removeLabelInCard(this.props.card.id, labelId)
     } else {
       this.props.addLabel(this.props.card.id, labelId)
+    }
+  }
+
+  handleChangeGooglePicker(value) {
+    if (value !== undefined && value.action === 'picked') {
+      value.docs.map(element => this.props.addAttachment(this.props.card.id, element))
     }
   }
 
@@ -81,11 +88,12 @@ class Card extends Component {
                 clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
                 developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
                 scope={SCOPE}
-                onChange={data => console.log('on change:', data)}
+                onChange={this.handleChangeGooglePicker}
                 multiselect
                 navHidden
                 authImmediate={false}
-                mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file', 'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder']}
+                mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file',
+                  'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder', 'application/pdf']}
                 viewId={'DOCS'}
               >
                 <Button type="primary" className="siderButton">Google Drive</Button>
@@ -109,6 +117,7 @@ Card.propTypes = {
   addLabel: PropTypes.func.isRequired,
   addAssignee: PropTypes.func.isRequired,
   addResponsible: PropTypes.func.isRequired,
+  addAttachment: PropTypes.func.isRequired,
   updateDesc: PropTypes.func.isRequired,
   updateDueDate: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,

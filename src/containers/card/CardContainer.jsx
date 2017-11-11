@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
-  getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard,
-  addComment, addLabel, addAssignee, addResponsible,
+  getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard, getAllAttachmentsInCard,
+  addComment, addLabel, addAssignee, addResponsible, addAttachment,
   updateDesc, updateDueDate,
   removeAssigneeInCard, removeLabelInCard } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
@@ -21,6 +21,7 @@ class CardContainer extends Component {
     this.props.getAllCommentsInCard(this.props.id)
     this.props.getAllLabelsInCard(this.props.id)
     this.props.getResponsibleForCard(this.props.id)
+    this.props.getAllAttachmentsInCard(this.props.id)
   }
 
   render() {
@@ -41,6 +42,7 @@ CardContainer.propTypes = {
   getResponsibleForCard: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
   getAllLabelsForBoard: PropTypes.func.isRequired,
+  getAllAttachmentsInCard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -56,10 +58,12 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getAllCommentsInCard,
   getAllLabelsInCard,
   getResponsibleForCard,
+  getAllAttachmentsInCard,
   addComment,
   addLabel,
   addAssignee,
   addResponsible,
+  addAttachment,
   updateDesc,
   updateDueDate,
   removeAssigneeInCard,
