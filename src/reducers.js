@@ -10,6 +10,7 @@ import usersReducer from './containers/users/reducer'
 import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
 import registerReducer from './containers/register/reducer'
+import attachmentsReducer from './containers/attachments/reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
   users: usersReducer,
   currentCard: cardReducer,
   register: registerReducer,
+  cardAttachments: attachmentsReducer,
 })

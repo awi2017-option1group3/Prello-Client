@@ -14,6 +14,7 @@ const initialState = {
   labels: [],
   assignees: [],
   comments: [],
+  attachments: [],
   isFetchingUsers: false,
   isAddingComment: false,
   isAddingAssignee: false,

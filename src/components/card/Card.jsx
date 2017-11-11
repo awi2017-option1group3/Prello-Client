@@ -5,6 +5,7 @@ import GooglePicker from 'react-google-picker'
 import { Layout, Button, Select } from 'antd'
 import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
+import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
 
 const { Sider, Content } = Layout
 
@@ -44,6 +45,12 @@ class Card extends Component {
     }
   }
 
+  getAttachments() {
+    return (
+      <AttachmentsContainer cardId={this.props.id} />
+    )
+  }
+
   render() {
     return (
       <div>
@@ -60,6 +67,9 @@ class Card extends Component {
               <p>Pos : {this.props.card.pos}</p>
               <p>List ID : {this.props.card.listId}</p>
               <p>ID : {this.props.id}</p>
+              <div>
+                {this.getAttachments()}
+              </div>
               <p>More...</p>
             </Content>
             <Sider className="sider">
