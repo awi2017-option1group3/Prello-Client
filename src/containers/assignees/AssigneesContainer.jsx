@@ -20,7 +20,7 @@ class AssigneesContainer extends Component {
         <Row>
           {this.props.displayAssignees ? (
             <Col span={11}>
-              <Assignees {...this.props} maxDisplayedAssignees={2} />
+              <Assignees {...this.props} maxDisplayedAssignees={3} />
             </Col>
           ) : (
             <Col span={0} />
