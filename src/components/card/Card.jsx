@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import GooglePicker from 'react-google-picker'
+import GooglePicker from 'react-google-picker-2'
 import { Layout, Button, Select } from 'antd'
 import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
@@ -82,6 +82,7 @@ class Card extends Component {
                 developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
                 scope={SCOPE}
                 onChange={data => console.log('on change:', data)}
+                onAuthenticate={token => console.log('oauth token:', token)}
                 multiselect
                 navHidden
                 authImmediate={false}
