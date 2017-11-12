@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Form, Icon, Input, Button, Layout } from 'antd'
+import { Form, Icon, Input, Button, Layout, Modal } from 'antd'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { history } from '../../store'
 
 const FormItem = Form.Item
 const { Content } = Layout
@@ -11,6 +12,16 @@ class ForgotPassword extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.ForgotPasswordSuccessed = this.ForgotPasswordSuccessed.bind(this)
+  }
+
+  ForgotPasswordSuccessed(values) {
+    Modal.success({
+      title: 'Email sent !',
+      content: `Check your email: ${values.email} and follow the link to reset your password.`,
+      okText: 'Ok',
+      onOk: history.push('/'),
+    })
   }
 
   handleSubmit(e) {
@@ -18,6 +29,7 @@ class ForgotPassword extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.sendForgotPassword(values)
+        this.ForgotPasswordSuccessed(values)
       }
     })
   }

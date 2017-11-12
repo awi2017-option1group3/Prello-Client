@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
         ...state,
       }
     case `${GET_USER_FORGOT_PASSWORD}_SUCCESS`:
-      debugger
       return {
         ...state,
         user: action.payload.data,

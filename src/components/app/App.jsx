@@ -33,6 +33,7 @@ class App extends Component {
         
 
   boardsRender() {
+    debugger
     return this.checkLogged(<BoardsContainer />)
   }
 

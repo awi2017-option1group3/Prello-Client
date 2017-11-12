@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import ForgotPassword from '../../components/forgotPassword/ForgotPassword'
 import SetForgotPassword from '../../components/setForgotPassword/SetForgotPassword'
-import { sendForgotPassword, getUserForgotPassword } from './actions'
+import { sendForgotPassword, getUserForgotPassword, resetPassword } from './actions'
 
 class ForgotPasswordContainer extends Component {
   renderForgotPassword() {
@@ -29,6 +29,7 @@ class ForgotPasswordContainer extends Component {
 ForgotPasswordContainer.propTypes = {
   sendForgotPassword: PropTypes.func.isRequired,
   getUserForgotPassword: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -38,6 +39,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   sendForgotPassword,
   getUserForgotPassword,
+  resetPassword,
 }, dispatch)
 
 export default connect(

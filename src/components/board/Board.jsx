@@ -10,7 +10,7 @@ class Board extends Component {
       <h1>
         <EditField
           text={this.props.title}
-          save={(newTitle) => { this.props.saveBoardTitle(this.props.id, newTitle) }}
+          save={(newTitle) => { this.props.saveBoardTitle(this.props.boardId, newTitle) }}
         />
       </h1>
     )
@@ -23,7 +23,7 @@ class Board extends Component {
           {this.getHeader()}
         </div>
         <ListsContainer boardId={this.props.boardId} />
-    </div>
+      </div>
     )
   }
 }
