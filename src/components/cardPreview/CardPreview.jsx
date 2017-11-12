@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Avatar, Row, Col, Modal as UIModal } from 'antd'
+import { Button, Card as UICard, Dropdown, Icon, Menu, Row, Col, Modal as UIModal } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardContainer from '../../containers/card/CardContainer'
 import Assignees from '../assignees/Assignees'
-// import LabelsContainer from '../../containers/labels/LabelsContainer'
 import Labels from "../labels/Labels"
 import moment from 'moment'
 
@@ -53,7 +52,6 @@ class Card extends Component {
   }
 
   getLabels() {
-
     return (
       <Labels cardLabels={this.props.labels} cardId={this.props.id} />
     )
@@ -109,7 +107,7 @@ class Card extends Component {
   getAssignees() {
     return (
       <Assignees cardId={this.props.id}
-                 cardResponsible={this.props.cardResponsible}
+                 cardResponsible={this.props.responsible}
                  assignees={this.props.assignees}
                  maxDisplayedAssignees={2}
                  target="cardPreview"
@@ -127,6 +125,7 @@ class Card extends Component {
     this.setState({
       visible: false,
     })
+    this.props.updateOneCardPopulated(this.props.id)
   }
 
   render() {
@@ -194,12 +193,13 @@ Card.propTypes = {
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
   comments: PropTypes.array,
-  cardResponsible: PropTypes.object,
+  responsible: PropTypes.object,
   assignees: PropTypes.array,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
   saveCardDesc: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
+  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default Card
