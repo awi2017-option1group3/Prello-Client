@@ -1,4 +1,4 @@
-import { GET_ALL_ATTACHMENTS_IN_CARD, REMOVE_ATTACHMENT_IN_CARD } from './constants'
+import { GET_ALL_ATTACHMENTS_IN_CARD, ADD_ATTACHMENT, REMOVE_ATTACHMENT } from './constants'
 
 export const getAllAttachmentsInCard = cardId => (dispatch) => {
   dispatch({
@@ -12,13 +12,35 @@ export const getAllAttachmentsInCard = cardId => (dispatch) => {
   })
 }
 
-export const removeAttachmentInCard = (cardId, AttachmentId) => (dispatch) => {
+export const addAttachment = (cardId, attachment) => (dispatch) => {
   dispatch({
-    type: REMOVE_ATTACHMENT_IN_CARD,
+    type: ADD_ATTACHMENT,
+    cardId,
+    payload: {
+      request: {
+        method: 'POST',
+        url: `/api/cards/${cardId}/attachments/`,
+        data: {
+          name: attachment.name,
+          desc: attachment.description,
+          attachmentId: attachment.id,
+          attachmentUrl: attachment.url,
+          attachmentIcon: attachment.embedUrl,
+          lastEditedTime: attachment.lastEditedUtc,
+        },
+      },
+    },
+  })
+}
+
+export const removeAttachment = (cardId, attachmentId) => (dispatch) => {
+  dispatch({
+    type: REMOVE_ATTACHMENT,
+    attachmentId,
     payload: {
       request: {
         method: 'DELETE',
-        url: `/api/cards/${cardId}/attachments/${AttachmentId}`,
+        url: `/api/cards/${cardId}/attachments/${attachmentId}`,
       },
     },
   })

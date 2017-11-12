@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getAllAttachmentsInCard, removeAttachmentInCard } from './actions'
+import { getAllAttachmentsInCard, removeAttachment } from './actions'
 import Attachments from '../../components/attachments/Attachments'
 
 class AttachmentsContainer extends Component {
@@ -20,16 +20,16 @@ class AttachmentsContainer extends Component {
 AttachmentsContainer.propTypes = {
   cardId: PropTypes.string.isRequired,
   getAllAttachmentsInCard: PropTypes.func.isRequired,
-  removeAttachmentInCard: PropTypes.func.isRequired,
+  removeAttachment: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  attachments: state.cardAttachments.attachments,
+  attachments: state.cardAttachments.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getAllAttachmentsInCard,
-  removeAttachmentInCard,
+  removeAttachment,
 }, dispatch)
 
 export default connect(

@@ -1,6 +1,6 @@
 import { CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ALL_LABELS_IN_CARD, GET_ALL_ASSIGNEES_IN_CARD, GET_RESPONSIBLE_FOR_CARD, GET_ONE_CARD,
-  ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE, ADD_ATTACHMENT,
+  ADD_COMMENT, ADD_LABEL, ADD_ASSIGNEE, ADD_RESPONSIBLE,
   UPDATE_DUE_DATE, UPDATE_DESC,
   REMOVE_ASSIGNEE, REMOVE_LABEL } from './constants'
 
@@ -128,27 +128,6 @@ export const addResponsible = (cardId, userId) => (dispatch) => {
         url: `/api/cards/${cardId}/responsible/`,
         data: {
           responsibleId: userId,
-        },
-      },
-    },
-  })
-}
-
-export const addAttachment = (cardId, attachment) => (dispatch) => {
-  dispatch({
-    type: ADD_ATTACHMENT,
-    cardId,
-    payload: {
-      request: {
-        method: 'POST',
-        url: `/api/cards/${cardId}/attachments/`,
-        data: {
-          name: attachment.name,
-          desc: attachment.description,
-          attachmentId: attachment.id,
-          attachmentUrl: attachment.url,
-          attachmentIcon: attachment.embedUrl,
-          lastEditedTime: attachment.lastEditedUtc,
         },
       },
     },

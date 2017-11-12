@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
   getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard,
-  addComment, addLabel, addAssignee, addResponsible, addAttachment,
+  addComment, addLabel, addAssignee, addResponsible,
   updateDesc, updateDueDate,
   removeAssigneeInCard, removeLabelInCard } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
 import { getAllLabelsForBoard } from '../labels/actions'
+import { addAttachment } from '../attachments/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {

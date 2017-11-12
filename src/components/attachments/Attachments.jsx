@@ -5,7 +5,7 @@ import './style.css'
 
 class Attachments extends Component {
   render() {
-    return this.props.attachments !== undefined ? (
+    return (
       <div>
         {this.props.attachments.map(attachment => (
           <Card
@@ -16,7 +16,7 @@ class Attachments extends Component {
               type="danger"
               icon="delete"
               size="small"
-              onClick={() => { this.props.removeAttachmentInCard(this.props.cardId, attachment.id) }}
+              onClick={() => { this.props.removeAttachment(this.props.cardId, attachment.id) }}
             />
             }
           >
@@ -31,7 +31,7 @@ class Attachments extends Component {
           </Card>
         ))}
       </div>
-    ) : (null)
+    )
   }
 }
 
@@ -39,7 +39,7 @@ class Attachments extends Component {
 Attachments.propTypes = {
   attachments: PropTypes.array.isRequired,
   cardId: PropTypes.string.isRequired,
-  removeAttachmentInCard: PropTypes.func.isRequired,
+  removeAttachment: PropTypes.func.isRequired,
 }
 
 export default Attachments
