@@ -23,7 +23,7 @@ class LabelsSelect extends Component {
   render() {
     return (
       <Select
-        style={{ width: '100%' }}
+        className="selectLabels"
         placeholder="Select labels..."
         onChange={this.handleChangeLabels}
         tokenSeparators={[',']}

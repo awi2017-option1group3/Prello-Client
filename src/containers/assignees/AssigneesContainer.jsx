@@ -35,13 +35,12 @@ class AssigneesContainer extends Component {
         </Row>
         {this.props.displaySelectResponsible ? (
           <Row>
-            <Col span={12} className="cardSelector">
+            <Col span={9} className="cardSelector">
               <ResponsibleSelect {...this.props} />
             </Col>
           </Row>
-        ) : (
-          <div />
-        )
+        ) :
+          (null)
         }
       </div>
     )
@@ -63,7 +62,7 @@ AssigneesContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  assignees: state.cardAssignees.assignees,
+  assignees: state.cardAssignees.data,
   cardResponsible: state.cardAssignees.responsible,
   allUsers: state.users.data,
 })

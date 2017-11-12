@@ -1,9 +1,14 @@
 .cardAssignees {
     margin: 5px;
+    width: 100%;
 }
 
 .cardMember {
     margin-right: 5px;
+}
+
+.cardResponsible {
+    width: 100%;
 }
 
 .cardAvatar {

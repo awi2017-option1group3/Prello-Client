@@ -26,7 +26,6 @@ class AssigneesSelect extends Component {
         className="cardAssignees"
         placeholder="Choose assignees..."
         onChange={this.handleChangeAssignee}
-        style={{ width: '100%' }}
         tokenSeparators={[',']}
       >
         { this.props.allUsers.map(user => <Option key={this.props.cardId + user.id}>{ user.fullName }</Option>) }

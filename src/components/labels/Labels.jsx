@@ -4,7 +4,6 @@ import { Tag } from 'antd'
 import './style.css'
 
 class Labels extends Component {
-
   render() {
     return (
       <div>

@@ -38,8 +38,8 @@ class Card extends Component {
   render() {
     return (
       <div>
-        <Layout><Layout>
-          <Content className="content">
+        <Layout>
+          <Content className="cardContent">
             <div>
               {this.getLabels()}
             </div>
@@ -59,8 +59,6 @@ class Card extends Component {
             <p>More...</p>
           </Content>
         </Layout>
-        </Layout>
-
       </div>
     )
   }
