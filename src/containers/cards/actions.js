@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_POS, SAVE_CARD_TITLE, SAVE_CARD_DESC } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, UPDATE_ONE_CARD_POPULATED, SAVE_CARD_POS, SAVE_CARD_TITLE, SAVE_CARD_DESC } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -14,6 +14,19 @@ export const getAllCardsInList = listId => (dispatch) => {
       request: {
         method: 'GET',
         url: `/api/lists/${listId}/cards`,
+      },
+    },
+  })
+}
+
+export const updateOneCardPopulated = cardId => (dispatch) => {
+  dispatch({
+    type: UPDATE_ONE_CARD_POPULATED,
+    cardId,
+    payload: {
+      request: {
+        method: 'GET',
+        url: `/api/cards/${cardId}/populated/`,
       },
     },
   })

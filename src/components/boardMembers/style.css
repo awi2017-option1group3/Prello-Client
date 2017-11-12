@@ -1,0 +1,35 @@
+.boardMembersBlock {
+    display: flex;
+    margin: 8px 10px;
+}
+
+.boardMemberMessage {
+    vertical-align: top;
+}
+
+.boardMembers {
+    margin-top: -2px;
+    display: flex;
+}
+
+.boardOwnerAvatar {
+    background-color: #0f8ee9;
+    margin-right: 5px;
+}
+
+.boardOwnerAvatar:hover {
+    cursor: pointer;
+}
+
+.boardContributorAvatar {
+    margin-right: 5px;
+}
+
+.boardContributorAvatar:hover {
+    cursor: pointer;
+}
+
+.boardContributorsSelector {
+    margin-top: -4px;
+    width: 150px;
+}

@@ -1,27 +1,30 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import ListsContainer from '../../containers/lists/ListsContainer'
-import './style.css'
+import BoardMembersContainer from '../../containers/boardMembers/BoardMembersContainer'
 import EditField from '../../commons/editField/EditField'
+import './style.css'
 
 class Board extends Component {
   getHeader() {
     return (
-      <h1>
-        <EditField
-          text={this.props.title}
-          save={(newTitle) => { this.props.saveBoardTitle(this.props.boardId, newTitle) }}
-        />
-      </h1>
+      <div className="boardHeader">
+        <h1 className="boardTitle">
+          <EditField
+            text={this.props.title}
+            save={(newTitle) => { this.props.saveBoardTitle(this.props.boardId, newTitle) }}
+          />
+        </h1>
+        <BoardMembersContainer boardId={this.props.boardId} />
+      </div>
     )
   }
 
   render() {
     return (
       <div className="board">
-        <div className="boardTitle">
-          {this.getHeader()}
-        </div>
+        { this.getHeader() }
         <ListsContainer boardId={this.props.boardId} />
       </div>
     )
