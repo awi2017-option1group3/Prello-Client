@@ -1,4 +1,4 @@
-import { SEND_FORGOT_PASSWORD } from './constants'
+import { SEND_FORGOT_PASSWORD, GET_USER_FORGOT_PASSWORD } from './constants'
 
 export const sendForgotPassword = formValues => (dispatch) => {
   dispatch({
@@ -6,10 +6,22 @@ export const sendForgotPassword = formValues => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: '/forgotPassword',
+        url: 'auth/forgotPassword',
         data: {
           email: formValues.email,
         },
+      },
+    },
+  })
+}
+
+export const getUserForgotPassword = token => (dispatch) => {
+  dispatch({
+    type: GET_USER_FORGOT_PASSWORD,
+    payload: {
+      request: {
+        method: 'GET',
+        url: `auth/forgotPassword/${token}`,
       },
     },
   })

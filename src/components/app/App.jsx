@@ -54,6 +54,7 @@ class App extends Component {
               <Route exact path="/login" component={LoginContainer} />
               <Route exact path="/register" component={RegisterContainer} />
               <Route exact path="/forgotPassword" component={ForgotPasswordContainer} />
+              <Route exact path="/forgotPassword/:token" component={ForgotPasswordContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
               <Route exact path="*" render={this.pageNotFound} />
