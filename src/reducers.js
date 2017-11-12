@@ -9,6 +9,7 @@ import labelsReducer from './containers/labels/reducer'
 import usersReducer from './containers/users/reducer'
 import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
+import assigneesReducer from './containers/assignees/reducer'
 import registerReducer from './containers/register/reducer'
 
 export default combineReducers({
@@ -22,5 +23,7 @@ export default combineReducers({
   labels: labelsReducer,
   users: usersReducer,
   currentCard: cardReducer,
+  cardAssignees: assigneesReducer,
+  currentCardLabels: labelsReducer,
   register: registerReducer,
 })
