@@ -103,7 +103,9 @@ class Card extends Component {
                 navHidden
                 authImmediate={false}
                 mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file',
-                  'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder', 'application/pdf']}
+                  'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder', 'application/pdf',
+                  'image/png', 'image/jpeg', 'image/gif', 'application/vnd.google.drive.ext-type.png',
+                  'application/vnd.google.drive.ext-type.jpg', 'application/vnd.google.drive.ext-type.gif']}
                 viewId={'DOCS'}
               >
                 <Button type="primary" className="siderButton">Google Drive</Button>
