@@ -32,7 +32,7 @@ ForgotPasswordContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.user,
+  user: state.forgotPassword.user,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

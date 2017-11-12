@@ -3,7 +3,7 @@ import { SEND_FORGOT_PASSWORD, GET_USER_FORGOT_PASSWORD } from './constants'
 const initialState = {
   success: false,
   error: '',
-  user: [],
+  user: null,
   isGettingUser: false,
 }
 
@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
         ...state,
       }
     case `${GET_USER_FORGOT_PASSWORD}_SUCCESS`:
+      debugger
       return {
         ...state,
         user: action.payload.data,

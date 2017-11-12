@@ -26,6 +26,7 @@ class SetForgotPassword extends Component {
     })
   }
 
+
   render() {
     const { getFieldDecorator } = this.props.form
     const regExpPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\\!@#$%&\\*\\_\\-\\"\'£€+/.?,;:=^])(?=.{8,})')
@@ -39,6 +40,11 @@ class SetForgotPassword extends Component {
                   <h1 >Reset your Password </h1>
                   <p className="forgotPasswordTitle"> Prello by Gluon</p>
                   <p>{this.props.token}</p>
+                  { this.props.user === undefined ? (
+                    <p>{this.props.user.fullName}</p>
+                  ) : (
+                    null
+                  )}
                   <FormItem className="signupFormItem" label="Password" hasFeedback>
                     {getFieldDecorator('password', {
                       rules: [{
@@ -63,11 +69,15 @@ class SetForgotPassword extends Component {
     )
   }
 }
+SetForgotPassword.defaultProps = {
+  user: null,
+}
 
 SetForgotPassword.propTypes = {
   form: PropTypes.object.isRequired,
   getUserForgotPassword: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
+  user: PropTypes.object,
 }
 
 const WrappedSetForgotPassword = Form.create()(SetForgotPassword)
