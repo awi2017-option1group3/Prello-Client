@@ -41,7 +41,7 @@ class BoardMembers extends Component {
     } else if (this.props.owner.id === this.props.user.id) {
       return (<Tag className="boardMemberMessage" color="blue">You are the board's owner.</Tag>)
     }
-    return (<Tag className="boardMemberMessage" color="blue">Ask {this.props.owner.fullName} to invite somebody.</Tag>)
+    return (<Tag className="boardMemberMessage" color="blue">Ask {this.props.owner.fullName} to invite someone.</Tag>)
   }
 
   renderOwner() {
@@ -109,7 +109,7 @@ class BoardMembers extends Component {
         className="boardContributorsSelector"
         mode="combobox"
         tags={false}
-        placeholder="Invite somebody..."
+        placeholder="Invite someone..."
         onSelect={this.add}
         onSearch={this.handleSelectorSearch}
         value={this.state.searchUserToInviteValue}

@@ -32,7 +32,7 @@ const OwnedBoards = props => (
               <div className="addBoardBlock">
                 <Button
                   className="addBoardButton"
-                  onClick={() => props.addBoard(props.userId)}
+                  onClick={() => props.addBoard(props.user.id)}
                   icon="plus"
                   size="large"
                 >
@@ -49,7 +49,7 @@ const OwnedBoards = props => (
 
 OwnedBoards.propTypes = {
   boards: PropTypes.object.isRequired,
-  userId: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
   addBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
 }

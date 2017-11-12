@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
         ownedBoards: {
           ...state.ownedBoards,
           areFetching: true,
+          areFetched: false,
         },
       }
     case `${GET_OWNED_BOARDS_FOR_USER}_SUCCESS`:
@@ -35,21 +36,13 @@ export default (state = initialState, action) => {
           areFetched: true,
         },
       }
-    case `${GET_OWNED_BOARDS_FOR_USER}_FAIL`:
-      return {
-        ...state,
-        ownedBoards: {
-          ...state.ownedBoards,
-          areFetching: false,
-          areFetched: true,
-        },
-      }
     case `${GET_CONTRIBUTING_BOARDS_FOR_USER}`:
       return {
         ...state,
         contributingBoards: {
           ...state.contributingBoards,
           areFetching: true,
+          areFetched: false,
         },
       }
     case `${GET_CONTRIBUTING_BOARDS_FOR_USER}_SUCCESS`:
@@ -58,15 +51,6 @@ export default (state = initialState, action) => {
         contributingBoards: {
           ...state.contributingBoards,
           data: action.payload.data,
-          areFetching: false,
-          areFetched: true,
-        },
-      }
-    case `${GET_CONTRIBUTING_BOARDS_FOR_USER}_FAIL`:
-      return {
-        ...state,
-        contributingBoards: {
-          ...state.contributingBoards,
           areFetching: false,
           areFetched: true,
         },

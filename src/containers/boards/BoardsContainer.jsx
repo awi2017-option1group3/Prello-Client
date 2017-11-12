@@ -8,28 +8,32 @@ import ContributingBoards from '../../components/boards/ContributingBoards'
 
 class BoardsContainer extends Component {
   componentDidUpdate() {
-    if (!this.props.ownedBoards.areFetched && !this.props.ownedBoards.areFetching && this.props.userId) {
-      this.props.getOwnedBoardsForUser(this.props.userId)
+    if (!this.props.ownedBoards.areFetched && !this.props.ownedBoards.areFetching && this.props.user) {
+      this.props.getOwnedBoardsForUser(this.props.user.id)
     }
-    if (!this.props.contributingBoards.areFetched && !this.props.contributingBoards.areFetching && this.props.userId) {
-      this.props.getContributingBoardsForUser(this.props.userId)
+    if (!this.props.contributingBoards.areFetched && !this.props.contributingBoards.areFetching && this.props.user) {
+      this.props.getContributingBoardsForUser(this.props.user.id)
     }
   }
 
   render() {
-    return (
+    return this.props.user ? (
       <div>
         <OwnedBoards boards={this.props.ownedBoards} {...this.props} />
         <ContributingBoards boards={this.props.contributingBoards} {...this.props} />
       </div>
-    )
+    ) : (null)
   }
+}
+
+BoardsContainer.defaultProps = {
+  user: null,
 }
 
 BoardsContainer.propTypes = {
   ownedBoards: PropTypes.object.isRequired,
   contributingBoards: PropTypes.object.isRequired,
-  userId: PropTypes.string.isRequired,
+  user: PropTypes.object,
   getOwnedBoardsForUser: PropTypes.func.isRequired,
   getContributingBoardsForUser: PropTypes.func.isRequired,
   addBoard: PropTypes.func.isRequired,
@@ -39,7 +43,7 @@ BoardsContainer.propTypes = {
 const mapStateToProps = state => ({
   ownedBoards: state.boards.ownedBoards,
   contributingBoards: state.boards.contributingBoards,
-  userId: state.user.infos.id,
+  user: state.user.infos,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -1,13 +1,7 @@
 import { GET_BOARD_OWNER, GET_BOARD_CONTRIBUTORS, ADD_CONTRIBUTOR_TO_BOARD, REMOVE_CONTRIBUTOR_FROM_BOARD } from './constants'
 
 const initialState = {
-  owner: {
-    id: '',
-    email: '',
-    fullName: '',
-    initials: '',
-    username: '',
-  },
+  owner: null,
   contributors: [],
 }
 

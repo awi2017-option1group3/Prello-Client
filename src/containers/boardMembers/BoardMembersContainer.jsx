@@ -15,17 +15,22 @@ class BoardMembersContainer extends Component {
   }
 
   render() {
-    if (this.props.user.id && this.props.owner.id) {
+    if (this.props.user && this.props.owner) {
       return (<BoardMembers {...this.props} />)
     }
     return (null)
   }
 }
 
+BoardMembersContainer.defaultProps = {
+  user: null,
+  owner: null,
+}
+
 BoardMembersContainer.propTypes = {
   boardId: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
-  owner: PropTypes.object.isRequired,
+  user: PropTypes.object,
+  owner: PropTypes.object,
   getBoardOwner: PropTypes.func.isRequired,
   getBoardContributors: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
