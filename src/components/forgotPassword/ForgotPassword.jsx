@@ -13,6 +13,7 @@ class ForgotPassword extends Component {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.ForgotPasswordSuccessed = this.ForgotPasswordSuccessed.bind(this)
+    this.ForgotPasswordFailed = this.ForgotPasswordFailed.bind(this)
   }
 
   ForgotPasswordSuccessed(values) {
@@ -24,12 +25,24 @@ class ForgotPassword extends Component {
     })
   }
 
+  ForgotPasswordFailed(values) {
+    Modal.warning({
+      title: 'Email not found !',
+      content: `This email is not correct: ${values.email} `,
+      okText: 'Ok',
+    })
+  }
+
   handleSubmit(e) {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.sendForgotPassword(values)
-        this.ForgotPasswordSuccessed(values)
+        if (this.props.success) {
+          this.ForgotPasswordSuccessed(values)
+        } else {
+          this.ForgotPasswordFailed(values)
+        }
       }
     })
   }
@@ -73,6 +86,7 @@ class ForgotPassword extends Component {
 ForgotPassword.propTypes = {
   form: PropTypes.object.isRequired,
   sendForgotPassword: PropTypes.func.isRequired,
+  success: PropTypes.bool.isRequired,
 }
 
 const WrappedForgotPassword = Form.create()(ForgotPassword)

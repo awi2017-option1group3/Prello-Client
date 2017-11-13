@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
     case `${SEND_FORGOT_PASSWORD}`:
       return {
         ...state,
+        success: true,
       }
     case `${SEND_FORGOT_PASSWORD}_SUCCESS`:
       return {
@@ -22,6 +23,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error.message,
+        success: false,
       }
     case `${GET_USER_FORGOT_PASSWORD}`:
       return {
@@ -37,6 +39,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error.message,
+        isGettingUser: false,
       }
     default:
       return state
