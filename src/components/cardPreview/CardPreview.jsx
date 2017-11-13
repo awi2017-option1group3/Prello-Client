@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Tag, Avatar, Row, Col, Modal as UIModal } from 'antd'
+import { Button, Card as UICard, Dropdown, Icon, Menu, Row, Col, Modal as UIModal } from 'antd'
 import Modal from '../../commons/modal/Modal'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardContainer from '../../containers/card/CardContainer'
+import Assignees from '../assignees/Assignees'
+import Labels from "../labels/Labels"
 import moment from 'moment'
 
 
@@ -51,13 +53,7 @@ class Card extends Component {
 
   getLabels() {
     return (
-      <div>
-        {this.props.labels.map(label => (
-          <Tag color={label.color} key={this.props.id + label.id} className="cardLabel">
-            {label.name}
-          </Tag>
-        ))}
-      </div>
+      <Labels cardLabels={this.props.labels} cardId={this.props.id} />
     )
   }
 
@@ -109,71 +105,27 @@ class Card extends Component {
   }
 
   getAssignees() {
-    const maxNumberOfPeopleInALine = 3
-    const members = this.props.assignees.sort((a, b) => a.initials > b.initials).slice(0)
-    if (this.props.cardResponsible !== null) {
-      // if responsible is in members, sets responsible to be the first user
-      if (members.find(element => element.id === this.props.cardResponsible.id) === true) {
-        const indexOfResponsible = members.findIndex(this.props.cardResponsible)
-        members.splice(indexOfResponsible, 0)
-      }
-      members.splice(0, 0, this.props.cardResponsible)
-    }
-    if (members.length > maxNumberOfPeopleInALine) {
-      const moreMembers = (
-        <div>
-          {members.slice(maxNumberOfPeopleInALine - 1, members.length)
-            .map(assignee => (
-              <p key={this.props.id + assignee.id} className="assigneeInitials">
-                {assignee.initials.toUpperCase()}
-              </p>
-            ))}
-        </div>
-      )
-      return (
-        <div>
-          {members.slice(0, maxNumberOfPeopleInALine - 1).map(assignee => (
-            <Avatar
-              key={this.props.id + assignee.id}
-              style={(this.props.cardResponsible !== null && assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
-              className="assigneeInitials"
-            >
-              {assignee.initials.toUpperCase()}
-            </Avatar>
-          ))}
-          <Popover content={moreMembers} trigger="hover">
-            <Avatar key={`${this.props.id}additionnals`} className="assigneeInitials">
-              +{(members.length - maxNumberOfPeopleInALine + 1)}
-            </Avatar>
-          </Popover>
-        </div>
-      )
-    }
     return (
-      <div>
-        {members.map(assignee => (
-          <Avatar
-            key={this.props.id + assignee.id}
-            style={(this.props.cardResponsible !== null && assignee.id === this.props.cardResponsible.id) ? { backgroundColor: '#3586EA' } : {}}
-            className="assigneeInitials"
-          >
-            {assignee.initials.toUpperCase()}
-          </Avatar>
-        ))}
-      </div>
+      <Assignees cardId={this.props.id}
+                 cardResponsible={this.props.responsible}
+                 assignees={this.props.assignees}
+                 maxDisplayedAssignees={2}
+                 target="cardPreview"
+      />
     )
   }
 
   showModal = () => {
     this.setState({
       visible: true,
-    });
+    })
   }
 
   handleCancel = () => {
     this.setState({
       visible: false,
-    });
+    })
+    this.props.updateOneCardPopulated(this.props.id)
   }
 
   render() {
@@ -241,12 +193,13 @@ Card.propTypes = {
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
   comments: PropTypes.array,
-  cardResponsible: PropTypes.object,
+  responsible: PropTypes.object,
   assignees: PropTypes.array,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
   saveCardDesc: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
+  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default Card

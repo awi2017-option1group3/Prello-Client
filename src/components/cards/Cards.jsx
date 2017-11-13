@@ -12,7 +12,15 @@ const Cards = props => (
     ) : (
       <div className="cardsWrapper">
         { props.cards.sort((a, b) => a.pos > b.pos).map(card => (
-          <DraggableCard {...card} key={card.id} boardId={props.boardId} deleteCard={props.deleteCard} saveCardTitle={props.saveCardTitle} saveCardDesc={props.saveCardDesc} />
+          <DraggableCard
+            {...card}
+            key={card.id}
+            boardId={props.boardId}
+            deleteCard={props.deleteCard}
+            saveCardTitle={props.saveCardTitle}
+            saveCardDesc={props.saveCardDesc}
+            updateOneCardPopulated={props.updateOneCardPopulated}
+          />
         ))}
         { props.droppableProvided.placeholder }
         { props.isAdding ? (
@@ -45,6 +53,7 @@ Cards.propTypes = {
   addCard: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
+  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default Cards
