@@ -13,6 +13,7 @@ import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
 import assigneesReducer from './containers/assignees/reducer'
 import labelsReducer from './containers/labels/reducer'
+import forgotPasswordReducer from './containers/forgotPassword/reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -21,6 +22,7 @@ export default combineReducers({
   user: userReducer,
   login: loginReducer,
   register: registerReducer,
+  forgotPassword: forgotPasswordReducer,
   notifications: notificationsReducer,
 
   boards: boardsReducer,

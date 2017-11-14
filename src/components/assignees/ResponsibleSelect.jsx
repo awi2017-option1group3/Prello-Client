@@ -10,14 +10,13 @@ class ResponsibleSelect extends Component {
     super(props)
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this)
     this.state = {
-      value: '',
       placeholder: 'Choose responsible...',
     }
   }
 
   handleChangeResponsible(value) {
     const memberId = value.substring(this.props.card.id.length)
-    if (this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' && this.props.cardResponsible.id === memberId) {
+    if (this.props.responsible !== null && typeof this.props.responsible.id !== 'undefined' && this.props.responsible.id === memberId) {
       this.props.removeResponsibleFromCard(this.props.card.id)
       if (memberId !== this.props.user.id) {
         // Notify the user involved
@@ -44,19 +43,21 @@ class ResponsibleSelect extends Component {
   }
 
   render() {
-    return (
+    return this.props.responsible ? (
       <Select
         className="cardResponsible"
         placeholder={this.state.placeholder}
         onChange={this.handleChangeResponsible}
-        style={{ width: '100%' }}
-        value={this.state.value}
         tokenSeparators={[',']}
       >
         { this.props.allUsers.map(user => <Option key={this.props.card.id + user.id}>{ user.fullName }</Option>) }
       </Select>
-    )
+    ) : (null)
   }
+}
+
+ResponsibleSelect.defaultProps = {
+  responsible: null,
 }
 
 ResponsibleSelect.propTypes = {
@@ -64,7 +65,7 @@ ResponsibleSelect.propTypes = {
   user: PropTypes.object.isRequired,
   boardId: PropTypes.string.isRequired,
   allUsers: PropTypes.array.isRequired,
-  cardResponsible: PropTypes.object.isRequired,
+  responsible: PropTypes.object,
   assignees: PropTypes.array.isRequired,
   addResponsibleToCard: PropTypes.func.isRequired,
   removeResponsibleFromCard: PropTypes.func.isRequired,

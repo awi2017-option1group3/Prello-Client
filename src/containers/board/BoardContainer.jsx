@@ -23,9 +23,9 @@ class BoardContainer extends Component {
   render() {
     if (this.props.user) {
       return this.props.board.isFailed ? (
-        <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it."/>
+        <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
       ) : (
-        <DndBoard {...this.props} />
+        <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
       )
     }
     return (null)
@@ -38,6 +38,7 @@ BoardContainer.defaultProps = {
 
 BoardContainer.propTypes = {
   match: PropTypes.object.isRequired,
+  board: PropTypes.object.isRequired,
   user: PropTypes.object,
   cleanBoardState: PropTypes.func.isRequired,
   cleanListsState: PropTypes.func.isRequired,

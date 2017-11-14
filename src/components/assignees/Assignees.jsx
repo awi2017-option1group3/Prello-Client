@@ -6,7 +6,7 @@ import './style.css'
 
 class Assignees extends Component {
   renderReponsible() {
-    return this.props.cardResponsible !== null ? (
+    return this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' ? (
       <div
         key={this.props.target + this.props.cardId + this.props.cardResponsible}
         className="cardAvatar responsible"
@@ -18,6 +18,13 @@ class Assignees extends Component {
 
   renderAssignees() {
     const sortedAssignees = this.props.assignees.sort((a, b) => a.initials.toUpperCase() > b.initials.toUpperCase())
+    if (this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined') {
+      // if responsible is in members, sets responsible to be the first user
+      if (sortedAssignees.map(assignee => assignee.id).includes(this.props.cardResponsible.id) === true) {
+        const indexOfResponsible = sortedAssignees.findIndex(assignee => assignee.id === this.props.cardResponsible.id)
+        sortedAssignees.splice(indexOfResponsible, 1)
+      }
+    }
     const displayedAssignees = sortedAssignees.slice(0, this.props.maxDisplayedAssignees)
     const hiddenAssignees = sortedAssignees.slice(this.props.maxDisplayedAssignees, sortedAssignees.length)
     return (

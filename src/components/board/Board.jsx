@@ -24,10 +24,14 @@ class Board extends Component {
     return (
       <div className="boardHeader">
         <h1 className="boardTitle">
-          <EditField
-            text={this.props.board.title}
-            save={this.editTitle}
-          />
+          {this.props.user.id === this.props.owner ? (
+            <EditField
+              text={this.props.board.title}
+              save={this.editTitle}
+            />
+          ) : (
+            this.props.board.title
+          )}
         </h1>
         <BoardMembersContainer boardId={this.props.board.id} />
       </div>
@@ -47,6 +51,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
+  user: PropTypes.object.isRequired,
+  owner: PropTypes.string.isRequired,
   board: PropTypes.object.isRequired,
   saveBoardTitle: PropTypes.func.isRequired,
   addNotification: PropTypes.func.isRequired,

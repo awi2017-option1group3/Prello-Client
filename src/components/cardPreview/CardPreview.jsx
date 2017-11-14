@@ -47,6 +47,7 @@ class CardPreview extends Component {
     this.setState({
       visible: false,
     })
+    this.props.updateOneCardPopulated(this.props.id)
   }
 
   renderHeader() {
@@ -121,7 +122,7 @@ class CardPreview extends Component {
       return ''
     } else if (diffDays <= warning && diffDays > urgent) {
       return 'dueDateWarning'
-    } 
+    }
     return 'dueDateUrgent'
   }
 
@@ -143,7 +144,7 @@ class CardPreview extends Component {
     return (
       <Assignees
         cardId={this.props.id}
-        cardResponsible={this.props.cardResponsible}
+        cardResponsible={this.props.responsible}
         assignees={this.props.assignees}
         maxDisplayedAssignees={2}
         target="cardPreview"
@@ -202,7 +203,7 @@ CardPreview.defaultProps = {
   labels: [],
   comments: [],
   assignees: [],
-  cardResponsible: {},
+  responsible: {},
   dueComplete: '',
 }
 
@@ -216,13 +217,14 @@ CardPreview.propTypes = {
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
   comments: PropTypes.array,
-  cardResponsible: PropTypes.object,
+  responsible: PropTypes.object,
   assignees: PropTypes.array,
   user: PropTypes.object.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
   addNotification: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
+  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default CardPreview

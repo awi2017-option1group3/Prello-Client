@@ -20,6 +20,8 @@ const Cards = props => (
             deleteCard={props.deleteCard}
             saveCardTitle={props.saveCardTitle}
             addNotification={props.addNotification}
+            saveCardDesc={props.saveCardDesc}
+            updateOneCardPopulated={props.updateOneCardPopulated}
           />
         ))}
         { props.droppableProvided.placeholder }
@@ -54,7 +56,9 @@ Cards.propTypes = {
   addCard: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
+  saveCardDesc: PropTypes.func.isRequired,
   addNotification: PropTypes.func.isRequired,
+  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default Cards
