@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {Avatar, Tag, Select, Popover, Popconfirm, Tooltip} from 'antd'
+import { Avatar, Tag, Select, Popover, Popconfirm, Tooltip, Button, Icon } from 'antd'
+
+import { history } from '../../store'
 import './style.css'
 
 const Option = Select.Option
@@ -11,6 +13,7 @@ class BoardMembers extends Component {
     this.handleSelectorSearch = this.handleSelectorSearch.bind(this)
     this.add = this.add.bind(this)
     this.remove = this.remove.bind(this)
+    this.quit = this.quit.bind(this)
     this.state = {
       searchUserToInviteValue: '',
     }
@@ -33,6 +36,11 @@ class BoardMembers extends Component {
 
   remove(userId) {
     this.props.removeContributorFromBoard(userId, this.props.boardId)
+  }
+
+  quit() {
+    this.remove(this.props.user.id)
+    history.push('/')
   }
 
   renderMessage() {
@@ -98,7 +106,7 @@ class BoardMembers extends Component {
         okText="Yes"
         cancelText="No"
       >
-        <a>Remove from board</a>
+        <a><Icon type="user-delete" /> Remove from board</a>
       </Popconfirm>
     )
   }
@@ -131,6 +139,22 @@ class BoardMembers extends Component {
     return (null)
   }
 
+  renderQuitBoard() {
+    if (this.props.owner.id !== this.props.user.id) {
+      return (
+        <Popconfirm
+          title="Do you really want to quit this board ? You will no longer be able to access it."
+          placement="right"
+          onConfirm={this.quit}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button className="boardContributorQuit" icon="disconnect" size="small" >Quit this board</Button>
+        </Popconfirm>
+      )
+    }
+  }
+
   render() {
     return (
       <div className="boardMembersBlock">
@@ -140,6 +164,7 @@ class BoardMembers extends Component {
           { this.renderContributors() }
         </div>
         { this.renderContributorsSelector() }
+        { this.renderQuitBoard() }
       </div>
     )
   }

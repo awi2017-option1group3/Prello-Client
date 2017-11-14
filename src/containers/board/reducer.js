@@ -2,6 +2,7 @@ import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ALL_LABELS_IN_BOARD, GET_ONE_B
 
 const initialState = {
   title: '',
+  owner: '',
   labels: [],
   isFailed: false,
 }
