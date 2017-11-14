@@ -44,7 +44,8 @@ class UserContainer extends Component {
 
   checkAuth() {
     // Bypass auth checking for page not requiring that
-    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register') {
+    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register'
+      && !this.props.location.pathname.includes('/forgotPassword')) {
       const auth = JSON.parse(localStorage.getItem('auth'))
       // Check if there is an auth in local storage
       if (auth) {

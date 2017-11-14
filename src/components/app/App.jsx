@@ -7,11 +7,13 @@ import moment from 'moment'
 import BoardsContainer from '../../containers/boards/BoardsContainer'
 import LoginContainer from '../../containers/login/LoginContainer'
 import RegisterContainer from '../../containers/register/RegisterContainer'
+import ForgotPasswordContainer from '../../containers/forgotPassword/ForgotPasswordContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
 import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import Navbar from '../navbar/Navbar'
 import { history } from '../../store'
 import './style.css'
+
 
 const { Content } = Layout
 
@@ -51,6 +53,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/login" component={LoginContainer} />
               <Route exact path="/register" component={RegisterContainer} />
+              <Route exact path="/forgotPassword" component={ForgotPasswordContainer} />
+              <Route exact path="/forgotPassword/:token" component={ForgotPasswordContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
               <Route exact path="*" render={this.pageNotFound} />

@@ -37,7 +37,7 @@ class LoginContainer extends Component {
   }
 }
 
-LoginContainer.propsType = {
+LoginContainer.propTypes = {
   token: PropTypes.string.isRequired,
   tokenToRefresh: PropTypes.string.isRequired,
   expiresAt: PropTypes.object.isRequired,

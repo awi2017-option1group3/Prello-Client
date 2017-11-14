@@ -24,6 +24,7 @@ class Navbar extends Component {
 
   renderUser() {
     const showUser = this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register'
+      && !this.props.location.pathname.includes('/forgotPassword')
     return showUser ? (
       <UserContainer />
     ) : (
