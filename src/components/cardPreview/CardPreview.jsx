@@ -1,32 +1,67 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Popover, Icon, Menu, Avatar, Row, Col, Modal as UIModal } from 'antd'
+import { Button, Card as UICard, Dropdown, Icon, Menu, Row, Col, Modal as UIModal } from 'antd'
+import moment from 'moment'
+
 import Modal from '../../commons/modal/Modal'
-import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CardContainer from '../../containers/card/CardContainer'
 import Assignees from '../assignees/Assignees'
-// import LabelsContainer from '../../containers/labels/LabelsContainer'
-import Labels from "../labels/Labels"
-import moment from 'moment'
+import Labels from '../labels/Labels'
+import './style.css'
 
 
-class Card extends Component {
-  state = { visible: false }
+class CardPreview extends Component {
+  constructor(props) {
+    super(props)
+    this.renameCard = this.renameCard.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.state = {
+      visible: false,
+    }
+  }
 
-  getHeader() {
+  renameCard(newTitle) {
+    this.props.saveCardTitle(this.props.id, newTitle)
+    this.props.assignees.forEach((assignee) => {
+      this.props.addNotification(assignee.id, this.props.user.id, ` has changed the card from ${this.props.title} to ${newTitle} in the board `, this.props.boardId)
+    })
+  }
+
+  deleteCard() {
+    this.props.deleteCard(this.props.listId, this.props.id)
+    this.props.assignees.forEach((assignee) => {
+      this.props.addNotification(assignee.id, this.props.user.id, ` has deleted the card ${this.props.title} in the board `, this.props.boardId)
+    })
+  }
+
+  showModal() {
+    this.setState({
+      visible: true,
+    })
+  }
+
+  handleCancel() {
+    this.setState({
+      visible: false,
+    })
+  }
+
+  renderHeader() {
     return (
       <div className="cardHeader">
         <EditField
           text={this.props.title}
-          save={(newTitle) => { this.props.saveCardTitle(this.props.id, newTitle) }}
+          save={this.renameCard}
           hint="A card has no name"
         />
       </div>
     )
   }
 
-  getMenu() {
+  renderMenu() {
     return (
       <Menu>
         <Menu.Item>
@@ -35,16 +70,16 @@ class Card extends Component {
             message={`Are you sure to delete this card named : ${this.props.title} ?`}
             okText={'Delete'}
             cancelText={'Cancel'}
-            handleOk={() => { this.props.deleteCard(this.props.listId, this.props.id) }}
+            handleOk={this.deleteCard}
           />
         </Menu.Item>
       </Menu>
     )
   }
 
-  getDropdown() {
+  renderDropdown() {
     return (
-      <Dropdown overlay={this.getMenu()}>
+      <Dropdown overlay={this.renderMenu()}>
         <Button shape="circle">
           <Icon type="ellipsis" />
         </Button>
@@ -52,23 +87,22 @@ class Card extends Component {
     )
   }
 
-  getLabels() {
-
+  renderLabels() {
     return (
       <Labels cardLabels={this.props.labels} cardId={this.props.id} />
     )
   }
 
-  getDueDate() {
+  renderDueDate() {
     let diff = 10000
     if (this.props.dueComplete !== null) {
-      const dueDate = moment(this.props.dueComplete.slice(0, 10), "YYYY-MM-DD")
+      const dueDate = moment(this.props.dueComplete.slice(0, 10), 'YYYY-MM-DD')
       diff = dueDate.diff(moment(), 'days') + 1
     }
     return (
       <div className="dueCompleteDisplay">
         <span
-          className={this.updateStyle(diff)}
+          className={this.chooseDueDateStyle(diff)}
         >
           <Icon
             type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
@@ -80,19 +114,18 @@ class Card extends Component {
     )
   }
 
-  updateStyle(diffDays) {
+  chooseDueDateStyle(diffDays) {
     const warning = 7
     const urgent = 3
     if (diffDays > warning) {
-      return ""
-    } else if ( diffDays <= warning && diffDays > urgent) {
-      return "dueDateWarning"
-    } else {
-      return "dueDateUrgent"
-    }
+      return ''
+    } else if (diffDays <= warning && diffDays > urgent) {
+      return 'dueDateWarning'
+    } 
+    return 'dueDateUrgent'
   }
 
-  getComments() {
+  renderComments() {
     return (
       <div>
         <span>
@@ -106,39 +139,28 @@ class Card extends Component {
     )
   }
 
-  getAssignees() {
+  renderAssignees() {
     return (
-      <Assignees cardId={this.props.id}
-                 cardResponsible={this.props.cardResponsible}
-                 assignees={this.props.assignees}
-                 maxDisplayedAssignees={2}
-                 target="cardPreview"
+      <Assignees
+        cardId={this.props.id}
+        cardResponsible={this.props.cardResponsible}
+        assignees={this.props.assignees}
+        maxDisplayedAssignees={2}
+        target="cardPreview"
       />
     )
-  }
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    })
-  }
-
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    })
   }
 
   render() {
     return (
       <UICard
-        title={this.getHeader()}
-        extra={this.getDropdown()} 
+        title={this.renderHeader()}
+        extra={this.renderDropdown()}
         {...this.props.dragHandleProps} 
         className="card"
       >
         <div className="topLabels">
-          {this.getLabels()}
+          {this.renderLabels()}
         </div>
         <div onClick={this.showModal}>
           <p>Pos     : {this.props.pos}</p>
@@ -147,16 +169,16 @@ class Card extends Component {
           <p>Desc    : {this.props.desc}</p>
           <Row className="cardFooter">
             <Col span={8}>
-              {this.getDueDate()}
+              {this.renderDueDate()}
             </Col>
             <Col span={3}>
               <div className="commentsDisplay">
-                {this.getComments()}
+                {this.renderComments()}
               </div>
             </Col>
             <Col span={12}>
               <div className="assignees">
-                {this.getAssignees()}
+                {this.renderAssignees()}
               </div>
             </Col>
           </Row>
@@ -176,7 +198,7 @@ class Card extends Component {
   }
 }
 
-Card.defaultProps = {
+CardPreview.defaultProps = {
   labels: [],
   comments: [],
   assignees: [],
@@ -184,7 +206,7 @@ Card.defaultProps = {
   dueComplete: '',
 }
 
-Card.propTypes = {
+CardPreview.propTypes = {
   id: PropTypes.string.isRequired,
   listId: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
@@ -196,10 +218,11 @@ Card.propTypes = {
   comments: PropTypes.array,
   cardResponsible: PropTypes.object,
   assignees: PropTypes.array,
+  user: PropTypes.object.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
-  saveCardDesc: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
 }
 
-export default Card
+export default CardPreview

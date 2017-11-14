@@ -1,0 +1,53 @@
+.notifications {
+    cursor: pointer;
+    margin: auto 10px auto auto;
+}
+
+.notificationsPopover .ant-popover-inner-content {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+
+.notificationsButton {
+    background-color: #0f8ee9;
+}
+
+.notificationsHeader {
+    display: flex;
+}
+
+.notificationsMarkAllAsRead {
+    right: 0;
+    position: absolute;
+    margin-right: 16px;
+}
+
+.notificationsList {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.notificationBox {
+    margin: 10px 0;
+}
+
+.notificationBox.read {
+    background-color: white;
+    border-color: #d9d9d9;
+}
+
+.notificationBox .ant-alert-close-icon {
+    top: 20px;
+}
+
+.notification {
+    display: flex;
+}
+
+.notificationAvatar {
+    margin: auto 10px auto 0;
+}
+
+.notificationMessage {
+    margin: auto auto auto 5px;
+}

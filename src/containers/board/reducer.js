@@ -1,8 +1,11 @@
 import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ALL_LABELS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 const initialState = {
+  id: '',
   title: '',
   labels: [],
+  owner: null,
+  contributors: [],
   isFailed: false,
 }
 

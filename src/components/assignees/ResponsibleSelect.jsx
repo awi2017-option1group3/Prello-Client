@@ -9,23 +9,37 @@ class ResponsibleSelect extends Component {
   constructor(props) {
     super(props)
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this)
-  }
-
-  state = {
-    value: '',
-    placeholder: 'Choose responsible...',
+    this.state = {
+      value: '',
+      placeholder: 'Choose responsible...',
+    }
   }
 
   handleChangeResponsible(value) {
-    const memberId = value.substring(this.props.cardId.length)
+    const memberId = value.substring(this.props.card.id.length)
     if (this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' && this.props.cardResponsible.id === memberId) {
-      this.props.removeResponsibleFromCard(this.props.cardId)
+      this.props.removeResponsibleFromCard(this.props.card.id)
+      if (memberId !== this.props.user.id) {
+        // Notify the user involved
+        this.props.addNotification(memberId, this.props.user.id, ` has removed you from the card ${this.props.card.title} in the board `, this.props.boardId)
+        // Notify the card assignees about responsible update
+        this.props.assignees.forEach((assignee) => {
+          this.props.addNotification(assignee.id, memberId, ` is no longer responsible for the card ${this.props.card.title} in the board `, this.props.boardId)
+        })
+      }
     } else {
-      this.props.addResponsibleToCard(this.props.cardId, memberId)
+      this.props.addResponsibleToCard(this.props.card.id, memberId)
+      if (memberId !== this.props.user.id) {
+        // Notify the user involved
+        this.props.addNotification(memberId, this.props.user.id, ` has added you as responsible of the card ${this.props.card.title} in the board `, this.props.boardId)
+        // Notify the card assignees about responsible update
+        this.props.assignees.forEach((assignee) => {
+          this.props.addNotification(assignee.id, memberId, ` is the new responsible of the card ${this.props.card.title} in the board `, this.props.boardId)
+        })
+      }
     }
     this.setState({
-      // value: '',
-      placeholder: 'Choose responsible...'
+      placeholder: 'Choose responsible...',
     })
   }
 
@@ -39,23 +53,22 @@ class ResponsibleSelect extends Component {
         value={this.state.value}
         tokenSeparators={[',']}
       >
-        { this.props.allUsers.map(user => <Option key={this.props.cardId + user.id}>{ user.fullName }</Option>) }
+        { this.props.allUsers.map(user => <Option key={this.props.card.id + user.id}>{ user.fullName }</Option>) }
       </Select>
     )
   }
 }
-/*
-ResponsibleSelect.defaultProps = {
-  cardResponsible: null,
-}
-*/
 
 ResponsibleSelect.propTypes = {
-  cardId: PropTypes.string.isRequired,
+  card: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  boardId: PropTypes.string.isRequired,
   allUsers: PropTypes.array.isRequired,
   cardResponsible: PropTypes.object.isRequired,
+  assignees: PropTypes.array.isRequired,
   addResponsibleToCard: PropTypes.func.isRequired,
   removeResponsibleFromCard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default ResponsibleSelect

@@ -12,11 +12,13 @@ class AssigneesSelect extends Component {
   }
 
   handleChangeAssignee(value) {
-    const memberId = value.substring(this.props.cardId.length)
+    const memberId = value.substring(this.props.card.id.length)
     if (this.props.assignees.map(element => element.id).includes(memberId) === true) {
-      this.props.removeAssigneeFromCard(this.props.cardId, memberId)
+      this.props.removeAssigneeFromCard(this.props.card.id, memberId)
+      this.props.addNotification(memberId, this.props.user.id, ` has removed you from the card ${this.props.card.title} in the board `, this.props.boardId)
     } else {
-      this.props.addAssigneeToCard(this.props.cardId, memberId)
+      this.props.addAssigneeToCard(this.props.card.id, memberId)
+      this.props.addNotification(memberId, this.props.user.id, ` has added you as assignee of the card ${this.props.card.title} in the board `, this.props.boardId)
     }
   }
 
@@ -29,18 +31,21 @@ class AssigneesSelect extends Component {
         style={{ width: '100%' }}
         tokenSeparators={[',']}
       >
-        { this.props.allUsers.map(user => <Option key={this.props.cardId + user.id}>{ user.fullName }</Option>) }
+        { this.props.allUsers.map(user => <Option key={this.props.card.id + user.id}>{ user.fullName }</Option>) }
       </Select>
     )
   }
 }
 
 AssigneesSelect.propTypes = {
-  cardId: PropTypes.string.isRequired,
+  card: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  boardId: PropTypes.string.isRequired,
   allUsers: PropTypes.array.isRequired,
   assignees: PropTypes.array.isRequired,
   addAssigneeToCard: PropTypes.func.isRequired,
   removeAssigneeFromCard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default AssigneesSelect

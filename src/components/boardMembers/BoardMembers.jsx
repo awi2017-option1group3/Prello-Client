@@ -29,10 +29,12 @@ class BoardMembers extends Component {
       searchUserToInviteValue: '',
     })
     this.props.addContributorToBoard(userId, this.props.boardId)
+    this.props.addNotification(userId, this.props.user.id, ' has added you to the board ', this.props.boardId)
   }
 
   remove(userId) {
     this.props.removeContributorFromBoard(userId, this.props.boardId)
+    this.props.addNotification(userId, this.props.user.id, ' has removed you from the board ', this.props.boardId)
   }
 
   renderMessage() {
@@ -153,6 +155,7 @@ BoardMembers.propTypes = {
   contributors: PropTypes.array.isRequired,
   addContributorToBoard: PropTypes.func.isRequired,
   removeContributorFromBoard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default BoardMembers

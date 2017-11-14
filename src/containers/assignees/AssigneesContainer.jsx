@@ -10,8 +10,8 @@ import ResponsibleSelect from '../../components/assignees/ResponsibleSelect'
 
 class AssigneesContainer extends Component {
   componentWillMount() {
-    this.props.getAllAssigneesInCard(this.props.cardId)
-    this.props.getResponsibleForCard(this.props.cardId)
+    this.props.getAllAssigneesInCard(this.props.card.id)
+    this.props.getResponsibleForCard(this.props.card.id)
   }
 
   render() {
@@ -20,7 +20,7 @@ class AssigneesContainer extends Component {
         <Row>
           {this.props.displayAssignees ? (
             <Col span={11}>
-              <Assignees {...this.props} maxDisplayedAssignees={2} />
+              <Assignees {...this.props} cardId={this.props.card.id} maxDisplayedAssignees={2} />
             </Col>
           ) : (
             <Col span={0} />
@@ -54,7 +54,7 @@ AssigneesContainer.defaultProps = {
 }
 
 AssigneesContainer.propTypes = {
-  cardId: PropTypes.string.isRequired,
+  card: PropTypes.object.isRequired,
   getAllAssigneesInCard: PropTypes.func.isRequired,
   getResponsibleForCard: PropTypes.func.isRequired,
   displayAssignees: PropTypes.bool.isRequired,

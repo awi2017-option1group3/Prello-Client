@@ -1,31 +1,38 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import loginReducer from './containers/login/reducer'
+import usersReducer from './containers/users/reducer'
 import userReducer from './containers/user/reducer'
+import loginReducer from './containers/login/reducer'
+import registerReducer from './containers/register/reducer'
+import notificationsReducer from './containers/notifications/reducer'
 import boardsReducer from './containers/boards/reducer'
 import boardReducer from './containers/board/reducer'
 import boardMembersReducer from './containers/boardMembers/reducer'
 import listsReducer from './containers/lists/reducer'
-import labelsReducer from './containers/labels/reducer'
-import usersReducer from './containers/users/reducer'
 import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
 import assigneesReducer from './containers/assignees/reducer'
-import registerReducer from './containers/register/reducer'
+import labelsReducer from './containers/labels/reducer'
 
 export default combineReducers({
   router: routerReducer,
-  login: loginReducer,
+
+  users: usersReducer,
   user: userReducer,
+  login: loginReducer,
+  register: registerReducer,
+  notifications: notificationsReducer,
+
   boards: boardsReducer,
   currentBoard: boardReducer,
   boardMembers: boardMembersReducer,
+
   lists: listsReducer,
+
   cards: cardsReducer,
-  labels: labelsReducer,
-  users: usersReducer,
   currentCard: cardReducer,
-  cardAssignees: assigneesReducer,
   currentCardLabels: labelsReducer,
-  register: registerReducer,
+  cardAssignees: assigneesReducer,
+
+  labels: labelsReducer,
 })
