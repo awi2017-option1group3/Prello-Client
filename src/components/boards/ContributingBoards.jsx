@@ -25,7 +25,7 @@ const ContributingBoards = props => (
             <Row>
               {props.boards.data.sort((a, b) => a.title > b.title).map(board => (
                 <Col xs={12} sm={6} md={4} lg={3} key={board.id}>
-                  <BoardPreview {...board} allowDeleting={false} />
+                  <BoardPreview {...board} allowDeleting={false} addNotification={props.addNotification} />
                 </Col>
               ))}
             </Row>
@@ -40,6 +40,7 @@ const ContributingBoards = props => (
 
 ContributingBoards.propTypes = {
   boards: PropTypes.object.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default ContributingBoards

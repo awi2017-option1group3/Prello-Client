@@ -16,8 +16,10 @@ const Cards = props => (
             {...card}
             key={card.id}
             boardId={props.boardId}
+            user={props.user}
             deleteCard={props.deleteCard}
             saveCardTitle={props.saveCardTitle}
+            addNotification={props.addNotification}
             saveCardDesc={props.saveCardDesc}
             updateOneCardPopulated={props.updateOneCardPopulated}
           />
@@ -47,12 +49,15 @@ Cards.propTypes = {
   listId: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
   cards: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
   droppableProvided: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
   addCard: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
   saveCardTitle: PropTypes.func.isRequired,
+  saveCardDesc: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
   updateOneCardPopulated: PropTypes.func.isRequired,
 }
 

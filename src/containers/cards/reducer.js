@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_ONE_CARD_POPULATED}_SUCCESS`:
       return {
         ...state,
-        data: state.data.map(card => (card.id === action.meta.previousAction.cardId) ? action.payload.data : card),
+        data: state.data.map(card => ((card.id === action.meta.previousAction.cardId) ? action.payload.data : card)),
       }
     case `${GET_ALL_CARDS_IN_LIST}_FAIL`:
       return {
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
     case `${SAVE_CARD_POS}_SUCCESS`:
       return {
         ...state,
-        data: state.data.map(card => (card.id === action.meta.previousAction.cardId) ? action.payload.data : card),
+        data: state.data.map(card => ((card.id === action.meta.previousAction.cardId) ? action.payload.data : card)),
       }
     default:
       return state
