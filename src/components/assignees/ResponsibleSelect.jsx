@@ -43,16 +43,14 @@ class ResponsibleSelect extends Component {
   }
 
   render() {
-    return this.props.responsible ? (
-      <Select
-        className="cardResponsible"
-        placeholder={this.state.placeholder}
-        onChange={this.handleChangeResponsible}
-        tokenSeparators={[',']}
-      >
-        { this.props.allUsers.map(user => <Option key={this.props.card.id + user.id}>{ user.fullName }</Option>) }
-      </Select>
-    ) : (null)
+    return (<Select
+      className="cardResponsible"
+      placeholder={this.state.placeholder}
+      onChange={this.handleChangeResponsible}
+      tokenSeparators={[',']}
+    >
+      { this.props.allUsers.map(user => <Option key={this.props.card.id + user.id}>{ user.fullName }</Option>) }
+    </Select>)
   }
 }
 
