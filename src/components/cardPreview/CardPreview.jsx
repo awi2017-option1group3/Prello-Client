@@ -158,7 +158,7 @@ class CardPreview extends Component {
         .map(taskList => taskList.tasks.length)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const done = this.props.taskLists
-        .map(taskList => taskList.tasks===
+        .map(taskList => taskList.tasks
           .map(task => task.done ? 1 : 0)
           .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
         )
