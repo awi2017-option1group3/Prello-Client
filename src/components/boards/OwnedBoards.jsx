@@ -25,7 +25,7 @@ const OwnedBoards = props => (
           <Row>
             {props.boards.data.sort((a, b) => a.title > b.title).map(board => (
               <Col xs={12} sm={6} md={4} lg={3} key={board.id}>
-                <BoardPreview {...board} deleteBoard={props.deleteBoard} />
+                <BoardPreview {...board} deleteBoard={props.deleteBoard} addNotification={props.addNotification} />
               </Col>
             ))}
             <Col xs={12} sm={6} md={4} lg={3}>
@@ -52,6 +52,7 @@ OwnedBoards.propTypes = {
   user: PropTypes.object.isRequired,
   addBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default OwnedBoards

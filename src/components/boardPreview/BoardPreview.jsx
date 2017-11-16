@@ -7,7 +7,19 @@ import Modal from '../../commons/modal/Modal'
 import './style.css'
 
 class BoardPreview extends Component {
-  getMenu() {
+  constructor(props) {
+    super(props)
+    this.deleteBoard = this.deleteBoard.bind(this)
+  }
+
+  deleteBoard() {
+    this.props.deleteBoard(this.props.id)
+    this.props.contributors.forEach((contributorId) => {
+      this.props.addNotification(contributorId, this.props.owner, ` has deleted the board ${this.props.title}`, this.props.id)
+    })
+  }
+
+  renderMenu() {
     return (
       <Menu>
         <Menu.Item>
@@ -16,16 +28,16 @@ class BoardPreview extends Component {
             message={`Are you sure to delete the board named : ${this.props.title} ? All lists, cards and contributors will be removed !`}
             okText={'Delete'}
             cancelText={'Cancel'}
-            handleOk={() => { this.props.deleteBoard(this.props.id) }}
+            handleOk={this.deleteBoard}
           />
         </Menu.Item>
       </Menu>
     )
   }
   
-  getDropdown() {
+  renderDropdown() {
     return this.props.allowDeleting ? (
-      <Dropdown overlay={this.getMenu()}>
+      <Dropdown overlay={this.renderMenu()}>
         <Button shape="circle">
           <Icon type="ellipsis" />
         </Button>
@@ -39,7 +51,7 @@ class BoardPreview extends Component {
         to={`/boards/${this.props.id}`}
         className="boardLink"
       >
-        <UICard title={this.props.title} extra={this.getDropdown()} className="boardPreview" />
+        <UICard title={this.props.title} extra={this.renderDropdown()} className="boardPreview" />
       </Link>
     )
   }
@@ -53,8 +65,11 @@ BoardPreview.defaultProps = {
 BoardPreview.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  contributors: PropTypes.array.isRequired, // Array of ids
+  owner: PropTypes.string.isRequired, // An id
   allowDeleting: PropTypes.bool,
   deleteBoard: PropTypes.func,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default BoardPreview

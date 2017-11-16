@@ -9,7 +9,6 @@ import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
 
 const { Content } = Layout
 
-
 class Card extends Component {
   constructor(props) {
     super(props)
@@ -20,11 +19,14 @@ class Card extends Component {
   getAssignees() {
     return (
       <AssigneesContainer
-        cardId={this.props.id}
+        card={this.props.card}
+        user={this.props.user}
+        boardId={this.props.boardId}
         target="cardDetails"
         displayAssignees
         displaySelectAssignees
         displaySelectResponsible
+        addNotification={this.props.addNotification}
       />
     )
   }
@@ -68,6 +70,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
   card: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
   boardLabels: PropTypes.array.isRequired,
   addComment: PropTypes.func.isRequired,
@@ -75,6 +78,7 @@ Card.propTypes = {
   updateDueDate: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
   getOneUser: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default Card

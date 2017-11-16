@@ -18,12 +18,12 @@ class User extends Component {
       <div className="user">
         <Popover
           content={this.renderContent()}
-          title={this.props.user.infos.fullName}
+          title={(<h3>{this.props.user.infos.fullName}</h3>)}
           trigger="click"
           placement="bottomLeft"
         >
           <div>
-            <Avatar className="userAvatar" size="large" >{this.props.user.infos.initials.toUpperCase()}</Avatar>
+            <Avatar className="userAvatar" >{this.props.user.infos.initials.toUpperCase()}</Avatar>
             <Icon className="userDropdownIcon" type="down" />
           </div>
         </Popover>

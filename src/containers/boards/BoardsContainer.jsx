@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getOwnedBoardsForUser, getContributingBoardsForUser, addBoard, deleteBoard } from './actions'
+import { addNotification } from '../notifications/actions'
 import OwnedBoards from '../../components/boards/OwnedBoards'
 import ContributingBoards from '../../components/boards/ContributingBoards'
 
@@ -51,6 +52,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getContributingBoardsForUser,
   addBoard,
   deleteBoard,
+  addNotification,
 }, dispatch)
 
 export default connect(

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { getBoardOwner, getBoardContributors, addContributorToBoard, removeContributorFromBoard } from './actions'
 import { getAllUsers } from '../users/actions'
+import { addNotification } from '../notifications/actions'
 import BoardMembers from '../../components/boardMembers/BoardMembers'
 
 class BoardMembersContainer extends Component {
@@ -49,6 +50,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addContributorToBoard,
   removeContributorFromBoard,
   getAllUsers,
+  addNotification,
 }, dispatch)
 
 export default connect(
