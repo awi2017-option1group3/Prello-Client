@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Spin } from 'antd'
+
 import DraggableCard from '../cardPreview/DraggableCard'
 import Loader from '../../commons/loader/Loader'
-import './style.css'
 import CreateWithName from '../../commons/createWithName/CreateWithName'
+import './style.css'
 
 class Cards extends Component {
   constructor(props) {
@@ -58,10 +59,12 @@ class Cards extends Component {
                 {...card}
                 key={card.id}
                 boardId={this.props.boardId}
+                user={this.props.user}
                 deleteCard={this.props.deleteCard}
                 saveCardTitle={this.props.saveCardTitle}
                 saveCardDesc={this.props.saveCardDesc}
                 updateOneCardPopulated={this.props.updateOneCardPopulated}
+                addNotification={this.props.addNotification}
               />
             ))}
             { this.props.droppableProvided.placeholder }

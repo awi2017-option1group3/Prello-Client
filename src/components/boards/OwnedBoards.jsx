@@ -67,7 +67,7 @@ class OwnedBoards extends Component {
               <Row>
                 {this.props.boards.data.sort((a, b) => a.title > b.title).map(board => (
                   <Col xs={12} sm={6} md={4} lg={3} key={board.id}>
-                    <BoardPreview {...board} deleteBoard={this.props.deleteBoard} />
+                    <BoardPreview {...board} deleteBoard={this.props.deleteBoard} addNotification={this.props.addNotification} />
                   </Col>
                 ))}
                 <Col xs={12} sm={6} md={4} lg={3}>

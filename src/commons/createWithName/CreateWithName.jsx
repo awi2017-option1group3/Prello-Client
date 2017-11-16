@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Button } from 'antd'
 
-const ButtonGroup = Button.Group
+import './style.css'
 
 class CreateWithName extends Component {
   constructor(props) {
@@ -33,14 +33,13 @@ class CreateWithName extends Component {
     return (
       <div>
         <Input
+          className="entityNameInput"
           value={this.state.title}
           onChange={this.onChangeTitle}
           onMouseDown={e => e.stopPropagation()}
         />
-        <ButtonGroup>
-          <Button type="primary" onClick={this.saveChange}>Ok</Button>
-          <Button onClick={this.props.cancel}>Cancel</Button>
-        </ButtonGroup>
+        <Button className="entityNameValidation" type="primary" onClick={this.saveChange}>Ok</Button>
+        <Button onClick={this.props.cancel}>Cancel</Button>
       </div>
     )
   }
