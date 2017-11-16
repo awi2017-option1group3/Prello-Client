@@ -15,8 +15,8 @@ class EditField extends Component {
     this.saveChange = this.saveChange.bind(this)
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState({text: nextProps.text})
+  componentWillReceiveProps(nextProps) {
+    this.setState({ text: nextProps.text })
   }
 
   onChangeText(e) {

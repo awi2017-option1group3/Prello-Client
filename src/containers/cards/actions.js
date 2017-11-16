@@ -32,7 +32,7 @@ export const updateOneCardPopulated = cardId => (dispatch) => {
   })
 }
 
-export const addCard = (listId, lastCardPos) => (dispatch) => {
+export const addCard = (listId, lastCardPos, title) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
     listId,
@@ -41,7 +41,7 @@ export const addCard = (listId, lastCardPos) => (dispatch) => {
         method: 'POST',
         url: `/api/lists/${listId}/cards`,
         data: {
-          title: 'New card',
+          title: title,
           pos: (lastCardPos || 0) + 1,
         },
       },

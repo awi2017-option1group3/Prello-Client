@@ -18,7 +18,7 @@ export const getAllListsInBoard = boardId => (dispatch) => {
   })
 }
 
-export const addList = (boardId, lastPos) => (dispatch) => {
+export const addList = (boardId, lastPos, title) => (dispatch) => {
   dispatch({
     type: ADD_LIST,
     payload: {
@@ -26,7 +26,7 @@ export const addList = (boardId, lastPos) => (dispatch) => {
         method: 'POST',
         url: `/api/boards/${boardId}/lists`,
         data: {
-          title: 'New list',
+          title: title,
           pos: (lastPos || 0) + 1,
         },
       },

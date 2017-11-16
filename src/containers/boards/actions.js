@@ -30,7 +30,7 @@ export const getContributingBoardsForUser = userId => (dispatch) => {
   })
 }
 
-export const addBoard = userId => (dispatch) => {
+export const addBoard = (userId, title) => (dispatch) => {
   dispatch({
     type: ADD_BOARD,
     payload: {
@@ -38,7 +38,7 @@ export const addBoard = userId => (dispatch) => {
         method: 'POST',
         url: `/api/users/${userId}/boards/`,
         data: {
-          title: 'New board',
+          title: title,
         },
       },
     },
