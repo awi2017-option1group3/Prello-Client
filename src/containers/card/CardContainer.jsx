@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
   getOneCard, getAllCommentsInCard,
-  addComment, updateDesc, updateDueDate } from './actions'
+  addComment, addAttachment, updateDesc, updateDueDate } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
 import { addNotification } from '../notifications/actions'
 import Card from '../../components/card/Card'
@@ -50,6 +50,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getOneCard,
   getAllCommentsInCard,
   addComment,
+  addAttachment,
   updateDesc,
   updateDueDate,
   getOneUser,
