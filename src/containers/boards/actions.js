@@ -1,4 +1,4 @@
-import { CLEAN_STATE, GET_OWNED_BOARDS_FOR_USER, GET_CONTRIBUTING_BOARDS_FOR_USER, ADD_BOARD, DELETE_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_BOARDS_FOR_USER, ADD_BOARD, DELETE_BOARD } from './constants'
 
 export const cleanState = () => (dispatch) => {
   dispatch({
@@ -6,25 +6,13 @@ export const cleanState = () => (dispatch) => {
   })
 }
 
-export const getOwnedBoardsForUser = userId => (dispatch) => {
+export const getAllBoardsForUser = userId => (dispatch) => {
   dispatch({
-    type: GET_OWNED_BOARDS_FOR_USER,
+    type: GET_ALL_BOARDS_FOR_USER,
     payload: {
       request: {
         method: 'GET',
         url: `/api/users/${userId}/boards`,
-      },
-    },
-  })
-}
-
-export const getContributingBoardsForUser = userId => (dispatch) => {
-  dispatch({
-    type: GET_CONTRIBUTING_BOARDS_FOR_USER,
-    payload: {
-      request: {
-        method: 'GET',
-        url: `/api/users/${userId}/contributingBoards`,
       },
     },
   })

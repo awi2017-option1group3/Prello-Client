@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
-  getOneCard, getAllCommentsInCard,
-  addComment, updateDesc, updateDueDate } from './actions'
+  getOneCard, getAllAssigneesInCard, getAllCommentsInCard, getAllLabelsInCard, getResponsibleForCard,
+  addComment, addLabel, addAssignee, addResponsible,
+  updateDesc, updateDueDate,
+  removeAssigneeInCard, removeLabelInCard } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
 import { getAllLabelsForBoard } from '../labels/actions'
 import { addAttachment } from '../attachments/actions'
-import { addNotification } from '../notifications/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {
@@ -16,41 +17,46 @@ class CardContainer extends Component {
     this.props.cleanCardState()
     this.props.getOneCard(this.props.id)
     this.props.getAllUsers()
+    this.props.getAllLabelsForBoard(this.props.boardId)
+    this.props.getAllAssigneesInCard(this.props.id)
+    this.props.getAllCommentsInCard(this.props.id)
+    this.props.getAllLabelsInCard(this.props.id)
+    this.props.getResponsibleForCard(this.props.id)
   }
 
   render() {
-    return this.props.card && this.props.card.id && this.props.user ? (
+    return (
       <Card {...this.props} />
-    ) : (null)
+    )
   }
-}
-
-CardContainer.defaultProps = {
-  card: null,
-  user: null,
 }
 
 CardContainer.propTypes = {
   id: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
-  card: PropTypes.object,
-  user: PropTypes.object,
   cleanCardState: PropTypes.func.isRequired,
   getOneCard: PropTypes.func.isRequired,
+  getAllAssigneesInCard: PropTypes.func.isRequired,
+  getAllCommentsInCard: PropTypes.func.isRequired,
+  getAllLabelsInCard: PropTypes.func.isRequired,
+  getResponsibleForCard: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
+  getAllLabelsForBoard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   card: state.currentCard,
   users: state.users.data,
-  user: state.user.infos,
-  boardLabels: state.currentBoard.labels,
+  labels: state.labels.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   cleanCardState,
   getOneCard,
+  getAllAssigneesInCard,
   getAllCommentsInCard,
+  getAllLabelsInCard,
+  getResponsibleForCard,
   addComment,
   addLabel,
   addAssignee,
@@ -58,9 +64,11 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addAttachment,
   updateDesc,
   updateDueDate,
-  getOneUser,
+  removeAssigneeInCard,
+  removeLabelInCard,
   getAllUsers,
-  addNotification,
+  getOneUser,
+  getAllLabelsForBoard,
 }, dispatch)
 
 export default connect(
