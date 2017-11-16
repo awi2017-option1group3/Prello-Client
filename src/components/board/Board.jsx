@@ -23,7 +23,7 @@ class Board extends Component {
           {this.getHeader()}
         </div>
         <ListsContainer boardId={this.props.boardId} />
-    </div>
+      </div>
     )
   }
 }
