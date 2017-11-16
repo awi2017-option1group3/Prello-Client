@@ -3,7 +3,13 @@ import moment from 'moment'
 import { CLEAN_STATE, GET_ONE_USER_BY_TOKEN, REFRESH_TOKEN, SET_TOKEN } from './constants'
 
 const initialState = {
-  infos: null,
+  infos: {
+    id: '',
+    email: '',
+    fullName: '',
+    initials: '',
+    username: '',
+  },
   auth: {
     token: '',
     tokenToRefresh: '',

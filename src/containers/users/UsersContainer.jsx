@@ -2,28 +2,31 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { cleanState as cleanUserState, getAllLabelsForBoard } from './actions'
+import { cleanState as cleanUserState, getOneUser, getAllUsers } from './actions'
 
-class LabelsContainer extends Component {
+class UsersContainer extends Component {
   componentWillMount() {
     this.props.cleanUserState()
+    // this.props.getAllUsers()
   }
 }
 
-LabelsContainer.propTypes = {
+UsersContainer.propTypes = {
   cleanUserState: PropTypes.func.isRequired,
+  // getAllUsers: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  labels: state.data,
+  users: state.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   cleanUserState,
-  getAllLabelsForBoard,
+  getOneUser,
+  getAllUsers,
 }, dispatch)
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LabelsContainer)
+)(UsersContainer)

@@ -1,4 +1,4 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, UPDATE_ONE_CARD_POPULATED, SAVE_CARD_POS } from './constants'
+import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, SAVE_CARD_POS } from './constants'
 
 const initialState = {
   data: [],
@@ -42,11 +42,6 @@ export default (state = initialState, action) => {
         data: state.data.concat(action.payload.data),
         isFetchingListIds: state.isFetchingListIds.filter(id => id !== action.meta.previousAction.listId),
       }
-    case `${UPDATE_ONE_CARD_POPULATED}_SUCCESS`:
-      return {
-        ...state,
-        data: state.data.map(card => ((card.id === action.meta.previousAction.cardId) ? action.payload.data : card)),
-      }
     case `${GET_ALL_CARDS_IN_LIST}_FAIL`:
       return {
         ...state,
@@ -55,7 +50,7 @@ export default (state = initialState, action) => {
     case `${SAVE_CARD_POS}_SUCCESS`:
       return {
         ...state,
-        data: state.data.map(card => ((card.id === action.meta.previousAction.cardId) ? action.payload.data : card)),
+        data: state.data.map(card => (card.id === action.meta.previousAction.cardId) ? action.payload.data : card),
       }
     default:
       return state

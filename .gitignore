@@ -32,3 +32,4 @@ chrome-user-data
 *react*min*.js
 !src/node_modules
 /.env
+/package-lock.json

@@ -1,32 +1,13 @@
 .boardsContent {
     padding: 0 10ch;
-    margin-top: 20px;
-}
-
-.boardsTitle {
-    margin: 10px;
-}
-
-.boardsTitle i {
-    margin-right: 10px;
-}
-
-.boardsTitleInfo {
-    color: #aaa;
-    font-size: large;
-    margin-left: 10px;
 }
   
 .addBoardBlock {
-    margin: 10px 10px 0 10px;
+    margin: 13px 10px 0 10px;
 }
 
 .addBoardButton {
-    height: 50px;
     opacity: 0.5;
     width: 100%;
 }
 
-.noContributingBoards {
-    margin: 20px 10px 10px;
-}

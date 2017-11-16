@@ -44,8 +44,7 @@ class UserContainer extends Component {
 
   checkAuth() {
     // Bypass auth checking for page not requiring that
-    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register'
-      && !this.props.location.pathname.includes('/forgotPassword')) {
+    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register') {
       const auth = JSON.parse(localStorage.getItem('auth'))
       // Check if there is an auth in local storage
       if (auth) {
@@ -53,7 +52,7 @@ class UserContainer extends Component {
         if (moment().isAfter(auth.expiresAt)) {
           localStorage.removeItem('auth')
           this.props.refreshToken(auth.tokenToRefresh)
-        } else if (!this.props.user.infos) { // Fetch user if infos not already known
+        } else if (!this.props.user.infos.id) { // Fetch user if not already known
           this.props.getOneUserByToken(auth.token)
         }
       } else {
@@ -63,7 +62,7 @@ class UserContainer extends Component {
   }
 
   render() {
-    return this.props.user.infos ? (<User {...this.props} onLogOut={this.onLogOut} />) : (null)
+    return (<User {...this.props} onLogOut={this.onLogOut} />)
   }
 }
 
