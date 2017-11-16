@@ -1,8 +1,12 @@
-import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ONE_BOARD } from './constants'
+import { CLEAN_STATE, GET_ALL_LISTS_IN_BOARD, GET_ALL_LABELS_IN_BOARD, GET_ONE_BOARD } from './constants'
 
 const initialState = {
+  id: '',
   title: '',
-  isFailed: false,
+  labels: [],
+  owner: null,
+  contributors: [],
+  hasFailed: false,
 }
 
 export default (state = initialState, action) => {
@@ -16,13 +20,13 @@ export default (state = initialState, action) => {
     case `${GET_ALL_LISTS_IN_BOARD}_SUCCESS`:
       return {
         ...state,
-        isFailed: false,
+        hasFailed: false,
         ...action.payload.data,
       }
     case `${GET_ALL_LISTS_IN_BOARD}_FAIL`:
       return {
         ...state,
-        isFailed: true,
+        hasFailed: true,
       }
     case GET_ONE_BOARD:
       return {
@@ -31,13 +35,18 @@ export default (state = initialState, action) => {
     case `${GET_ONE_BOARD}_SUCCESS`:
       return {
         ...state,
-        isFailed: false,
+        hasFailed: false,
         ...action.payload.data,
       }
     case `${GET_ONE_BOARD}_FAIL`:
       return {
         ...state,
-        isFailed: true,
+        hasFailed: true,
+      }
+    case `${GET_ALL_LABELS_IN_BOARD}_SUCCESS`:
+      return {
+        ...state,
+        labels: action.payload.data,
       }
     default:
       return state

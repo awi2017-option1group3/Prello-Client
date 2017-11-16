@@ -1,10 +1,17 @@
-.user {
+.user, .user div {
     display: flex;
+    cursor: pointer;
 }
 
 .userAvatar {
-    margin: auto;
     background-color: #0f8ee9;
+    margin: auto;
+}
+
+.userDropdownIcon {
+    color: white;
+    font-size: 16px!important;
+    margin: auto auto auto 5px;
 }
 
 .userLogoutButton {
