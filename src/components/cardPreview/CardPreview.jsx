@@ -206,7 +206,7 @@ class CardPreview extends Component {
           <Row className="cardFooter">
             { this.props.dueComplete !== '' ? (
               <Col span={8}>
-                {this.getDueDate()}
+                {this.renderDueDate()}
               </Col>
             ) : (null)
             }
