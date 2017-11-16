@@ -152,6 +152,41 @@ class CardPreview extends Component {
     )
   }
 
+  renderTaskListsCompleted() {
+    if (this.props.taskLists.length > 0){
+      const total = this.props.taskLists
+        .map(taskList => taskList.tasks.length)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      const done = this.props.taskLists
+        .map(taskList => taskList.tasks===
+          .map(task => task.done ? 1 : 0)
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+        )
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      const display = `${done} / ${total}`
+      return (
+        <div className={ done/total === 1 ? "taskCompleted" : "taskUncompleted"}>
+          <span>
+            <Icon type="check-square-o" /> {display}
+          </span>
+        </div>
+      )
+    }
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false,
+    })
+    this.props.updateOneCardPopulated(this.props.id)
+  }
+
   render() {
     return (
       <UICard
@@ -169,14 +204,30 @@ class CardPreview extends Component {
           <p>ID      : {this.props.id}</p>
           <p>Desc    : {this.props.desc}</p>
           <Row className="cardFooter">
-            <Col span={8}>
-              {this.renderDueDate()}
-            </Col>
-            <Col span={3}>
-              <div className="commentsDisplay">
-                {this.renderComments()}
-              </div>
-            </Col>
+            { this.props.dueComplete !== '' ? (
+              <Col span={8}>
+                {this.getDueDate()}
+              </Col>
+            ) : (null)
+            }
+            {
+              typeof this.props.commments !== 'undefined' && this.props.commments.length > 0 ? (
+                <Col span={3}>
+                  <div className="commentsDisplay">
+                    {this.getComments()}
+                  </div>
+                </Col>
+              ) : (null)
+            }
+            {
+              this.props.taskLists.length > 0 ? (
+                <Col span={5}>
+                  <div className="taskListsDisplay">
+                    {this.renderTaskListsCompleted()}
+                  </div>
+                </Col>
+              ) : (null)
+            }
             <Col span={12}>
               <div className="assignees">
                 {this.renderAssignees()}
@@ -203,6 +254,7 @@ CardPreview.defaultProps = {
   labels: [],
   comments: [],
   assignees: [],
+  taskLists: [],
   responsible: {},
   dueComplete: '',
 }
@@ -217,6 +269,7 @@ CardPreview.propTypes = {
   dueComplete: PropTypes.string,
   labels: PropTypes.array,
   comments: PropTypes.array,
+  taskLists: PropTypes.array,
   responsible: PropTypes.object,
   assignees: PropTypes.array,
   user: PropTypes.object.isRequired,
