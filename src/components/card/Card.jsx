@@ -6,12 +6,13 @@ import { Layout, Button, Select } from 'antd'
 import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
 import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
+import LabelsContainer from '../../containers/labels/LabelsContainer'
+import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
 
 const { Sider, Content } = Layout
 
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 const Option = Select.Option
-
 
 class Card extends Component {
   constructor(props) {
@@ -19,24 +20,30 @@ class Card extends Component {
     this.handleChangeAssignee = this.handleChangeAssignee.bind(this)
     this.handleChangeLabels = this.handleChangeLabels.bind(this)
     this.handleChangeGooglePicker = this.handleChangeGooglePicker.bind(this)
+    this.getLabels = this.getLabels.bind(this)
+    this.getAssignees = this.getAssignees.bind(this)
+
   }
 
-  handleChangeAssignee(value) {
-    const memberId = value[value.length - 1].slice(this.props.id.length, value.toString().length)
-    if (this.props.card.assignees.map(element => element.id).includes(memberId) === true) {
-      this.props.removeAssigneeInCard(this.props.card.id, memberId)
-    } else {
-      this.props.addAssignee(this.props.card.id, memberId)
-    }
+  getAssignees() {
+    return (
+      <AssigneesContainer
+        card={this.props.card}
+        user={this.props.user}
+        boardId={this.props.boardId}
+        target="cardDetails"
+        displayAssignees
+        displaySelectAssignees
+        displaySelectResponsible
+        addNotification={this.props.addNotification}
+      />
+    )
   }
 
-  handleChangeLabels(value) {
-    const labelId = value[value.length - 1].slice(this.props.id.length, value.toString().length)
-    if (this.props.card.labels.map(element => element.id).includes(labelId) === true) {
-      this.props.removeLabelInCard(this.props.card.id, labelId)
-    } else {
-      this.props.addLabel(this.props.card.id, labelId)
-    }
+  getLabels() {
+    return (
+      <LabelsContainer cardId={this.props.id} displayLabels displaySelect />
+    )
   }
 
   handleChangeGooglePicker(value) {
@@ -113,7 +120,6 @@ class Card extends Component {
             </Sider>
           </Layout>
         </Layout>
-
       </div>
     )
   }
@@ -121,10 +127,11 @@ class Card extends Component {
 
 Card.propTypes = {
   id: PropTypes.string.isRequired,
+  boardId: PropTypes.string.isRequired,
   card: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   users: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired,
-  getResponsibleForCard: PropTypes.func.isRequired,
+  boardLabels: PropTypes.array.isRequired,
   addComment: PropTypes.func.isRequired,
   addLabel: PropTypes.func.isRequired,
   addAssignee: PropTypes.func.isRequired,
@@ -134,8 +141,7 @@ Card.propTypes = {
   updateDueDate: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
   getOneUser: PropTypes.func.isRequired,
-  removeAssigneeInCard: PropTypes.func.isRequired,
-  removeLabelInCard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default Card

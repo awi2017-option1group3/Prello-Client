@@ -1,3 +1,7 @@
 .boardPreview {
     margin: 10px;
 }
+
+.boardPreview .ant-card-body {
+    padding: 0;
+}

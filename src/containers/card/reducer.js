@@ -6,6 +6,7 @@ import {
   REMOVE_ASSIGNEE, REMOVE_LABEL,
 } from './constants'
 
+
 const initialState = {
   title: '',
   desc: '',
@@ -14,9 +15,12 @@ const initialState = {
   cardResponsible: null,
   dueComplete: null,
   labels: [],
-  assignees: [],
+  assigneesIds: [],
   comments: [],
-  isFetchingUsers: false,
+  isFetchingAssignees: false,
+  isFetchingLabels: false,
+  isFetchingResponsible: false,
+  isFetchingComments: false,
   isAddingComment: false,
   isAddingAssignee: false,
   isAddingResponsible: false,
@@ -24,31 +28,23 @@ const initialState = {
   isAddingLabel: false,
   isAddingDueDate: false,
   isAddingDesc: false,
+  isLoading: false,
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case CLEAN_STATE:
       return initialState
+    case GET_ALL_COMMENTS_IN_CARD:
+      return {
+        ...state,
+        isFetchingComments: true,
+      }
     case `${GET_ALL_COMMENTS_IN_CARD}_SUCCESS`:
       return {
         ...state,
         comments: action.payload.data,
-      }
-    case `${GET_ALL_LABELS_IN_CARD}_SUCCESS`:
-      return {
-        ...state,
-        labels: action.payload.data,
-      }
-    case `${GET_ALL_ASSIGNEES_IN_CARD}_SUCCESS`:
-      return {
-        ...state,
-        assignees: action.payload.data,
-      }
-    case `${GET_RESPONSIBLE_FOR_CARD}_SUCCESS`:
-      return {
-        ...state,
-        responsible: action.payload.data,
+        isFetchingComments: false,
       }
     case `${GET_ONE_CARD}_SUCCESS`:
       return {
@@ -77,28 +73,6 @@ export default (state = initialState, action) => {
         ...state,
         isAddingLabel: false,
       }
-    case `${ADD_ASSIGNEE}_SUCCESS`:
-      return {
-        ...state,
-        assignees: state.assignees.concat(action.payload.data),
-        isAddingAssignee: true,
-      }
-    case `${ADD_ASSIGNEE}_FAIL`:
-      return {
-        ...state,
-        isAddingAssignee: false,
-      }
-    case `${ADD_RESPONSIBLE}_SUCCESS`:
-      return {
-        ...state,
-        responsible: action.payload.data,
-        isAddingResponsible: true,
-      }
-    case `${ADD_RESPONSIBLE}_FAIL`:
-      return {
-        ...state,
-        isAddingResponsible: false,
-      }
     case `${UPDATE_DESC}_SUCCESS`:
       return {
         ...state,
@@ -120,14 +94,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAddingDueDate: false,
-      }
-    case `${REMOVE_ASSIGNEE}_SUCCESS`:
-      return {
-        ...state,
-      }
-    case `${REMOVE_LABEL}_SUCCESS`:
-      return {
-        ...state,
       }
     default:
       return state

@@ -86,6 +86,16 @@ class DndBoard extends Component {
       destinationCards[i].listId = destinationListId
       this.props.saveCardPos(destinationCards[i])
     }
+
+    const destinationList = this.props.lists.find(list => list.id === destinationListId)
+    if (destinationList) {
+      removed.assignees.filter(assignee => assignee.id !== this.props.user.id).forEach((assignee) => {
+        this.props.addNotification(assignee.id, this.props.user.id, ` has moved the card ${removed.title} to the list ${destinationList.title} in the board `, this.props.board.id)
+      })
+      if (removed.responsible && removed.responsible.id !== this.props.user.id) {
+        this.props.addNotification(removed.responsible.id, this.props.user.id, ` has moved the card ${removed.title} to the list ${destinationList.title} in the board `, this.props.board.id)
+      }
+    }
   }
 
   render() {
@@ -104,10 +114,13 @@ class DndBoard extends Component {
 }
 
 DndBoard.propTypes = {
+  board: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired,
   lists: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
   saveListPos: PropTypes.func.isRequired,
   saveCardPos: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default DndBoard

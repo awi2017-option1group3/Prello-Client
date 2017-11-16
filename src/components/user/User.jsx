@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Dropdown, Icon, Menu } from 'antd'
+import { Avatar, Icon, Popover } from 'antd'
 
 import './style.css'
 
 class User extends Component {
-  getMenu() {
+  renderContent() {
     return (
-      <Menu>
-        <Menu.Item key="logout">
-          <span onClick={this.props.onLogOut}>
-            <Icon type="logout" /> Log out
-          </span>
-        </Menu.Item>
-      </Menu>
+      <div>
+        <a onClick={this.props.onLogOut}><Icon type="logout" /> Log out</a>
+      </div>
     )
   }
 
   render() {
     return (
       <div className="user">
-        <Dropdown overlay={this.getMenu()}>
-          <Avatar className="userAvatar" size="large" >{this.props.user.infos.initials.toUpperCase()}</Avatar>
-        </Dropdown>
+        <Popover
+          content={this.renderContent()}
+          title={(<h3>{this.props.user.infos.fullName}</h3>)}
+          trigger="click"
+          placement="bottomLeft"
+        >
+          <div>
+            <Avatar className="userAvatar" >{this.props.user.infos.initials.toUpperCase()}</Avatar>
+            <Icon className="userDropdownIcon" type="down" />
+          </div>
+        </Popover>
       </div>
     )
   }

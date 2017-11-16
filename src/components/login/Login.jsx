@@ -66,6 +66,7 @@ class Login extends Component {
                         register
                       </Link>
                     </div>
+                    <p><Link to={'/forgotPassword'}>Forgot Password ?</Link></p>
                   </FormItem>
 
                 </Form>
