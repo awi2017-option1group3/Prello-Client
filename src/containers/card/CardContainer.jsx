@@ -6,6 +6,7 @@ import { cleanState as cleanCardState,
   getOneCard, getAllCommentsInCard,
   addComment, updateDesc, updateDueDate } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
+import { addNotification } from '../notifications/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {
@@ -16,15 +17,22 @@ class CardContainer extends Component {
   }
 
   render() {
-    return (
+    return this.props.card && this.props.card.id && this.props.user ? (
       <Card {...this.props} />
-    )
+    ) : (null)
   }
+}
+
+CardContainer.defaultProps = {
+  card: null,
+  user: null,
 }
 
 CardContainer.propTypes = {
   id: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
+  card: PropTypes.object,
+  user: PropTypes.object,
   cleanCardState: PropTypes.func.isRequired,
   getOneCard: PropTypes.func.isRequired,
   getAllUsers: PropTypes.func.isRequired,
@@ -33,6 +41,7 @@ CardContainer.propTypes = {
 const mapStateToProps = state => ({
   card: state.currentCard,
   users: state.users.data,
+  user: state.user.infos,
   boardLabels: state.currentBoard.labels,
 })
 
@@ -45,6 +54,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   updateDueDate,
   getOneUser,
   getAllUsers,
+  addNotification,
 }, dispatch)
 
 export default connect(

@@ -98,11 +98,13 @@ class OwnedBoards extends Component {
   }
 }
 
+
 OwnedBoards.propTypes = {
   boards: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   addBoard: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
+  addNotification: PropTypes.func.isRequired,
 }
 
 export default OwnedBoards

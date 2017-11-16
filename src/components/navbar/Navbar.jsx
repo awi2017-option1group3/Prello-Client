@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 
 import routes from '../../config/routes'
+import NotificationsContainer from '../../containers/notifications/NotificationsContainer'
 import UserContainer from '../../containers/user/UserContainer'
 import './style.css'
 
@@ -23,9 +24,15 @@ class Navbar extends Component {
   }
 
   renderUser() {
-    const showUser = this.props.location.pathname !== '/login' && this.props.location.pathname !== '/register'
-    return showUser ? (
-      <UserContainer />
+    const showUserRelatedHeader =
+      this.props.location.pathname !== '/login'
+      && this.props.location.pathname !== '/register'
+      && !this.props.location.pathname.includes('/forgotPassword')
+    return showUserRelatedHeader ? (
+      <div className="navbarUserHeader">
+        <NotificationsContainer />
+        <UserContainer />
+      </div>
     ) : (
       null
     )

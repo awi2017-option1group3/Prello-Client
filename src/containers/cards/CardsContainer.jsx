@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
 import DroppableCards from '../../components/cards/DroppableCards'
 import { addCard, deleteCard, getAllCardsInList, updateOneCardPopulated, saveCardPos, saveCardTitle, saveCardDesc } from './actions'
+import { addNotification } from '../notifications/actions'
 
 class CardsContainer extends Component {
   componentWillMount() {
@@ -25,6 +27,7 @@ CardsContainer.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   cards: state.cards.data.filter(card => card.listId === props.listId),
+  user: state.user.infos,
   isAdding: state.cards.isAddingListIds.includes(props.listId),
   isFetching: state.cards.isFetchingListIds.includes(props.listId),
 })
@@ -37,6 +40,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   saveCardPos,
   saveCardTitle,
   saveCardDesc,
+  addNotification,
 }, dispatch)
 
 export default connect(
