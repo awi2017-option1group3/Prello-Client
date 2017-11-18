@@ -8,6 +8,15 @@ import OwnedBoards from '../../components/boards/OwnedBoards'
 import ContributingBoards from '../../components/boards/ContributingBoards'
 
 class BoardsContainer extends Component {
+  componentDidMount() {
+    if (!this.props.ownedBoards.areFetched && !this.props.ownedBoards.areFetching && this.props.user) {
+      this.props.getOwnedBoardsForUser(this.props.user.id)
+    }
+    if (!this.props.contributingBoards.areFetched && !this.props.contributingBoards.areFetching && this.props.user) {
+      this.props.getContributingBoardsForUser(this.props.user.id)
+    }
+  }
+
   componentDidUpdate() {
     if (!this.props.ownedBoards.areFetched && !this.props.ownedBoards.areFetching && this.props.user) {
       this.props.getOwnedBoardsForUser(this.props.user.id)
