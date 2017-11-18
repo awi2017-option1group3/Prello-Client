@@ -30,8 +30,9 @@ export default (state = initialState, action) => {
         ...state,
         data: state.data.map((tasklist) => {
           if (tasklist.id === action.meta.previousAction.taskListId) {
-            tasklist.tasks.concat(action.payload.data)
-          } 
+            tasklist.tasks = action.payload.data
+            return tasklist
+          }
           return tasklist
         }),
       }
