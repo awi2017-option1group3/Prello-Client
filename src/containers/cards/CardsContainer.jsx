@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import DroppableCards from '../../components/cards/DroppableCards'
-import { addCard, deleteCard, getAllCardsInList, updateOneCardPopulated, saveCardPos, saveCardTitle, saveCardDesc } from './actions'
+import { addCard, deleteCard, getAllCardsInList, refreshCard, saveCardPos, saveCardTitle, saveCardDesc } from './actions'
 import { addNotification } from '../notifications/actions'
 
 class CardsContainer extends Component {
@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addCard,
   deleteCard,
   getAllCardsInList,
-  updateOneCardPopulated,
+  refreshCard,
   saveCardPos,
   saveCardTitle,
   saveCardDesc,

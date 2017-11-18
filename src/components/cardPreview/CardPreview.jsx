@@ -10,7 +10,6 @@ import Assignees from '../assignees/Assignees'
 import Labels from '../labels/Labels'
 import './style.css'
 
-
 class CardPreview extends Component {
   constructor(props) {
     super(props)
@@ -24,14 +23,14 @@ class CardPreview extends Component {
   }
 
   renameCard(newTitle) {
-    this.props.saveCardTitle(this.props.id, newTitle)
+    this.props.saveCardTitle(this.props.boardId, this.props.id, newTitle)
     this.props.assignees.forEach((assignee) => {
       this.props.addNotification(assignee.id, this.props.user.id, ` has changed the card from ${this.props.title} to ${newTitle} in the board `, this.props.boardId)
     })
   }
 
   deleteCard() {
-    this.props.deleteCard(this.props.listId, this.props.id)
+    this.props.deleteCard(this.props.boardId, this.props.listId, this.props.id)
     this.props.assignees.forEach((assignee) => {
       this.props.addNotification(assignee.id, this.props.user.id, ` has deleted the card ${this.props.title} in the board `, this.props.boardId)
     })
@@ -47,7 +46,18 @@ class CardPreview extends Component {
     this.setState({
       visible: false,
     })
-    this.props.updateOneCardPopulated(this.props.id)
+    this.props.refreshCard(this.props.boardId, this.props.id)
+  }
+
+  chooseDueDateStyle(diffDays) {
+    const warning = 7
+    const urgent = 3
+    if (diffDays > warning) {
+      return ''
+    } else if (diffDays <= warning && diffDays > urgent) {
+      return 'dueDateWarning'
+    }
+    return 'dueDateUrgent'
   }
 
   renderHeader() {
@@ -115,17 +125,6 @@ class CardPreview extends Component {
     )
   }
 
-  chooseDueDateStyle(diffDays) {
-    const warning = 7
-    const urgent = 3
-    if (diffDays > warning) {
-      return ''
-    } else if (diffDays <= warning && diffDays > urgent) {
-      return 'dueDateWarning'
-    }
-    return 'dueDateUrgent'
-  }
-
   renderComments() {
     return (
       <div>
@@ -153,7 +152,7 @@ class CardPreview extends Component {
   }
 
   renderTaskListsCompleted() {
-    if (this.props.taskLists.length > 0){
+    if (this.props.taskLists.length > 0) {
       const total = this.props.taskLists
         .map(taskList => taskList.tasks.length)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
@@ -165,26 +164,14 @@ class CardPreview extends Component {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const display = `${done} / ${total}`
       return (
-        <div className={ done/total === 1 ? "taskCompleted" : "taskUncompleted"}>
+        <div className={done / total === 1 ? 'taskCompleted' : 'taskUncompleted'}>
           <span>
             <Icon type="check-square-o" /> {display}
           </span>
         </div>
       )
-    }
-  }
-
-  showModal = () => {
-    this.setState({
-      visible: true,
-    })
-  }
-
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    })
-    this.props.updateOneCardPopulated(this.props.id)
+    } 
+    return (null)
   }
 
   render() {
@@ -211,7 +198,7 @@ class CardPreview extends Component {
             ) : (null)
             }
             {
-              typeof this.props.commments !== 'undefined' && this.props.commments.length > 0 ? (
+              typeof this.props.comments !== 'undefined' && this.props.comments.length > 0 ? (
                 <Col span={3}>
                   <div className="commentsDisplay">
                     {this.renderComments()}
@@ -277,7 +264,7 @@ CardPreview.propTypes = {
   saveCardTitle: PropTypes.func.isRequired,
   addNotification: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object.isRequired,
-  updateOneCardPopulated: PropTypes.func.isRequired,
+  refreshCard: PropTypes.func.isRequired,
 }
 
 export default CardPreview

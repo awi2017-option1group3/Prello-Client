@@ -6,8 +6,19 @@ import { connect } from 'react-redux'
 import DndBoard from '../../components/board/DndBoard'
 import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import { cleanState as cleanBoardState, getAllLabelsInBoard, getAllListsInBoard, getOneBoard, saveBoardTitle } from './actions'
-import { cleanState as cleanListsState, saveListPos } from '../lists/actions'
-import { cleanState as cleanCardsState, getAllCardsInList, saveCardPos } from '../cards/actions'
+import {
+  cleanState as cleanListsState, saveListPos,
+  pushNewList, pushNewListName, pushNewListPosition, pushDeleteList,
+} from '../lists/actions'
+import {
+  cleanState as cleanCardsState, getAllCardsInList, saveCardPos,
+  pushNewCard, pushNewCardName, pushNewCardPosition, pushDeleteCard, pushRefreshCard,
+} from '../cards/actions'
+import {
+  joinBoard, leaveBoard,
+  listenAddList, listenRenameList, listenMoveList, listenDeleteList,
+  listenAddCard, listenRenameCard, listenMoveCard, listenDeleteCard, listenRefreshCard,
+} from '../../websockets'
 import { addNotification } from '../notifications/actions'
 
 class BoardContainer extends Component {
@@ -18,6 +29,21 @@ class BoardContainer extends Component {
     this.props.getAllLabelsInBoard(this.props.match.params.boardId)
     this.props.getAllListsInBoard(this.props.match.params.boardId)
     this.props.getOneBoard(this.props.match.params.boardId)
+    joinBoard(this.props.match.params.boardId, () => {
+      listenAddList(this.props.pushNewList)
+      listenRenameList(this.props.pushNewListName)
+      listenMoveList(this.props.pushNewListPosition)
+      listenDeleteList(this.props.pushDeleteList)
+      listenAddCard(this.props.pushNewCard)
+      listenRenameCard(this.props.pushNewCardName)
+      listenMoveCard(this.props.pushNewCardPosition)
+      listenDeleteCard(this.props.pushDeleteCard)
+      listenRefreshCard(this.props.pushRefreshCard)
+    })
+  }
+
+  componentWillUnmount() {
+    leaveBoard(this.props.match.params.boardId)
   }
 
   render() {
@@ -50,6 +76,16 @@ BoardContainer.propTypes = {
   saveListPos: PropTypes.func.isRequired,
   getOneBoard: PropTypes.func.isRequired,
   saveBoardTitle: PropTypes.func.isRequired,
+  // Realtime actions
+  pushNewList: PropTypes.func.isRequired,
+  pushNewListName: PropTypes.func.isRequired,
+  pushNewListPosition: PropTypes.func.isRequired,
+  pushDeleteList: PropTypes.func.isRequired,
+  pushNewCard: PropTypes.func.isRequired,
+  pushNewCardName: PropTypes.func.isRequired,
+  pushNewCardPosition: PropTypes.func.isRequired,
+  pushDeleteCard: PropTypes.func.isRequired,
+  pushRefreshCard: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -71,6 +107,16 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getOneBoard,
   saveBoardTitle,
   addNotification,
+  // Realtime actions
+  pushNewList,
+  pushNewListName,
+  pushNewListPosition,
+  pushDeleteList,
+  pushNewCard,
+  pushNewCardName,
+  pushNewCardPosition,
+  pushDeleteCard,
+  pushRefreshCard,
 }, dispatch)
 
 export default connect(

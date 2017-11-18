@@ -25,7 +25,6 @@ const DraggableCard = props => (
 DraggableCard.propTypes = {
   id: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
-  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default DraggableCard

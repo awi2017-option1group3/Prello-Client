@@ -14,7 +14,9 @@ import cardReducer from './containers/card/reducer'
 import assigneesReducer from './containers/assignees/reducer'
 import labelsReducer from './containers/labels/reducer'
 import tasksReducer from './containers/taskLists/reducer'
+import cardAttachmentsReducer from './containers/attachments/reducer'
 import forgotPasswordReducer from './containers/forgotPassword/reducer'
+import checkRegistrationReducer from './containers/checkRegistration/reducer'
 
 export default combineReducers({
   router: routerReducer,
@@ -23,6 +25,7 @@ export default combineReducers({
   user: userReducer,
   login: loginReducer,
   register: registerReducer,
+  checkRegistration: checkRegistrationReducer,
   forgotPassword: forgotPasswordReducer,
   notifications: notificationsReducer,
 
@@ -37,6 +40,7 @@ export default combineReducers({
   currentCardLabels: labelsReducer,
   cardAssignees: assigneesReducer,
   cardTasks: tasksReducer,
+  cardAttachments: cardAttachmentsReducer,
 
   labels: labelsReducer,
 })

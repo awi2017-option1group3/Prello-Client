@@ -1,4 +1,8 @@
-import { GET_USER_NOTIFICATIONS, MARK_NOTIFICATION_AS_READ } from './constants'
+import {
+  GET_USER_NOTIFICATIONS, ADD_NOTIFICATION, MARK_NOTIFICATION_AS_READ,
+  PUSH_NOTIFICATION,
+} from './constants'
+import { emitNotify } from '../../websockets'
 
 const initialState = {
   data: [],
@@ -7,6 +11,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    // Realtime pushes
+    case PUSH_NOTIFICATION:
+      return {
+        ...state,
+        data: state.data.concat(action.notification),
+      }
+
+    // API calls results
     case `${GET_USER_NOTIFICATIONS}`:
       return {
         ...state,
@@ -18,6 +30,12 @@ export default (state = initialState, action) => {
         data: action.payload.data,
         areFetched: true,
       }
+    case `${ADD_NOTIFICATION}_SUCCESS`:
+      emitNotify({
+        object: action.payload.data,
+        userId: action.meta.previousAction.userId,
+      })
+      return state
     case `${MARK_NOTIFICATION_AS_READ}_SUCCESS`:
       return {
         ...state,

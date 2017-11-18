@@ -51,7 +51,7 @@ class DndBoard extends Component {
 
     for (let i = 0; i < lists.length; i++) {
       lists[i].pos = i + 1
-      this.props.saveListPos(lists[i])
+      this.props.saveListPos(this.props.board.id, lists[i])
     }
   }
 
@@ -64,7 +64,7 @@ class DndBoard extends Component {
 
     for (let i = 0; i < cards.length; i++) {
       cards[i].pos = i + 1
-      this.props.saveCardPos(cards[i])
+      this.props.saveCardPos(this.props.board.id, cards[i])
     }
   }
 
@@ -79,12 +79,12 @@ class DndBoard extends Component {
 
     for (let i = 0; i < originCards.length; i++) {
       originCards[i].pos = i + 1
-      this.props.saveCardPos(originCards[i])
+      this.props.saveCardPos(this.props.board.id, originCards[i])
     }
     for (let i = 0; i < destinationCards.length; i++) {
       destinationCards[i].pos = i + 1
       destinationCards[i].listId = destinationListId
-      this.props.saveCardPos(destinationCards[i])
+      this.props.saveCardPos(this.props.board.id, destinationCards[i])
     }
 
     const destinationList = this.props.lists.find(list => list.id === destinationListId)
