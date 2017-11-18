@@ -11,10 +11,24 @@ const { Header } = Layout
 
 class Navbar extends Component {
   renderLinks() {
-    const links = [
-      { to: routes.root, text: 'Home' },
-      { to: routes.register, text: 'Register' },
-    ]
+    const showUserRelatedHeader =
+      this.props.location.pathname !== '/login'
+      && this.props.location.pathname !== '/register'
+      && !this.props.location.pathname.includes('/registration')
+      && !this.props.location.pathname.includes('/forgotPassword')
+
+    let links = null
+    if (showUserRelatedHeader) {
+      links = [
+        { to: routes.root, text: 'Home' },
+        { to: routes.profil, text: 'My Profil' },
+      ]
+    } else {
+      links = [
+        { to: routes.root, text: 'Home' },
+        { to: routes.register, text: 'Register' },
+      ]
+    }
 
     return links.map(link =>
       (<Menu.Item key={link.text}>
