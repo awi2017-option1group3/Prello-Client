@@ -47,6 +47,7 @@ class EditField extends Component {
           onPressEnter={this.saveChange}
           onBlur={this.saveChange}
           onMouseDown={e => e.stopPropagation()}
+          onKeyDown={e => e.stopPropagation()}
           autoFocus
         />
       )
