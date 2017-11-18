@@ -30,7 +30,6 @@ class App extends Component {
     const auth = JSON.parse(localStorage.getItem('auth'))
     return auth && moment().isBefore(auth.expiresAt) ? componentToRender : <Redirect to="/login" />
   }
-        
 
   boardsRender() {
     return this.checkLogged(<BoardsContainer />)

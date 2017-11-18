@@ -24,12 +24,12 @@ class Lists extends Component {
     })
   }
 
-  saveList(Newtitle) {
+  saveList(newTitle) {
     this.setState({
       adding: false,
-      title: Newtitle,
+      title: newTitle,
     })
-    this.props.addList(this.props.boardId, this.props.lists.length, Newtitle)
+    this.props.addList(this.props.boardId, this.props.lists.length, newTitle)
   }
 
   add() {
@@ -37,8 +37,8 @@ class Lists extends Component {
       <div>
         <CreateWithName
           title="New List"
-          save={(Newtitle) => {
-            this.saveList(Newtitle)
+          save={(newTitle) => {
+            this.saveList(newTitle)
           }}
           cancel={this.onCancel}
         />
@@ -54,7 +54,12 @@ class Lists extends Component {
         ) : (
           <div className="listsWrapper">
             {this.props.lists.sort((a, b) => a.pos > b.pos).map(list => (
-              <DraggableList {...list} key={list.id} deleteList={this.props.deleteList} saveTitleList={this.props.saveTitleList} />
+              <DraggableList
+                {...list}
+                key={list.id}
+                deleteList={listId => this.props.deleteList(this.props.boardId, listId)}
+                saveTitleList={(listId, listTitle) => this.props.saveTitleList(this.props.boardId, listId, listTitle)}
+              />
             ))}
             <div className="addListBlock">
               {this.state.adding ? (
