@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { cleanState as cleanCardState,
   getOneCard, getAllCommentsInCard,
-  addComment, addAttachment, updateDesc, updateDueDate } from './actions'
+  addComment, updateDesc, updateDueDate } from './actions'
 import { getOneUser, getAllUsers } from '../users/actions'
 import { addNotification } from '../notifications/actions'
+import { addAttachment } from '../attachments/actions'
 import Card from '../../components/card/Card'
 
 class CardContainer extends Component {
