@@ -48,11 +48,14 @@ class BoardContainer extends Component {
 
   render() {
     if (this.props.user) {
-      return this.props.board.hasFailed ? (
-        <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
-      ) : (
-        <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
-      )
+      return this.props.board.hasFailed
+        || ((this.props.board.owner !== this.props.user.id)
+          && (this.props.board.contributors.filter(contributorId => contributorId === this.props.user.id).length === 0))
+        ? (
+          <ErrorDisplayer message="Failed to load this board. Maybe it doesn't exist, or you don't have access to it." />
+        ) : (
+          <DndBoard {...this.props} {...this.props.board} boardId={this.props.match.params.boardId} />
+        )
     }
     return (null)
   }
