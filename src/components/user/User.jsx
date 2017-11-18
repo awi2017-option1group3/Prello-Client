@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Avatar, Icon, Popover } from 'antd'
+import { Link } from 'react-router-dom'
 
 import './style.css'
 
@@ -18,7 +19,7 @@ class User extends Component {
       <div className="user">
         <Popover
           content={this.renderContent()}
-          title={(<h3>{this.props.user.infos.fullName}</h3>)}
+          title={(<Link to={'/myprofil'}><h3>{this.props.user.infos.fullName}</h3> </Link>)}
           trigger="click"
           placement="bottomLeft"
         >

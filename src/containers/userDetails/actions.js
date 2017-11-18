@@ -6,7 +6,7 @@ export const updateUser = (userId, formValues) => (dispatch) => {
     payload: {
       request: {
         method: 'POST',
-        url: `/api/user/${userId}/update`,
+        url: `/api/users/${userId}/update/`,
         data: {
           fullName: `${formValues.lastname} ${formValues.firstname}`,
           password: formValues.password,
@@ -16,7 +16,7 @@ export const updateUser = (userId, formValues) => (dispatch) => {
   })
 }
 
-export const deleteUser = (userId, password) => (dispatch) => {
+export const deleteUser = userId => (dispatch) => {
   dispatch({
     type: DELETE_USER,
     userId,
@@ -24,9 +24,6 @@ export const deleteUser = (userId, password) => (dispatch) => {
       request: {
         method: 'DELETE',
         url: `/api/users/${userId}`,
-      },
-      data: {
-        password,
       },
     },
   })

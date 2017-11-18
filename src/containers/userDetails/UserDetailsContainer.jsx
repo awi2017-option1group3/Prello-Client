@@ -8,18 +8,21 @@ import { updateUser, deleteUser } from './actions'
 
 class UserDetailsContainer extends Component {
   render() {
-    return (
-      <UserDetails {...this.props} />
-    )
+    if (this.props.user) {
+      return (<UserDetails {...this.props} />)
+    }
+    return (null)
   }
 }
 
 UserDetailsContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
+  user: PropTypes.object,
 }
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
+  user: state.user.infos,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

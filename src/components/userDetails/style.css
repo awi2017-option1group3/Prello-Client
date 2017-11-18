@@ -18,3 +18,8 @@
 .signupLogin {
     padding: 0 5%;
 }
+
+.deleteButton {
+    padding: 100px 50px;
+    text-align: center;
+}
