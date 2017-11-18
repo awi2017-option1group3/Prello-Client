@@ -74,7 +74,9 @@ The Client app will be available at `localhost:3000`.
 On the Heroku website:
 
 1. Create an Heroku app.
-2. Using the panel "Settings", set the React buildback to your app : `https://github.com/mars/create-react-app-buildpack.git`
+2. Using the panel "Settings", set two buildpacks in this order:
+ * the React buildpack : `https://github.com/mars/create-react-app-buildpack.git`
+ * the Heroku static buildpack: `https://github.com/heroku/heroku-buildpack-static.git`
 3. Using the panel "Settings", add the config variable `REACT_APP_API_URL` (replace `{api-name}` by the name of the other Heroku instance hosting the API): `https://{api-name}.herokuapp.com/`
 
 In a new tab (keep the Heroku website in background), go to the API Client Registration page: `https://{api-name}.herokuapp.com/auth/clients` and fill the form to get your tokens.
