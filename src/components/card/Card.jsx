@@ -6,6 +6,7 @@ import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
 import LabelsContainer from '../../containers/labels/LabelsContainer'
 import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
+import TaskListsContainer from '../../containers/taskLists/TaskListsContainer'
 import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
 
 const { Content } = Layout
@@ -14,6 +15,8 @@ const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 class Card extends Component {
   constructor(props) {
     super(props)
+    this.renderLabels = this.renderLabels.bind(this)
+    this.renderAssignees = this.renderAssignees.bind(this)
     this.handleChangeGooglePicker = this.handleChangeGooglePicker.bind(this)
   }
 
@@ -50,6 +53,11 @@ class Card extends Component {
     )
   }
 
+  renderTaskLists() {
+    return (
+      <TaskListsContainer cardId={this.props.id} />
+    )
+  }
   render() {
     return (
       <div>
@@ -72,6 +80,7 @@ class Card extends Component {
             <p>List ID : {this.props.card.listId}</p>
             <p>ID : {this.props.id}</p>
             <p>More...</p>
+            {this.renderTaskLists()}
             <GooglePicker
               clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
               developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}

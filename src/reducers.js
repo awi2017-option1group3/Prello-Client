@@ -13,6 +13,7 @@ import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
 import assigneesReducer from './containers/assignees/reducer'
 import labelsReducer from './containers/labels/reducer'
+import tasksReducer from './containers/taskLists/reducer'
 import cardAttachmentsReducer from './containers/attachments/reducer'
 import forgotPasswordReducer from './containers/forgotPassword/reducer'
 import checkRegistrationReducer from './containers/checkRegistration/reducer'
@@ -38,6 +39,7 @@ export default combineReducers({
   currentCard: cardReducer,
   currentCardLabels: labelsReducer,
   cardAssignees: assigneesReducer,
+  cardTasks: tasksReducer,
   cardAttachments: cardAttachmentsReducer,
 
   labels: labelsReducer,

@@ -158,8 +158,8 @@ class CardPreview extends Component {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const done = this.props.taskLists
         .map(taskList => taskList.tasks
-          .map(task => (task.done ? 1 : 0))
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+          .map(task => task.done ? 1 : 0)
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
         )
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const display = `${done} / ${total}`
@@ -201,7 +201,7 @@ class CardPreview extends Component {
               typeof this.props.comments !== 'undefined' && this.props.comments.length > 0 ? (
                 <Col span={3}>
                   <div className="commentsDisplay">
-                    {this.getComments()}
+                    {this.renderComments()}
                   </div>
                 </Col>
               ) : (null)
