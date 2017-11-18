@@ -6,17 +6,18 @@ import './style.css'
 import EditArea from '../../commons/editArea/EditArea'
 import LabelsContainer from '../../containers/labels/LabelsContainer'
 import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
+import TaskListsContainer from '../../containers/taskLists/TaskListsContainer'
 
 const { Content } = Layout
 
 class Card extends Component {
   constructor(props) {
     super(props)
-    this.getLabels = this.getLabels.bind(this)
-    this.getAssignees = this.getAssignees.bind(this)
+    this.renderLabels = this.renderLabels.bind(this)
+    this.renderAssignees = this.renderAssignees.bind(this)
   }
 
-  getAssignees() {
+  renderAssignees() {
     return (
       <AssigneesContainer
         card={this.props.card}
@@ -31,22 +32,27 @@ class Card extends Component {
     )
   }
 
-  getLabels() {
+  renderLabels() {
     return (
       <LabelsContainer cardId={this.props.id} displayLabels displaySelect />
     )
   }
 
+  renderTaskLists() {
+    return (
+      <TaskListsContainer cardId={this.props.id} />
+    )
+  }
   render() {
     return (
       <div>
         <Layout>
           <Content className="cardContent">
             <div>
-              {this.getLabels()}
+              {this.renderLabels()}
             </div>
             <div>
-              {this.getAssignees()}
+              {this.renderAssignees()}
             </div>
             <EditArea
               text={this.props.card.desc}
@@ -59,6 +65,7 @@ class Card extends Component {
             <p>List ID : {this.props.card.listId}</p>
             <p>ID : {this.props.id}</p>
             <p>More...</p>
+            {this.renderTaskLists()}
           </Content>
         </Layout>
       </div>

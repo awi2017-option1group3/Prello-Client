@@ -158,7 +158,7 @@ class CardPreview extends Component {
         .map(taskList => taskList.tasks.length)
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const done = this.props.taskLists
-        .map(taskList => taskList.tasks===
+        .map(taskList => taskList.tasks
           .map(task => task.done ? 1 : 0)
           .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
         )
@@ -206,7 +206,7 @@ class CardPreview extends Component {
           <Row className="cardFooter">
             { this.props.dueComplete !== '' ? (
               <Col span={8}>
-                {this.getDueDate()}
+                {this.renderDueDate()}
               </Col>
             ) : (null)
             }
@@ -214,7 +214,7 @@ class CardPreview extends Component {
               typeof this.props.commments !== 'undefined' && this.props.commments.length > 0 ? (
                 <Col span={3}>
                   <div className="commentsDisplay">
-                    {this.getComments()}
+                    {this.renderComments()}
                   </div>
                 </Col>
               ) : (null)
