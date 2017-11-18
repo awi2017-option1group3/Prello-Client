@@ -87,7 +87,9 @@ class Notifications extends Component {
   renderNotificationContent(notification) {
     return (
       <div className="notification">
-        <Avatar className="notificationAvatar" size="small">{notification.sourceUser.initials.toUpperCase()}</Avatar>
+        <div className="notificationAvatar">
+          <span>{notification.sourceUser.initials.toUpperCase()}</span>
+        </div>
         <div className="notificationMessage">
           <div>
             <strong>{`${notification.sourceUser.fullName} `}</strong>

@@ -141,10 +141,10 @@ class BoardMembers extends Component {
     return (null)
   }
 
-  renderQuitBoard() {
+  renderLeaveBoard() {
     return this.props.owner.id !== this.props.user.id ? (
       <Popconfirm
-        title="Do you really want to quit this board ? You will no longer be able to access it."
+        title="Do you really want to leave this board ? You will no longer be able to access it."
         placement="right"
         onConfirm={this.quit}
         okText="Yes"
@@ -164,7 +164,7 @@ class BoardMembers extends Component {
           { this.renderContributors() }
         </div>
         { this.renderContributorsSelector() }
-        { this.renderQuitBoard() }
+        { this.renderLeaveBoard() }
       </div>
     )
   }

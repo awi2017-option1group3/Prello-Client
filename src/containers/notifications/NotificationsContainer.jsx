@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { getUserNotifications, markNotificationAsRead } from './actions'
 import Notifications from '../../components/notifications/Notifications'
+import { getUserNotifications, markNotificationAsRead, pushNotification } from './actions'
+import { listenNotify } from '../../websockets'
 
 class NotificationsContainer extends Component {
   componentDidUpdate() {
     if (this.props.user && !this.props.notificationsFetched) {
       this.props.getUserNotifications(this.props.user.id)
+      listenNotify(this.props.pushNotification)
     }
   }
 
@@ -26,6 +28,7 @@ NotificationsContainer.propTypes = {
   user: PropTypes.object,
   notificationsFetched: PropTypes.bool.isRequired,
   getUserNotifications: PropTypes.func.isRequired,
+  pushNotification: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -37,6 +40,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   getUserNotifications,
   markNotificationAsRead,
+  pushNotification,
 }, dispatch)
 
 export default connect(

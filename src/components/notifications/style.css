@@ -45,7 +45,20 @@
 }
 
 .notificationAvatar {
+    display: inline-flex;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    color: white;
+    height: 26px;
+    width: 26px;
+    text-align: center;
+    background: #cccccc;
     margin: auto 10px auto 0;
+}
+
+.notificationAvatar span {
+    margin: auto;
 }
 
 .notificationMessage {

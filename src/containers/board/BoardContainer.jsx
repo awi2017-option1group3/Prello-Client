@@ -15,7 +15,7 @@ import {
   pushNewCard, pushNewCardName, pushNewCardPosition, pushDeleteCard, pushRefreshCard,
 } from '../cards/actions'
 import {
-  joinBoard, quitBoard,
+  joinBoard, leaveBoard,
   listenAddList, listenRenameList, listenMoveList, listenDeleteList,
   listenAddCard, listenRenameCard, listenMoveCard, listenDeleteCard, listenRefreshCard,
 } from '../../websockets'
@@ -43,7 +43,7 @@ class BoardContainer extends Component {
   }
 
   componentWillUnmount() {
-    quitBoard(this.props.match.params.boardId)
+    leaveBoard(this.props.match.params.boardId)
   }
 
   render() {

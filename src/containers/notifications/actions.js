@@ -1,4 +1,18 @@
-import { GET_USER_NOTIFICATIONS, ADD_NOTIFICATION, MARK_NOTIFICATION_AS_READ } from './constants'
+import {
+  GET_USER_NOTIFICATIONS, ADD_NOTIFICATION, MARK_NOTIFICATION_AS_READ,
+  PUSH_NOTIFICATION,
+} from './constants'
+
+// Synchronous actions for realtime
+
+export const pushNotification = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_NOTIFICATION,
+    notification: wrapper.object,
+  })
+}
+
+// Asynchronous actions hitting the API
 
 export const getUserNotifications = userId => (dispatch) => {
   dispatch({
@@ -15,6 +29,7 @@ export const getUserNotifications = userId => (dispatch) => {
 export const addNotification = (targetUserId, sourceUserId, message, boardId) => (dispatch) => {
   dispatch({
     type: ADD_NOTIFICATION,
+    userId: targetUserId,
     payload: {
       request: {
         method: 'POST',
