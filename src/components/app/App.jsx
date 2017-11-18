@@ -10,11 +10,11 @@ import RegisterContainer from '../../containers/register/RegisterContainer'
 import ForgotPasswordContainer from '../../containers/forgotPassword/ForgotPasswordContainer'
 import CheckRegistrationContainer from '../../containers/checkRegistration/CheckRegistrationContainer'
 import BoardContainer from '../../containers/board/BoardContainer'
+import UserDetailsContainer from '../../containers/userDetails/UserDetailsContainer'
 import ErrorDisplayer from '../../commons/errorDisplayer/ErrorDisplayer'
 import Navbar from '../navbar/Navbar'
 import { history } from '../../store'
 import './style.css'
-
 
 
 const { Content } = Layout
@@ -58,6 +58,7 @@ class App extends Component {
               <Route exact path="/forgotPassword" component={ForgotPasswordContainer} />
               <Route exact path="/forgotPassword/:token" component={ForgotPasswordContainer} />
               <Route exact path="/registration/:token" component={CheckRegistrationContainer} />
+              <Route exact path="/userDetails" component={UserDetailsContainer} />
               <Route exact path="/" render={this.boardsRender} />
               <Route exact path="/boards/:boardId" render={this.boardRender} />
               <Route exact path="*" render={this.pageNotFound} />
