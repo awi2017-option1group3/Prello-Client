@@ -1,7 +1,9 @@
-import { CLEAN_STATE,
+import {
+  CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ONE_CARD,
   ADD_COMMENT, ADD_LABEL,
-  UPDATE_DUE_DATE, UPDATE_DESC } from './constants'
+  UPDATE_DUE_DATE, UPDATE_DESC,
+} from './constants'
 
 const initialState = {
   title: '',

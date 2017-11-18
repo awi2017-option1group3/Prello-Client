@@ -1,7 +1,7 @@
 import {
   CLEAN_STATE,
   GET_ALL_COMMENTS_IN_CARD, GET_ONE_CARD,
-  ADD_COMMENT, ADD_ATTACHMENT,
+  ADD_COMMENT,
   UPDATE_DUE_DATE, UPDATE_DESC } from './constants'
 
 export const cleanState = () => (dispatch) => {
@@ -45,27 +45,6 @@ export const addComment = (cardId, content, userId) => (dispatch) => {
         data: {
           content,
           userId,
-        },
-      },
-    },
-  })
-}
-
-export const addAttachment = (cardId, element) => (dispatch) => {
-  dispatch({
-    type: ADD_ATTACHMENT,
-    cardId,
-    payload: {
-      request: {
-        method: 'POST',
-        url: `/api/cards/${cardId}/attachments/`,
-        data: {
-          name: element.name,
-          desc: element.description,
-          attachmentId: element.id,
-          attachmentUrl: element.url,
-          attachmentIcon: element.iconUrl,
-          lastEditedTime: element.lastEditedUtc,
         },
       },
     },
