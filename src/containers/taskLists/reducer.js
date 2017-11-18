@@ -4,6 +4,7 @@ import { GET_ALL_TASKLISTS_IN_CARD, ADD_TASKLIST_IN_CARD, REMOVE_TASKLIST_IN_CAR
 
 const initialState = {
   data: [],
+  isAdding: false,
 }
 
 export default (state = initialState, action) => {
@@ -29,7 +30,7 @@ export default (state = initialState, action) => {
         ...state,
         data: state.data.map((tasklist) => {
           if (tasklist.id === action.meta.previousAction.taskListId) {
-            return tasklist.tasks.concat(action.payload.data)
+            tasklist.tasks.concat(action.payload.data)
           } 
           return tasklist
         }),
