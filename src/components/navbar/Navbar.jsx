@@ -27,6 +27,7 @@ class Navbar extends Component {
     const showUserRelatedHeader =
       this.props.location.pathname !== '/login'
       && this.props.location.pathname !== '/register'
+      && !this.props.location.pathname.includes('/registration')
       && !this.props.location.pathname.includes('/forgotPassword')
     return showUserRelatedHeader ? (
       <div className="navbarUserHeader">

@@ -32,7 +32,8 @@ class Register extends Component {
   registrationSuccessed(values) {
     Modal.success({
       title: 'Registration successed ',
-      content: `Welcome ${values.firstname} in the Prello team by Gluon!`,
+      content: `Welcome ${values.firstname} in the Prello team by Gluon ! 
+      check your email to validate your account in the hour, otherwise it will be removed `,
       okText: 'Ok',
       onOk: history.push('/'),
     })
