@@ -18,7 +18,6 @@ DroppableCards.propTypes = {
   cards: PropTypes.array.isRequired,
   listId: PropTypes.string.isRequired,
   boardId: PropTypes.string.isRequired,
-  updateOneCardPopulated: PropTypes.func.isRequired,
 }
 
 export default DroppableCards

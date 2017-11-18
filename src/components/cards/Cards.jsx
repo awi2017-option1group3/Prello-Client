@@ -25,12 +25,12 @@ class Cards extends Component {
     })
   }
 
-  saveCard(Newtitle) {
+  saveCard(newTitle) {
     this.setState({
       adding: false,
-      title: Newtitle,
+      title: newTitle,
     })
-    this.props.addCard(this.props.listId, this.props.cards.length, Newtitle)
+    this.props.addCard(this.props.boardId, this.props.listId, this.props.cards.length, newTitle)
   }
 
   add() {
@@ -38,8 +38,8 @@ class Cards extends Component {
       <div>
         <CreateWithName
           title="New Card"
-          save={(Newtitle) => {
-            this.saveCard(Newtitle)
+          save={(newTitle) => {
+            this.saveCard(newTitle)
           }}
           cancel={this.onCancel}
         />
@@ -63,7 +63,7 @@ class Cards extends Component {
                 deleteCard={this.props.deleteCard}
                 saveCardTitle={this.props.saveCardTitle}
                 saveCardDesc={this.props.saveCardDesc}
-                updateOneCardPopulated={this.props.updateOneCardPopulated}
+                refreshCard={this.props.refreshCard}
                 addNotification={this.props.addNotification}
               />
             ))}
@@ -109,7 +109,7 @@ Cards.propTypes = {
   saveCardTitle: PropTypes.func.isRequired,
   saveCardDesc: PropTypes.func.isRequired,
   addNotification: PropTypes.func.isRequired,
-  updateOneCardPopulated: PropTypes.func.isRequired,
+  refreshCard: PropTypes.func.isRequired,
 }
 
 export default Cards

@@ -1,10 +1,55 @@
-import { CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, UPDATE_ONE_CARD_POPULATED, SAVE_CARD_POS, SAVE_CARD_TITLE, SAVE_CARD_DESC } from './constants'
+import {
+  CLEAN_STATE, ADD_CARD, DELETE_CARD, GET_ALL_CARDS_IN_LIST, REFRESH_CARD, SAVE_CARD_POS, SAVE_CARD_TITLE,
+  SAVE_CARD_DESC,
+  PUSH_NEW_CARD, PUSH_NEW_CARD_NAME, PUSH_NEW_CARD_POSITION, PUSH_DELETE_CARD, PUSH_REFRESH_CARD,
+} from './constants'
+
+// Synchronous actions
 
 export const cleanState = () => (dispatch) => {
   dispatch({
     type: CLEAN_STATE,
   })
 }
+
+// Synchronous actions for realtime
+
+export const pushNewCard = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_NEW_CARD,
+    card: wrapper.object,
+  })
+}
+
+export const pushNewCardName = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_NEW_CARD_NAME,
+    card: wrapper.object,
+  })
+}
+
+export const pushNewCardPosition = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_NEW_CARD_POSITION,
+    card: wrapper.object,
+  })
+}
+
+export const pushDeleteCard = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_DELETE_CARD,
+    cardId: wrapper.object.cardId,
+  })
+}
+
+export const pushRefreshCard = wrapper => (dispatch) => {
+  dispatch({
+    type: PUSH_REFRESH_CARD,
+    card: wrapper.object,
+  })
+}
+
+// Asynchronous actions hitting the API
 
 export const getAllCardsInList = listId => (dispatch) => {
   dispatch({
@@ -19,9 +64,10 @@ export const getAllCardsInList = listId => (dispatch) => {
   })
 }
 
-export const updateOneCardPopulated = cardId => (dispatch) => {
+export const refreshCard = (boardId, cardId) => (dispatch) => {
   dispatch({
-    type: UPDATE_ONE_CARD_POPULATED,
+    type: REFRESH_CARD,
+    boardId,
     cardId,
     payload: {
       request: {
@@ -32,16 +78,17 @@ export const updateOneCardPopulated = cardId => (dispatch) => {
   })
 }
 
-export const addCard = (listId, lastCardPos, title) => (dispatch) => {
+export const addCard = (boardId, listId, lastCardPos, title) => (dispatch) => {
   dispatch({
     type: ADD_CARD,
+    boardId,
     listId,
     payload: {
       request: {
         method: 'POST',
         url: `/api/lists/${listId}/cards`,
         data: {
-          title: title,
+          title,
           pos: (lastCardPos || 0) + 1,
         },
       },
@@ -49,9 +96,10 @@ export const addCard = (listId, lastCardPos, title) => (dispatch) => {
   })
 }
 
-export const deleteCard = (listId, cardId) => (dispatch) => {
+export const deleteCard = (boardId, listId, cardId) => (dispatch) => {
   dispatch({
     type: DELETE_CARD,
+    boardId,
     cardId,
     payload: {
       request: {
@@ -62,9 +110,10 @@ export const deleteCard = (listId, cardId) => (dispatch) => {
   })
 }
 
-export const saveCardPos = card => (dispatch) => {
+export const saveCardPos = (boardId, card) => (dispatch) => {
   dispatch({
     type: SAVE_CARD_POS,
+    boardId,
     cardId: card.id,
     payload: {
       request: {
@@ -79,9 +128,10 @@ export const saveCardPos = card => (dispatch) => {
   })
 }
 
-export const saveCardTitle = (cardId, cardTitle) => (dispatch) => {
+export const saveCardTitle = (boardId, cardId, cardTitle) => (dispatch) => {
   dispatch({
     type: SAVE_CARD_TITLE,
+    boardId,
     payload: {
       request: {
         method: 'PUT',
