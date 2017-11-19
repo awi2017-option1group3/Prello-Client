@@ -13,7 +13,7 @@ import AttachmentsContainer from '../../containers/attachments/AttachmentsContai
 import CommentsContainer from '../../containers/comments/CommentsContainer'
 import './style.css'
 
-const { Content, Sider } = Layout
+const { Content, Sider, Footer } = Layout
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 
 class Card extends Component {
@@ -53,7 +53,7 @@ class Card extends Component {
 
   renderAttachments() {
     return (
-      <div>
+      <div className="attachment">
         <h3>Attachments</h3>
         <AttachmentsContainer cardId={this.props.id} />
       </div>
@@ -86,7 +86,6 @@ class Card extends Component {
             <div>
               {this.renderAttachments()}
             </div>
-            {this.renderComments()}
           </Content>
           <Sider className="sider">
             <div>
@@ -121,6 +120,9 @@ class Card extends Component {
             </GooglePicker>
           </Sider>
         </Layout>
+        <Footer className="footer">
+          {this.renderComments()}
+        </Footer>
       </div>
     )
   }

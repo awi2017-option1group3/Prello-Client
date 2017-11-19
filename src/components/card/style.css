@@ -12,10 +12,18 @@
     background: #fff;
 }
 
+.footer {
+    background: #fff;
+}
+
 .cardContent ul {
     list-style: circle;
     padding-left: 25px;
     background: #fff;
+}
+
+.attachment {
+    margin-top: 10px;
 }
 
 .assignees {

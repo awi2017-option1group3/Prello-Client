@@ -8,3 +8,12 @@
     display: flex;
     padding: 20px;
 }
+
+.boardOptions {
+    display: flex;
+}
+
+.boardLabelsButton {
+    margin: auto;
+    top: -2px;
+}

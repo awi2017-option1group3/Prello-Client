@@ -1,16 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Button, Modal as UIModal } from 'antd'
 
 import ListsContainer from '../../containers/lists/ListsContainer'
 import BoardMembersContainer from '../../containers/boardMembers/BoardMembersContainer'
+import BoardLabelsContainer from '../../containers/boardLabels/BoardLabelsContainer'
 import EditField from '../../commons/editField/EditField'
+import Loader from '../../commons/loader/Loader'
 import './style.css'
-import Loader from "../../commons/loader/Loader"
 
 class Board extends Component {
   constructor(props) {
     super(props)
     this.editTitle = this.editTitle.bind(this)
+    this.showBoardLabels = this.showBoardLabels.bind(this)
+    this.hideBoardLabels = this.hideBoardLabels.bind(this)
+    this.state = {
+      boardLabelsVisible: false,
+    }
+  }
+
+  showBoardLabels() {
+    this.setState({
+      boardLabelsVisible: true,
+    })
+  }
+
+  hideBoardLabels() {
+    this.setState({
+      boardLabelsVisible: false,
+    })
   }
 
   editTitle(newTitle) {
@@ -33,9 +52,18 @@ class Board extends Component {
             this.props.board.title
           )}
         </h1>
-        <BoardMembersContainer boardId={this.props.board.id} />
+        <div className="boardOptions">
+          <BoardMembersContainer boardId={this.props.board.id} />
+          {this.renderBoardLabelsButton()}
+        </div>
       </div>
     )
+  }
+
+  renderBoardLabelsButton() {
+    return this.props.user.id === this.props.board.owner ? (
+      <Button className="boardLabelsButton" icon="tags-o" onClick={this.showBoardLabels}>Labels</Button>
+    ) : (null)
   }
 
   render() {
@@ -43,6 +71,16 @@ class Board extends Component {
       <div className="board">
         { this.getHeader() }
         <ListsContainer boardId={this.props.board.id} />
+        <div>
+          <UIModal
+            title={`Labels of ${this.props.board.title}`}
+            visible={this.state.boardLabelsVisible}
+            footer={null}
+            onCancel={this.hideBoardLabels}
+          >
+            <BoardLabelsContainer boardId={this.props.board.id} />
+          </UIModal>
+        </div>
       </div>
     ) : (
       <Loader message="Loading the board..." />
