@@ -9,7 +9,7 @@ import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
 import TaskListsContainer from '../../containers/taskLists/TaskListsContainer'
 import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
 
-const { Content } = Layout
+const { Content, Sider } = Layout
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 
 class Card extends Component {
@@ -62,13 +62,7 @@ class Card extends Component {
     return (
       <div>
         <Layout>
-          <Content className="cardContent">
-            <div>
-              {this.renderLabels()}
-            </div>
-            <div>
-              {this.renderAssignees()}
-            </div>
+          <Content className="content">
             <EditArea
               text={this.props.card.desc}
               save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
@@ -81,6 +75,17 @@ class Card extends Component {
             <p>ID : {this.props.id}</p>
             <p>More...</p>
             {this.renderTaskLists()}
+            <div>
+              {this.renderAttachments()}
+            </div>
+          </Content>
+          <Sider className="sider">
+            <div>
+              {this.renderLabels()}
+            </div>
+            <div>
+              {this.renderAssignees()}
+            </div>
             <GooglePicker
               clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
               developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
@@ -97,10 +102,7 @@ class Card extends Component {
             >
               <Button type="primary" className="siderButton">Google Drive</Button>
             </GooglePicker>
-            <div>
-              {this.renderAttachments()}
-            </div>
-          </Content>
+          </Sider>
         </Layout>
       </div>
     )
