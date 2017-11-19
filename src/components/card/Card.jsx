@@ -13,7 +13,7 @@ import AttachmentsContainer from '../../containers/attachments/AttachmentsContai
 import CommentsContainer from '../../containers/comments/CommentsContainer'
 import './style.css'
 
-const { Content, Sider, Footer } = Layout
+const { Content } = Layout
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
 
 class Card extends Component {
@@ -53,10 +53,7 @@ class Card extends Component {
 
   renderAttachments() {
     return (
-      <div className="attachment">
-        <h3>Attachments</h3>
-        <AttachmentsContainer cardId={this.props.id} />
-      </div>
+      <AttachmentsContainer cardId={this.props.id} />
     )
   }
 
@@ -77,52 +74,75 @@ class Card extends Component {
       <div>
         <Layout>
           <Content className="content">
-            <EditArea
-              text={this.props.card.desc}
-              save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
-              hint="Add a description"
-            />
-            {this.renderTaskLists()}
+            <div className="cardMembersLabelsDueDateBlock">
+              <div className="cardMembersBlock">
+                <h3>Members</h3>
+                {this.renderAssignees()}
+              </div>
+              <div className="cardLabelsBlock">
+                <h3>Labels</h3>
+                {this.renderLabels()}
+              </div>
+              <div className="cardDueDateBlock">
+                <h3>Due date</h3>
+                <LocaleProvider locale={enUS}>
+                  <DatePicker
+                    className="cardDueDate"
+                    onChange={dueDate => this.props.updateDueDate(this.props.id, dueDate)}
+                    value={this.props.card.dueComplete ? moment(this.props.card.dueComplete) : null}
+                  />
+                </LocaleProvider>
+              </div>
+            </div>
             <div>
-              {this.renderAttachments()}
+              <h3>Description</h3>
+              <div className="cardDescription">
+                <EditArea
+                  text={this.props.card.desc}
+                  save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
+                  hint="Add a description"
+                />
+              </div>
+            </div>
+            <div>
+              <h3>Task lists</h3>
+              {this.renderTaskLists()}
+            </div>
+            <div>
+              <h3>Attachments</h3>
+              <div className="cardAttachments">
+                {this.renderAttachments()}
+              </div>
+              <div className="cardNewAttachment">
+                <GooglePicker
+                  clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
+                  developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
+                  scope={SCOPE}
+                  onChange={this.handleChangeGooglePicker}
+                  multiselect
+                  navHidden
+                  authImmediate={false}
+                  mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file',
+                    'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder', 'application/pdf',
+                    'image/png', 'image/jpeg', 'image/gif', 'application/vnd.google.drive.ext-type.png',
+                    'application/vnd.google.drive.ext-type.jpg', 'application/vnd.google.drive.ext-type.gif']}
+                  viewId={'DOCS'}
+                >
+                  <Button
+                    className="addAttachmentButton"
+                    icon="plus"
+                    size="small"
+                    type="dashed"
+                  >Add attachment</Button>
+                </GooglePicker>
+              </div>
+            </div>
+            <div>
+              <h3>Comments</h3>
+              {this.renderComments()}
             </div>
           </Content>
-          <Sider className="sider">
-            <div>
-              <LocaleProvider locale={enUS}>
-                <DatePicker
-                  onChange={dueDate => this.props.updateDueDate(this.props.id, dueDate)}
-                  value={this.props.card.dueComplete ? moment(this.props.card.dueComplete) : null}
-                />
-              </LocaleProvider>
-            </div>
-            <div>
-              {this.renderLabels()}
-            </div>
-            <div>
-              {this.renderAssignees()}
-            </div>
-            <GooglePicker
-              clientId={process.env.REACT_APP_DRIVE_CLIENT_ID}
-              developerKey={process.env.REACT_APP_DRIVE_DEVELOPER_KEY}
-              scope={SCOPE}
-              onChange={this.handleChangeGooglePicker}
-              multiselect
-              navHidden
-              authImmediate={false}
-              mimeTypes={['application/vnd.google-apps.document', 'application/vnd.google-apps.file',
-                'application/vnd.google-apps.spreadsheet', 'application/vnd.google-apps.folder', 'application/pdf',
-                'image/png', 'image/jpeg', 'image/gif', 'application/vnd.google.drive.ext-type.png',
-                'application/vnd.google.drive.ext-type.jpg', 'application/vnd.google.drive.ext-type.gif']}
-              viewId={'DOCS'}
-            >
-              <Button type="primary" className="siderButton">Google Drive</Button>
-            </GooglePicker>
-          </Sider>
         </Layout>
-        <Footer className="footer">
-          {this.renderComments()}
-        </Footer>
       </div>
     )
   }

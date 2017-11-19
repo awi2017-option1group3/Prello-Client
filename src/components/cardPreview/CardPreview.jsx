@@ -172,7 +172,7 @@ class CardPreview extends Component {
     return (
       <Assignees
         cardId={this.props.id}
-        cardResponsible={this.props.responsible}
+        responsible={this.props.responsible}
         assignees={this.props.assignees}
         maxDisplayedAssignees={2}
         target="cardPreview"
@@ -201,14 +201,17 @@ class CardPreview extends Component {
           {this.renderAssignees()}
         </div>
         <div>
-          <UIModal
-            title={this.props.title}
-            visible={this.state.visible}
-            footer={null}
-            onCancel={this.handleCancel}
-          >
-            <CardContainer id={this.props.id} boardId={this.props.boardId} />
-          </UIModal>
+          {this.state.visible ? (
+            <UIModal
+              title={this.props.title}
+              visible={this.state.visible}
+              footer={null}
+              width="75%"
+              onCancel={this.handleCancel}
+            >
+              <CardContainer id={this.props.id} boardId={this.props.boardId} />
+            </UIModal>
+          ) : (null)}
         </div>
       </UICard>
     )

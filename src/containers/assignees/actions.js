@@ -58,6 +58,7 @@ export const addResponsibleToCard = (cardId, userId) => (dispatch) => {
 export const removeAssigneeFromCard = (cardId, memberId) => (dispatch) => {
   dispatch({
     type: REMOVE_ASSIGNEE_FROM_CARD,
+    assigneeId: memberId,
     payload: {
       request: {
         method: 'DELETE',
@@ -67,7 +68,7 @@ export const removeAssigneeFromCard = (cardId, memberId) => (dispatch) => {
   })
 }
 
-export const removeResponsibleFromCard = (cardId) => (dispatch) => {
+export const removeResponsibleFromCard = cardId => (dispatch) => {
   dispatch({
     type: REMOVE_RESPONSIBLE_FROM_CARD,
     payload: {

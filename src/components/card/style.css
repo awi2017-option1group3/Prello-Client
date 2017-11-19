@@ -1,13 +1,3 @@
-.sider {
-    background: #fff;
-    width: 65px;
-    text-align: right;
-}
-
-.siderButton {
-    margin: 4px;
-}
-
 .content {
     background: #fff;
 }
@@ -44,4 +34,30 @@
 .commentsDisplay {
     display: inline-grid;
     margin-top: 17px;
+}
+
+.cardMembersLabelsDueDateBlock {
+    display: flex;
+}
+
+.cardMembersLabelsDueDateBlock > * {
+    margin-right: 20px;
+}
+
+.cardDueDate {
+    margin: 5px 5px 20px 0;
+}
+
+.cardDescription {
+    width: 100%;
+    margin: 5px 5px 20px 0;
+}
+
+.cardAttachments {
+    margin: 5px 5px 15px 0;
+}
+
+.cardNewAttachment {
+    text-align: center;
+    margin: 5px 5px 20px 0;
 }

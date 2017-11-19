@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
     case `${REMOVE_ASSIGNEE_FROM_CARD}_SUCCESS`:
       return {
         ...state,
-        data: action.payload.data,
+        data: state.data.filter(assignee => assignee.id !== action.meta.previousAction.assigneeId),
       }
     case `${REMOVE_RESPONSIBLE_FROM_CARD}_SUCCESS`:
       return {

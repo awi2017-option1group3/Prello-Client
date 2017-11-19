@@ -9,6 +9,9 @@ class AssigneesSelect extends Component {
   constructor(props) {
     super(props)
     this.handleChangeAssignee = this.handleChangeAssignee.bind(this)
+    this.state = {
+      value: 'Assignees',
+    }
   }
 
   handleChangeAssignee(value) {
@@ -20,13 +23,17 @@ class AssigneesSelect extends Component {
       this.props.addAssigneeToCard(this.props.card.id, memberId)
       this.props.addNotification(memberId, this.props.user.id, ` has added you as assignee of the card ${this.props.card.title} in the board `, this.props.boardId)
     }
+    this.setState({
+      value: 'Assignees',
+    })
   }
 
   render() {
     return (
       <Select
         className="cardAssignees"
-        placeholder="Choose assignees..."
+        placeholder="Assignees"
+        value={this.state.value}
         onChange={this.handleChangeAssignee}
         tokenSeparators={[',']}
       >

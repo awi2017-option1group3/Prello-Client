@@ -6,22 +6,22 @@ import './style.css'
 
 class Assignees extends Component {
   renderReponsible() {
-    return this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined' ? (
+    return this.props.responsible !== null && typeof this.props.responsible.id !== 'undefined' ? (
       <div
-        key={this.props.target + this.props.cardId + this.props.cardResponsible}
+        key={`${this.props.target + this.props.cardId}responsible${this.props.responsible}`}
         className="cardAvatar responsible"
       >
-        <span>{this.props.cardResponsible.initials.toUpperCase()}</span>
+        <span>{this.props.responsible.initials.toUpperCase()}</span>
       </div>
     ) : (null)
   }
 
   renderAssignees() {
     const sortedAssignees = this.props.assignees.sort((a, b) => a.initials.toUpperCase() > b.initials.toUpperCase())
-    if (this.props.cardResponsible !== null && typeof this.props.cardResponsible.id !== 'undefined') {
+    if (this.props.responsible !== null && typeof this.props.responsible.id !== 'undefined') {
       // if responsible is in members, sets responsible to be the first user
-      if (sortedAssignees.map(assignee => assignee.id).includes(this.props.cardResponsible.id) === true) {
-        const indexOfResponsible = sortedAssignees.findIndex(assignee => assignee.id === this.props.cardResponsible.id)
+      if (sortedAssignees.map(assignee => assignee.id).includes(this.props.responsible.id) === true) {
+        const indexOfResponsible = sortedAssignees.findIndex(assignee => assignee.id === this.props.responsible.id)
         sortedAssignees.splice(indexOfResponsible, 1)
       }
     }
@@ -31,7 +31,7 @@ class Assignees extends Component {
       <span>
         {displayedAssignees.map(assignee => (
           <div
-            key={this.props.target + this.props.cardId + assignee.id}
+            key={`${this.props.target + this.props.cardId}assignee${assignee.id}`}
             className="cardAvatar assignee"
           >
             <span>{assignee.initials.toUpperCase()}</span>
@@ -72,14 +72,14 @@ class Assignees extends Component {
 }
 
 Assignees.defaultProps = {
-  cardResponsible: null,
+  responsible: null,
 }
 
 Assignees.propTypes = {
   target: PropTypes.string.isRequired,
   cardId: PropTypes.string.isRequired,
   assignees: PropTypes.array.isRequired,
-  cardResponsible: PropTypes.object,
+  responsible: PropTypes.object,
   maxDisplayedAssignees: PropTypes.number.isRequired,
 }
 
