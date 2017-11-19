@@ -8,6 +8,7 @@ import notificationsReducer from './containers/notifications/reducer'
 import boardsReducer from './containers/boards/reducer'
 import boardReducer from './containers/board/reducer'
 import boardMembersReducer from './containers/boardMembers/reducer'
+import boardLabelsReducer from './containers/boardLabels/reducer'
 import listsReducer from './containers/lists/reducer'
 import cardsReducer from './containers/cards/reducer'
 import cardReducer from './containers/card/reducer'
@@ -33,6 +34,7 @@ export default combineReducers({
   boards: boardsReducer,
   currentBoard: boardReducer,
   boardMembers: boardMembersReducer,
+  boardLabels: boardLabelsReducer,
 
   lists: listsReducer,
 
