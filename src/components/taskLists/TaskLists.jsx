@@ -15,6 +15,8 @@ class TaskLists extends Component {
     this.saveTask = this.saveTask.bind(this)
     this.saveTaskList = this.saveTaskList.bind(this)
     this.onCancel = this.onCancel.bind(this)
+    this.deleteTask = this.deleteTask.bind(this)
+    this.renderTaskDelete = this.renderTaskDelete.bind(this)
     this.state = {
       addingTaskList: false,
       addingTask: false,
@@ -77,6 +79,18 @@ class TaskLists extends Component {
     this.props.addTaskListInCard(cardId, newTitle)
   }
 
+  deleteTask(taskListId, taskId, taskTitle) {
+    return (
+      <Modal
+        title={'Delete'}
+        message={`Are you sure to delete the task named : ${taskTitle} ?`}
+        okText={'Delete'}
+        cancelText={'Cancel'}
+        handleOk={() => this.props.removeTaskInTaskList(taskId, taskListId)}
+      />
+    )
+  }
+
   renderHeader(taskListTitle, taskListId) {
     return (
       <div className="taskListHeader">
@@ -100,6 +114,17 @@ class TaskLists extends Component {
       </div>
     )
   }
+
+  renderTaskDelete(taskListId, taskId, taskTitle) {
+    return (
+      <Button
+        type="primary"
+        icon="close"
+        onClick={() => this.deleteTask(taskListId, taskId, taskTitle)}
+      />
+    )
+  }
+
 
   renderMenu(taskListTitle, taskListId) {
     return (
@@ -139,7 +164,7 @@ class TaskLists extends Component {
         )
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       return (
-        <Progress percent={(done / total) * 100} />
+        <Progress percent={Math.trunc((done / total) * 100)} />
       )
     }
     return (null)
@@ -173,6 +198,7 @@ class TaskLists extends Component {
                         label={task.title}
                       />
                       {this.renderTaskText(task.id, task.title)}
+                      {this.renderTaskDelete(task.taskListId, task.id, task.title)}
                     </div>
                   ),
                 )
@@ -218,6 +244,7 @@ TaskLists.propTypes = {
   cardId: PropTypes.string.isRequired,
   cardTaskLists: PropTypes.array.isRequired,
   removeTaskListInCard: PropTypes.func.isRequired,
+  removeTaskInTaskList: PropTypes.func.isRequired,
   addTaskListInCard: PropTypes.func.isRequired,
   addTaskInTaskList: PropTypes.func.isRequired,
   updateTaskDone: PropTypes.func.isRequired,
