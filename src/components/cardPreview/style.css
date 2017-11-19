@@ -33,11 +33,11 @@
     margin-bottom: 7px;
 }
 
-.clockIcon, .commentsIcon {
+.clockIcon, .commentsIcon, .attachmentsIcon {
     margin-right: 8px;
 }
 
-.commentsDisplay {
+.commentsDisplay, .attachmentsDisplay {
     display: inline-grid;
     margin-top: 17px;
 }

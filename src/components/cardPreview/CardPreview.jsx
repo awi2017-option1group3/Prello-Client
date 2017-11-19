@@ -139,6 +139,20 @@ class CardPreview extends Component {
     )
   }
 
+  renderAttachments() {
+    return (
+      <div>
+        <span>
+          <Icon
+            type={this.props.attachments.length > 0 ? 'link' : ''}
+            className="attachmentsIcon"
+          />
+          {this.props.attachments.length > 0 ? this.props.attachments.length : ''}
+        </span>
+      </div>
+    )
+  }
+
   renderAssignees() {
     return (
       <Assignees
@@ -207,6 +221,15 @@ class CardPreview extends Component {
               ) : (null)
             }
             {
+              typeof this.props.attachments !== 'undefined' && this.props.attachments.length > 0 ? (
+                <Col span={3}>
+                  <div className="attachmentsDisplay">
+                    {this.renderAttachments()}
+                  </div>
+                </Col>
+              ) : (null)
+            }
+            {
               this.props.taskLists.length > 0 ? (
                 <Col span={5}>
                   <div className="taskListsDisplay">
@@ -242,6 +265,7 @@ CardPreview.defaultProps = {
   comments: [],
   assignees: [],
   taskLists: [],
+  attachments: [],
   responsible: {},
   dueComplete: '',
 }
@@ -257,6 +281,7 @@ CardPreview.propTypes = {
   labels: PropTypes.array,
   comments: PropTypes.array,
   taskLists: PropTypes.array,
+  attachments: PropTypes.array,
   responsible: PropTypes.object,
   assignees: PropTypes.array,
   user: PropTypes.object.isRequired,
