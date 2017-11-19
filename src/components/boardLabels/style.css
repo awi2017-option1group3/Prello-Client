@@ -1,0 +1,25 @@
+.boardLabel {
+    display: flex;
+    margin: 10px 10px 10px 0;
+}
+
+.boardLabelOptions button {
+    margin-right: 10px;
+}
+
+.newBoardLabelBlock {
+    display: flex;
+    margin-top: 20px;
+}
+
+.newBoardLabelBlock > * {
+    margin: 0 5px 0 5px;
+}
+
+.newBoardLabelName {
+    width: 200px;
+}
+
+.newBoardLabelColor {
+    width: 150px;
+}
