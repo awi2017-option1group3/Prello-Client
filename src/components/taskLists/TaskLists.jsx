@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Modal, Progress } from 'antd'
+import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Popconfirm, Progress } from 'antd'
 import './style.css'
 import EditField from '../../commons/editField/EditField'
 import CreateWithName from '../../commons/createWithName/CreateWithName'
@@ -105,21 +105,23 @@ class TaskLists extends Component {
     return (
       <Menu>
         <Menu.Item>
-          <Modal
-            title={'Delete'}
-            message={`Are you sure to delete this taskList named : ${taskListTitle} ?`}
-            okText={'Delete'}
-            cancelText={'Cancel'}
-            handleOk={() => this.props.removeTaskListInCard(taskListId)}
-          />
+          <Popconfirm
+            title={`Do you really want to delete the tasks list named ${taskListTitle} ?`}
+            placement="right"
+            onConfirm={() => this.props.removeTaskListInCard(this.props.cardId, taskListId)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <a><Icon type="delete" /> Delete</a>
+          </Popconfirm>
         </Menu.Item>
       </Menu>
     )
   }
 
-  renderDropdown() {
+  renderDropdown(taskListTitle, taskListId) {
     return (
-      <Dropdown overlay={this.renderMenu()}>
+      <Dropdown overlay={this.renderMenu(taskListTitle, taskListId)}>
         <Button shape="circle">
           <Icon type="ellipsis" />
         </Button>
@@ -155,7 +157,7 @@ class TaskLists extends Component {
         {tasklists.map(tasklist =>
           (<UICard
             title={this.renderHeader(tasklist.title, tasklist.id)}
-            extra={this.renderDropdown()}
+            extra={this.renderDropdown(tasklist.title, tasklist.id)}
             className="tasklist"
             key={`tasklist-${tasklist.id}`}
           >
