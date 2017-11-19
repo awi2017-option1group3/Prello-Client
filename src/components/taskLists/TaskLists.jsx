@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Modal, Progress } from 'antd'
-import './style.css'
+import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Modal, Progress, Popconfirm } from 'antd'
+
 import EditField from '../../commons/editField/EditField'
 import CreateWithName from '../../commons/createWithName/CreateWithName'
-
+import './style.css'
 
 class TaskLists extends Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class TaskLists extends Component {
     this.saveTask = this.saveTask.bind(this)
     this.saveTaskList = this.saveTaskList.bind(this)
     this.onCancel = this.onCancel.bind(this)
-    this.deleteTask = this.deleteTask.bind(this)
     this.renderTaskDelete = this.renderTaskDelete.bind(this)
     this.state = {
       addingTaskList: false,
@@ -79,18 +78,6 @@ class TaskLists extends Component {
     this.props.addTaskListInCard(cardId, newTitle)
   }
 
-  deleteTask(taskListId, taskId, taskTitle) {
-    return (
-      <Modal
-        title={'Delete'}
-        message={`Are you sure to delete the task named : ${taskTitle} ?`}
-        okText={'Delete'}
-        cancelText={'Cancel'}
-        handleOk={() => this.props.removeTaskInTaskList(taskId, taskListId)}
-      />
-    )
-  }
-
   renderHeader(taskListTitle, taskListId) {
     return (
       <div className="taskListHeader">
@@ -117,14 +104,19 @@ class TaskLists extends Component {
 
   renderTaskDelete(taskListId, taskId, taskTitle) {
     return (
-      <Button
-        type="primary"
-        icon="close"
-        onClick={() => this.deleteTask(taskListId, taskId, taskTitle)}
-      />
+      <Popconfirm
+        title={`Do you really want to remove the task ${taskTitle}?`}
+        placement="right"
+        onConfirm={() => this.props.removeTaskInTaskList(taskId, taskListId)}
+        okText="Yes"
+        cancelText="No"
+      >
+        <Button
+          icon="close"
+        />
+      </Popconfirm>
     )
   }
-
 
   renderMenu(taskListTitle, taskListId) {
     return (
