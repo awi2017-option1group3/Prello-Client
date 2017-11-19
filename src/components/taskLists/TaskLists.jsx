@@ -166,15 +166,14 @@ class TaskLists extends Component {
               (
                 tasklist.tasks.map(task =>
                   (
-                    <div>
+                    <div className="task">
                       <Checkbox
                         onChange={this.onCheck}
                         checked={task.done}
                         key={`task-${task.id}`}
                         value={task.id}
                         label={task.title}
-                      />
-                      {this.renderTaskText(task.id, task.title)}
+                      />{this.renderTaskText(task.id, task.title)}
                     </div>
                   ),
                 )
@@ -192,8 +191,7 @@ class TaskLists extends Component {
                   })}
                   icon="plus"
                   size="large"
-                  type="primary"
-                >New Task</Button>)}
+                >add Task</Button>)}
             </div>
           </UICard>
           ))}
@@ -208,7 +206,7 @@ class TaskLists extends Component {
               })}
               icon="plus"
               size="large"
-              type="primary"
+              type="dashed"
             >New TaskList</Button>)}
         </div>
       </div>
