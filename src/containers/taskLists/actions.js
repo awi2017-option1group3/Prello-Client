@@ -28,7 +28,7 @@ export const getAllTasksInTasksList = taskListId => (dispatch) => {
 }
 */
 
-export const addTaskListInCard = (cardId, taskListId) => (dispatch) => {
+export const addTaskListInCard = (cardId, title) => (dispatch) => {
   dispatch({
     type: ADD_TASKLIST_IN_CARD,
     cardId,
@@ -37,7 +37,7 @@ export const addTaskListInCard = (cardId, taskListId) => (dispatch) => {
         method: 'POST',
         url: `/api/cards/${cardId}/tasklists/`,
         data: {
-          taskListId,
+          title,
         },
       },
     },

@@ -15,6 +15,7 @@
 .cardContent ul {
     list-style: circle;
     padding-left: 25px;
+    background: #fff;
 }
 
 .assignees {
