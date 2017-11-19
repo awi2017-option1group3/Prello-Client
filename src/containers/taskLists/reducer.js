@@ -40,7 +40,8 @@ export default (state = initialState, action) => {
         ...state,
         data: state.data.map((tasklist) => {
           if (tasklist.id === action.meta.previousAction.taskListId) {
-            return tasklist.tasks.filter(task => task.id !== action.meta.previousAction.taskId)
+            tasklist.tasks = tasklist.tasks.filter(task => task.id !== action.meta.previousAction.taskId)
+            return tasklist
           } 
           return tasklist
         }),

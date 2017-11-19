@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Popconfirm, Progress } from 'antd'
-import './style.css'
+import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Progress, Popconfirm } from 'antd'
+
 import EditField from '../../commons/editField/EditField'
 import CreateWithName from '../../commons/createWithName/CreateWithName'
-
+import './style.css'
 
 class TaskLists extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class TaskLists extends Component {
     this.saveTask = this.saveTask.bind(this)
     this.saveTaskList = this.saveTaskList.bind(this)
     this.onCancel = this.onCancel.bind(this)
+    this.renderTaskDelete = this.renderTaskDelete.bind(this)
     this.state = {
       addingTaskList: false,
       addingTask: false,
@@ -101,6 +102,22 @@ class TaskLists extends Component {
     )
   }
 
+  renderTaskDelete(taskListId, taskId, taskTitle) {
+    return (
+      <Popconfirm
+        title={`Do you really want to remove the task ${taskTitle}?`}
+        placement="right"
+        onConfirm={() => this.props.removeTaskInTaskList(taskId, taskListId)}
+        okText="Yes"
+        cancelText="No"
+      >
+        <Button
+          icon="close"
+        />
+      </Popconfirm>
+    )
+  }
+
   renderMenu(taskListTitle, taskListId) {
     return (
       <Menu>
@@ -141,7 +158,7 @@ class TaskLists extends Component {
         )
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       return (
-        <Progress percent={(done / total) * 100} />
+        <Progress percent={Math.trunc((done / total) * 100)} />
       )
     }
     return (null)
@@ -173,7 +190,9 @@ class TaskLists extends Component {
                         key={`task-${task.id}`}
                         value={task.id}
                         label={task.title}
-                      />{this.renderTaskText(task.id, task.title)}
+                      />
+                      {this.renderTaskText(task.id, task.title)}
+                      {this.renderTaskDelete(task.taskListId, task.id, task.title)}
                     </div>
                   ),
                 )
@@ -218,6 +237,7 @@ TaskLists.propTypes = {
   cardId: PropTypes.string.isRequired,
   cardTaskLists: PropTypes.array.isRequired,
   removeTaskListInCard: PropTypes.func.isRequired,
+  removeTaskInTaskList: PropTypes.func.isRequired,
   addTaskListInCard: PropTypes.func.isRequired,
   addTaskInTaskList: PropTypes.func.isRequired,
   updateTaskDone: PropTypes.func.isRequired,

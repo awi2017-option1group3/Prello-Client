@@ -78,6 +78,7 @@ export const removeTaskInTaskList = (taskId, taskListId) => (dispatch) => {
   dispatch({
     type: REMOVE_TASK_IN_TASKLIST,
     taskId,
+    taskListId,
     payload: {
       request: {
         method: 'DELETE',
