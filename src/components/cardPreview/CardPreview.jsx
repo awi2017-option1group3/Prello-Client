@@ -110,7 +110,7 @@ class CardPreview extends Component {
       const dueDate = moment(this.props.dueComplete.slice(0, 10), 'YYYY-MM-DD')
       diff = dueDate.diff(moment(), 'days') + 1
     }
-    return (
+    return this.props.dueComplete ? (
       <div className="dueCompleteDisplay">
         <span
           className={this.chooseDueDateStyle(diff)}
@@ -119,10 +119,10 @@ class CardPreview extends Component {
             type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
             className="clockIcon"
           />
-          {this.props.dueComplete !== null ? this.props.dueComplete.slice(0, 10) : ''}
+          {moment(this.props.dueComplete).format('L')}
         </span>
       </div>
-    )
+    ) : (null)
   }
 
   renderComments() {

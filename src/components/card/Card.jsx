@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Layout } from 'antd'
+import { Button, DatePicker, Layout, LocaleProvider } from 'antd'
+import enUS from 'antd/lib/locale-provider/en_US'
 import GooglePicker from 'react-google-picker'
-import './style.css'
+import moment from 'moment'
+
 import EditArea from '../../commons/editArea/EditArea'
 import LabelsContainer from '../../containers/labels/LabelsContainer'
 import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
 import TaskListsContainer from '../../containers/taskLists/TaskListsContainer'
 import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
 import CommentsContainer from '../../containers/comments/CommentsContainer'
+import './style.css'
 
 const { Content, Sider } = Layout
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
@@ -79,12 +82,6 @@ class Card extends Component {
               save={(newDesc) => { this.props.updateDesc(this.props.id, newDesc) }}
               hint="Add a description"
             />
-            <p>Desc : {this.props.card.desc}</p>
-            <p>DueDate : {this.props.card.dueComplete}</p>
-            <p>Pos : {this.props.card.pos}</p>
-            <p>List ID : {this.props.card.listId}</p>
-            <p>ID : {this.props.id}</p>
-            <p>More...</p>
             {this.renderTaskLists()}
             <div>
               {this.renderAttachments()}
@@ -92,6 +89,14 @@ class Card extends Component {
             {this.renderComments()}
           </Content>
           <Sider className="sider">
+            <div>
+              <LocaleProvider locale={enUS}>
+                <DatePicker
+                  onChange={dueDate => this.props.updateDueDate(this.props.id, dueDate)}
+                  value={this.props.card.dueComplete ? moment(this.props.card.dueComplete) : null}
+                />
+              </LocaleProvider>
+            </div>
             <div>
               {this.renderLabels()}
             </div>
