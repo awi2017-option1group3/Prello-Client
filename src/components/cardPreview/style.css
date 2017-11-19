@@ -1,4 +1,4 @@
-.card {
+.cardPreview {
     display: inline-grid;
     margin-top: 15px;
     width: 100%;
@@ -8,56 +8,38 @@
     cursor: pointer;
 }
 
-.draggableCard {
-    display: inline-grid;
+.cardPreviewImportantIndicators, .cardPreviewSimpleCounters {
+    display: flex;
 }
 
-.dueCompleteDisplay {
-    display: inline-grid;
-    margin-top: 17px;
-    float: left;
-}
-
-.assignees {
-    display: inline-grid;
-    margin-top: 9px;
-    float: right;
-    height: 25px;
-}
-
-.assigneeInitials {
-    margin-left: 5px;
-}
-
-.cardLabel {
-    margin-bottom: 7px;
-}
-
-.clockIcon, .commentsIcon, .attachmentsIcon {
-    margin-right: 8px;
-}
-
-.commentsDisplay, .attachmentsDisplay {
-    display: inline-grid;
-    margin-top: 17px;
+.cardPreviewImportantIndicators div {
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: 5px;
 }
 
 .dueDateWarning {
     color: #ff7b1d;
 }
 
-.dueDateUrgent, .taskUncompleted {
+.dueDateUrgent {
     color: #FFFFFF;
-    background-color: #FF0000;
-    border-radius: 4px;
-    padding-right : 3px;
-    padding-left : 3px;
+    background-color: #FF0000
 }
 
 .taskCompleted {
     color: #FFFFFF;
     background-color: #2ecc71;
-    border-radius: 4px;
-    padding-right : 3px;
-    padding-left : 3px;
+}
+
+.cardPreviewSimpleCounters div {
+    margin: 5px 10px 5px 0;
+}
+
+.cardPreviewSimpleCounters i {
+    margin-right: 5px;
+}
+
+.clockIcon, .commentsIcon {
+    margin-right: 8px;
 }

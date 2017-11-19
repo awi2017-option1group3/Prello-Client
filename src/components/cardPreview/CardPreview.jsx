@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Card as UICard, Dropdown, Icon, Menu, Row, Col, Modal as UIModal } from 'antd'
+import { Button, Card as UICard, Dropdown, Icon, Menu, Modal as UIModal } from 'antd'
 import moment from 'moment'
 
 import Modal from '../../commons/modal/Modal'
@@ -111,18 +111,35 @@ class CardPreview extends Component {
       diff = dueDate.diff(moment(), 'days') + 1
     }
     return this.props.dueComplete ? (
-      <div className="dueCompleteDisplay">
-        <span
-          className={this.chooseDueDateStyle(diff)}
-        >
-          <Icon
-            type={this.props.dueComplete !== null ? 'clock-circle-o' : ''}
-            className="clockIcon"
-          />
-          {moment(this.props.dueComplete).format('L')}
+      <div className={`cardPreviewDueDate ${this.chooseDueDateStyle(diff)}`}>
+        <span>
+          <Icon type="clock-circle-o" /> {moment(this.props.dueComplete).format('L')}
         </span>
       </div>
     ) : (null)
+  }
+
+  renderTasks() {
+    if (this.props.taskLists.length > 0) {
+      const total = this.props.taskLists
+        .map(taskList => taskList.tasks.length)
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      const done = this.props.taskLists
+        .map(taskList => taskList.tasks
+          .map(task => (task.done ? 1 : 0))
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+        )
+        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      const display = `${done} / ${total}`
+      return (
+        <div className={`cardPreviewTasks ${done / total === 1 ? 'taskCompleted' : ''}`}>
+          <span>
+            <Icon type="check-square-o" /> {display}
+          </span>
+        </div>
+      )
+    }
+    return (null)
   }
 
   renderComments() {
@@ -131,7 +148,6 @@ class CardPreview extends Component {
         <span>
           <Icon
             type={this.props.comments.length > 0 ? 'message' : ''}
-            className="commentsIcon"
           />
           {this.props.comments.length > 0 ? this.props.comments.length : ''}
         </span>
@@ -145,7 +161,6 @@ class CardPreview extends Component {
         <span>
           <Icon
             type={this.props.attachments.length > 0 ? 'link' : ''}
-            className="attachmentsIcon"
           />
           {this.props.attachments.length > 0 ? this.props.attachments.length : ''}
         </span>
@@ -165,85 +180,25 @@ class CardPreview extends Component {
     )
   }
 
-  renderTaskListsCompleted() {
-    if (this.props.taskLists.length > 0) {
-      const total = this.props.taskLists
-        .map(taskList => taskList.tasks.length)
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-      const done = this.props.taskLists
-        .map(taskList => taskList.tasks
-          .map(task => task.done ? 1 : 0)
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-        )
-        .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-      const display = `${done} / ${total}`
-      return (
-        <div className={done / total === 1 ? 'taskCompleted' : 'taskUncompleted'}>
-          <span>
-            <Icon type="check-square-o" /> {display}
-          </span>
-        </div>
-      )
-    } 
-    return (null)
-  }
-
   render() {
     return (
       <UICard
         title={this.renderHeader()}
         extra={this.renderDropdown()}
         {...this.props.dragHandleProps} 
-        className="card"
+        className="cardPreview"
       >
-        <div className="topLabels">
-          {this.renderLabels()}
-        </div>
         <div onClick={this.showModal}>
-          <p>Pos     : {this.props.pos}</p>
-          <p>List ID : {this.props.listId}</p>
-          <p>ID      : {this.props.id}</p>
-          <p>Desc    : {this.props.desc}</p>
-          <Row className="cardFooter">
-            { this.props.dueComplete !== '' ? (
-              <Col span={8}>
-                {this.renderDueDate()}
-              </Col>
-            ) : (null)
-            }
-            {
-              typeof this.props.comments !== 'undefined' && this.props.comments.length > 0 ? (
-                <Col span={3}>
-                  <div className="commentsDisplay">
-                    {this.renderComments()}
-                  </div>
-                </Col>
-              ) : (null)
-            }
-            {
-              typeof this.props.attachments !== 'undefined' && this.props.attachments.length > 0 ? (
-                <Col span={3}>
-                  <div className="attachmentsDisplay">
-                    {this.renderAttachments()}
-                  </div>
-                </Col>
-              ) : (null)
-            }
-            {
-              this.props.taskLists.length > 0 ? (
-                <Col span={5}>
-                  <div className="taskListsDisplay">
-                    {this.renderTaskListsCompleted()}
-                  </div>
-                </Col>
-              ) : (null)
-            }
-            <Col span={12}>
-              <div className="assignees">
-                {this.renderAssignees()}
-              </div>
-            </Col>
-          </Row>
+          {this.renderLabels()}
+          <div className="cardPreviewImportantIndicators">
+            {this.renderDueDate()}
+            {this.renderTasks()}
+          </div>
+          <div className="cardPreviewSimpleCounters">
+            {this.renderComments()}
+            {this.renderAttachments()}
+          </div>
+          {this.renderAssignees()}
         </div>
         <div>
           <UIModal
