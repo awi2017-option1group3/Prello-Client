@@ -89,6 +89,7 @@ class Card extends Component {
             <div>
               {this.renderAttachments()}
             </div>
+            {this.renderComments()}
           </Content>
           <Sider className="sider">
             <div>
@@ -113,7 +114,6 @@ class Card extends Component {
             >
               <Button type="primary" className="siderButton">Google Drive</Button>
             </GooglePicker>
-            {this.renderComments()}
           </Sider>
         </Layout>
       </div>
