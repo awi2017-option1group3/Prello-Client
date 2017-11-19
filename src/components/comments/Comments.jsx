@@ -41,7 +41,9 @@ class Comments extends Component {
           autosize
         />
         <div className="newCommentSubmit">
-          <Button shape="circle" icon="message" onClick={this.add} />
+          <Tooltip title="send" placement="top">
+            <Button shape="circle" icon="message" onClick={this.add} />
+          </Tooltip>
         </div>
         <div className="commentAvatar">
           <span>{this.props.user.initials.toUpperCase()}</span>
