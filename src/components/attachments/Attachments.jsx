@@ -9,7 +9,7 @@ const Attachments = props => (
     {props.attachments.map(attachment => (
       <div key={attachment.id}>
         <Tooltip title={attachment.name}>
-          <a target="_blank" href={attachment.url}><Button type="primary" className="fileButton"><Icon type="file" />{attachment.name}</Button></a>
+          <a target="_blank" href={attachment.url}><Button className="fileButton"><Icon type="file" className="icon" />{attachment.name}</Button></a>
         </Tooltip>
         <Popconfirm
           title="Do you really want to delete this attachment ?"
