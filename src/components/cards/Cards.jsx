@@ -74,7 +74,7 @@ class Cards extends Component {
               </div>
             ) : (
               <div className="addCardBlock">
-                {this.state.adding ? (
+                { this.state.adding ? (
                   this.add()
                 ) : (
                   <Button
