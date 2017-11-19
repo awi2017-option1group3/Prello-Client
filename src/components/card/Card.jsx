@@ -53,7 +53,7 @@ class Card extends Component {
 
   renderAttachments() {
     return (
-      <div>
+      <div className="attachment">
         <h3>Attachments</h3>
         <AttachmentsContainer cardId={this.props.id} />
       </div>

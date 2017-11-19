@@ -22,6 +22,10 @@
     background: #fff;
 }
 
+.attachment {
+    margin-top: 10px;
+}
+
 .assignees {
     display: inline-grid;
     margin-top: 9px;
