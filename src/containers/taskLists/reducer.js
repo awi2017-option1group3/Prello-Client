@@ -22,8 +22,7 @@ export default (state = initialState, action) => {
     case `${REMOVE_TASKLIST_IN_CARD}_SUCCESS`:
       return {
         ...state,
-
-        data: state.data.filter(tasklist => tasklist.id !== action.meta.previousAction.cardId),
+        data: state.data.filter(tasklist => tasklist.cardId !== action.meta.previousAction.cardId),
       }
     case `${ADD_TASK_IN_TASKLIST}_SUCCESS`:
       return {
