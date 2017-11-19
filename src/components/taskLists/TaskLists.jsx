@@ -166,7 +166,7 @@ class TaskLists extends Component {
               (
                 tasklist.tasks.map(task =>
                   (
-                    <div className="task">
+                    <div key={task.id}>
                       <Checkbox
                         onChange={this.onCheck}
                         checked={task.done}
@@ -190,7 +190,7 @@ class TaskLists extends Component {
                     addingTask: true,
                   })}
                   icon="plus"
-                  size="large"
+                  size="small"
                 >add Task</Button>)}
             </div>
           </UICard>
@@ -205,7 +205,7 @@ class TaskLists extends Component {
                 addingTaskList: true,
               })}
               icon="plus"
-              size="large"
+              size="small"
               type="dashed"
             >New TaskList</Button>)}
         </div>
