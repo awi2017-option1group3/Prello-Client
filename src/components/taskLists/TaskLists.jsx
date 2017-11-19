@@ -84,7 +84,6 @@ class TaskLists extends Component {
   }
 
   render() {
-    // debugger
     const tasklists = this.props.cardTaskLists
     console.log('RENDER')
     console.log(tasklists)

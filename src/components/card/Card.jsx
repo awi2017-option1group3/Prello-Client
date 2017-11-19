@@ -8,6 +8,7 @@ import LabelsContainer from '../../containers/labels/LabelsContainer'
 import AssigneesContainer from '../../containers/assignees/AssigneesContainer'
 import TaskListsContainer from '../../containers/taskLists/TaskListsContainer'
 import AttachmentsContainer from '../../containers/attachments/AttachmentsContainer'
+import CommentsContainer from '../../containers/comments/CommentsContainer'
 
 const { Content } = Layout
 const SCOPE = ['https://www.googleapis.com/auth/drive.readonly']
@@ -43,7 +44,7 @@ class Card extends Component {
 
   renderLabels() {
     return (
-      <LabelsContainer cardId={this.props.id} displayLabels displaySelect/>
+      <LabelsContainer cardId={this.props.id} displayLabels displaySelect />
     )
   }
 
@@ -58,6 +59,13 @@ class Card extends Component {
       <TaskListsContainer cardId={this.props.id} />
     )
   }
+
+  renderComments() {
+    return (
+      <CommentsContainer card={this.props.card} />
+    )
+  }
+
   render() {
     return (
       <div>
@@ -100,6 +108,7 @@ class Card extends Component {
             <div>
               {this.renderAttachments()}
             </div>
+            {this.renderComments()}
           </Content>
         </Layout>
       </div>
