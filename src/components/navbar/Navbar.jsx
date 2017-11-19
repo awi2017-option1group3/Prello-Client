@@ -20,7 +20,7 @@ class Navbar extends Component {
     let links = null
     if (showUserRelatedHeader) {
       links = [
-        { to: routes.root, text: 'Home' },
+        { to: routes.root, text: 'My boards' },
         { to: routes.profil, text: 'My Profil' },
       ]
     } else {
