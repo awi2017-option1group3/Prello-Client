@@ -84,7 +84,7 @@ export default (state = initialState, action) => {
     case `${UPDATE_DUE_DATE}_SUCCESS`:
       return {
         ...state,
-        dueComplete: action.payload.data,
+        ...action.payload.data,
         isAddingDueDate: false,
       }
     case `${UPDATE_DUE_DATE}_FAIL`:
