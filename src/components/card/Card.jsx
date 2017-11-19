@@ -49,7 +49,10 @@ class Card extends Component {
 
   renderAttachments() {
     return (
-      <AttachmentsContainer cardId={this.props.id} />
+      <div>
+        <h3>Attachments</h3>
+        <AttachmentsContainer cardId={this.props.id} />
+      </div>
     )
   }
 
