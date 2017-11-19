@@ -89,6 +89,18 @@ class TaskLists extends Component {
     )
   }
 
+  renderTaskText(taskId, taskText) {
+    return (
+      <div className="taskText">
+        <EditField
+          text={taskText}
+          save={newTaskText => this.props.updateTaskTitle(taskId, newTaskText)}
+          hint="No name yet, add one !"
+        />
+      </div>
+    )
+  }
+
   renderMenu(taskListTitle, taskListId) {
     return (
       <Menu>
@@ -122,8 +134,8 @@ class TaskLists extends Component {
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       const done = this.props.cardTaskLists
         .map(taskList => taskList.tasks
-          .map(task => task.done ? 1 : 0)
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+          .map(task => (task.done ? 1 : 0))
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
         )
         .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       return (
@@ -152,15 +164,16 @@ class TaskLists extends Component {
               (
                 tasklist.tasks.map(task =>
                   (
-                    <Checkbox
-                      onChange={this.onCheck}
-                      checked={task.done}
-                      key={`task-${task.id}`}
-                      value={task.id}
-                      label={task.title}
-                    >
-                      {task.title}
-                    </Checkbox>
+                    <div>
+                      <Checkbox
+                        onChange={this.onCheck}
+                        checked={task.done}
+                        key={`task-${task.id}`}
+                        value={task.id}
+                        label={task.title}
+                      />
+                      {this.renderTaskText(task.id, task.title)}
+                    </div>
                   ),
                 )
               ) :
@@ -209,6 +222,7 @@ TaskLists.propTypes = {
   addTaskInTaskList: PropTypes.func.isRequired,
   updateTaskDone: PropTypes.func.isRequired,
   updateTaskListTitle: PropTypes.func.isRequired,
+  updateTaskTitle: PropTypes.func.isRequired,
 }
 
 export default TaskLists
