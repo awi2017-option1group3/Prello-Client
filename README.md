@@ -1,3 +1,5 @@
+Try our client here : https://prello-by-gluon.herokuapp.com/
+
 # Prello (Client)
 
 Study project attempting to make a Trello clone. 
