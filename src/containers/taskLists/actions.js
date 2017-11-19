@@ -64,7 +64,7 @@ export const addTaskInTaskList = (taskListId, title) => (dispatch) => {
 export const removeTaskListInCard = (cardId, taskListId) => (dispatch) => {
   dispatch({
     type: REMOVE_TASKLIST_IN_CARD,
-    cardId,
+    taskListId,
     payload: {
       request: {
         method: 'DELETE',
