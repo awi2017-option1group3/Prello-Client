@@ -1,7 +1,7 @@
 .list {
     display: inline-grid;
     margin: 10px;
-    width: 250px;
+    width: 350px;
 }
 
 .listHeader {
@@ -14,5 +14,5 @@
 
 .draggableList {
     display: inline-grid;
-    min-width: 270px;
+    min-width: 370px;
 }
