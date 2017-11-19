@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Card as UICard, Checkbox, Dropdown, Icon, Menu, Progress, Popconfirm } from 'antd'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
 import EditField from '../../commons/editField/EditField'
 import CreateWithName from '../../commons/createWithName/CreateWithName'
@@ -90,12 +91,12 @@ class TaskLists extends Component {
     )
   }
 
-  renderTaskText(taskId, taskText) {
+  renderTaskText(task) {
     return (
-      <div className="taskText">
+      <div>
         <EditField
-          text={taskText}
-          save={newTaskText => this.props.updateTaskTitle(taskId, newTaskText)}
+          text={task.done ? (<del>{task.title}</del>) : task.title}
+          save={newTaskText => this.props.updateTaskTitle(task.id, newTaskText)}
           hint="No name yet, add one !"
         />
       </div>
@@ -112,6 +113,7 @@ class TaskLists extends Component {
         cancelText="No"
       >
         <Button
+          size="small"
           icon="close"
         />
       </Popconfirm>
@@ -168,52 +170,61 @@ class TaskLists extends Component {
     const tasklists = this.props.cardTaskLists
     return (
       <div>
-        <div>
+        <div className="tasklistsCompleted">
           {this.renderTaskListsCompleted()}
         </div>
-        {tasklists.map(tasklist =>
-          (<UICard
-            title={this.renderHeader(tasklist.title, tasklist.id)}
-            extra={this.renderDropdown(tasklist.title, tasklist.id)}
-            className="tasklist"
-            key={`tasklist-${tasklist.id}`}
-          >
-            { typeof tasklist.tasks !== 'undefined'
-              && tasklist.tasks.length > 0 ?
+        <Grid fluid>
+          <Row>
+            {tasklists.map(tasklist =>
               (
-                tasklist.tasks.map(task =>
-                  (
-                    <div key={task.id}>
-                      <Checkbox
-                        onChange={this.onCheck}
-                        checked={task.done}
-                        key={`task-${task.id}`}
-                        value={task.id}
-                        label={task.title}
-                      />
-                      {this.renderTaskText(task.id, task.title)}
-                      {this.renderTaskDelete(task.taskListId, task.id, task.title)}
+                <Col xs={12} sm={6} md={4} lg={3} key={tasklist.id}>
+                  <UICard
+                    className="tasklist"
+                    title={this.renderHeader(tasklist.title, tasklist.id)}
+                    extra={this.renderDropdown(tasklist.title, tasklist.id)}
+                    key={`tasklist-${tasklist.id}`}
+                  >
+                    { typeof tasklist.tasks !== 'undefined' && tasklist.tasks.length > 0 ?
+                      (
+                        tasklist.tasks.map(task =>
+                          (
+                            <div key={`tasklist-${tasklist.id}-task-${task.id}`} className="taskInTasklist">
+                              <div>
+                                <Checkbox
+                                  onChange={this.onCheck}
+                                  checked={task.done}
+                                  key={`task-${task.id}`}
+                                  value={task.id}
+                                  label={task.title}
+                                />
+                              </div>
+                              {this.renderTaskText(task)}
+                              {this.renderTaskDelete(task.taskListId, task.id, task.title)}
+                            </div>
+                          ),
+                        )
+                      ) :
+                      (null)
+                    }
+                    <div className="addTaskBlock">
+                      {this.state.addingTask ? (
+                        this.addTask(tasklist.id)
+                      ) : (
+                        <Button
+                          className="addTaskButton"
+                          onClick={() => this.setState({
+                            addingTask: true,
+                          })}
+                          icon="plus"
+                          size="small"
+                        >Add task</Button>)}
                     </div>
-                  ),
-                )
-              ) :
-              (null)
-            }
-            <div className="addTaskBlock">
-              {this.state.addingTask ? (
-                this.addTask(tasklist.id)
-              ) : (
-                <Button
-                  className="addTaskButton"
-                  onClick={() => this.setState({
-                    addingTask: true,
-                  })}
-                  icon="plus"
-                  size="small"
-                >add Task</Button>)}
-            </div>
-          </UICard>
-          ))}
+                  </UICard>
+                </Col>
+              ))}
+          </Row>
+        </Grid>
+
         <div className="addTaskListBlock">
           {this.state.addingTaskList ? (
             this.addTaskList(this.props.cardId)
@@ -226,7 +237,7 @@ class TaskLists extends Component {
               icon="plus"
               size="small"
               type="dashed"
-            >New TaskList</Button>)}
+            >Add task list</Button>)}
         </div>
       </div>
     )

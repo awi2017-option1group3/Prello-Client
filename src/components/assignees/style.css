@@ -1,14 +1,14 @@
-.cardAssignees {
-    margin: 5px;
-    width: 100%;
+.cardAssigneesGroup {
+    display: flex;
+    margin: 5px 5px 20px 0;
 }
 
-.cardMember {
-    margin-right: 5px;
+.cardAssignees {
+    margin: auto 5px auto 5px;
 }
 
 .cardResponsible {
-    width: 100%;
+    margin: auto 5px auto 5px;
 }
 
 .cardAvatar {

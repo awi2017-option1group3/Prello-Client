@@ -6,7 +6,7 @@ import './style.css'
 class Labels extends Component {
   render() {
     return (
-      <div>
+      <div className="cardLabels">
         {this.props.cardLabels.sort((a, b) => a.name < b.name).map(label => (
           <Tag color={label.color} key={`label-display-${(this.props.cardId + label.id)}`} className="cardLabel">
             {label.name}

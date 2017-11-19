@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Row, Col } from 'antd'
-import { getAllLabelsInCard, addLabelInCard, removeLabelInCard } from './actions'
-import Labels from '../../components/labels/Labels'
-import LabelsSelect from '../../components/labels/LabelsSelect'
 
+import { getAllLabelsInCard, addLabelInCard, removeLabelInCard } from './actions'
+import LabelsGroup from '../../components/labels/LabelsGroup'
 
 class LabelsContainer extends Component {
   componentWillMount() {
@@ -15,22 +13,7 @@ class LabelsContainer extends Component {
 
   render() {
     return (
-      <Row className="cardDetailLabels">
-        { this.props.displayLabels ? (
-          <Col span={12}>
-            <Labels {...this.props} />
-          </Col>
-        ) : (
-          <Col span={0} />
-        )}
-        { this.props.displaySelect ? (
-          <Col span={9} className="cardSelector">
-            <LabelsSelect {...this.props} />
-          </Col>
-        ) : (
-          <Col span={0} />
-        )}
-      </Row>
+      <LabelsGroup {...this.props} />
     )
   }
 }
@@ -40,8 +23,6 @@ LabelsContainer.propTypes = {
   getAllLabelsInCard: PropTypes.func.isRequired,
   addLabelInCard: PropTypes.func.isRequired,
   removeLabelInCard: PropTypes.func.isRequired,
-  displayLabels: PropTypes.bool.isRequired,
-  displaySelect: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({

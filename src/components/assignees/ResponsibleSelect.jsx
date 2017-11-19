@@ -10,7 +10,7 @@ class ResponsibleSelect extends Component {
     super(props)
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this)
     this.state = {
-      placeholder: 'Choose responsible...',
+      value: 'Responsible',
     }
   }
 
@@ -38,14 +38,15 @@ class ResponsibleSelect extends Component {
       }
     }
     this.setState({
-      placeholder: 'Choose responsible...',
+      value: 'Responsible',
     })
   }
 
   render() {
     return (<Select
       className="cardResponsible"
-      placeholder={this.state.placeholder}
+      placeholder="Responsible"
+      value={this.state.value}
       onChange={this.handleChangeResponsible}
       tokenSeparators={[',']}
     >

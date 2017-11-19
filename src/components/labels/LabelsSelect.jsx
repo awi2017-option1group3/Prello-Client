@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Select } from 'antd'
+import { Select, Tag } from 'antd'
 import './style.css'
 
 const Option = Select.Option
@@ -9,6 +9,9 @@ class LabelsSelect extends Component {
   constructor(props) {
     super(props)
     this.handleChangeLabels = this.handleChangeLabels.bind(this)
+    this.state = {
+      value: 'Labels',
+    }
   }
 
   handleChangeLabels(value) {
@@ -18,17 +21,29 @@ class LabelsSelect extends Component {
     } else {
       this.props.addLabelInCard(this.props.cardId, labelId)
     }
+    this.setState({
+      value: 'Labels',
+    })
   }
 
   render() {
     return (
       <Select
         className="selectLabels"
-        placeholder="Select labels..."
+        placeholder="Labels"
+        value={this.state.value}
         onChange={this.handleChangeLabels}
         tokenSeparators={[',']}
       >
-        {this.props.boardLabels.map(label => <Option key={this.props.cardId + label.id} style={{ backgroundColor: label.color}} className="optionLabel">{label.name}</Option>)}
+        {this.props.boardLabels.map(label => (
+          <Option
+            key={this.props.cardId + label.id}
+          >
+            <Tag color={label.color} key={`label-select-${(this.props.cardId + label.id)}`}>
+              {label.name}
+            </Tag>
+          </Option>
+        ))}
       </Select>
     )
   }

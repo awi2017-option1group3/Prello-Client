@@ -1,9 +1,29 @@
-.addTaskButton {
-    margin-top: 10px;
-    margin-left: 25%;
+.addTaskBlock {
+    text-align: center;
 }
 
-.addTaskListButton {
-    margin-top: 5px;
-    margin-left: 25%;
+.addTaskButton {
+    margin-top: 20px;
+}
+
+.addTaskListBlock {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tasklistsCompleted {
+    margin: 5px 0 10px 0;
+}
+
+.tasklist {
+    margin-bottom: 20px;
+}
+
+.taskInTasklist {
+    display: flex;
+    margin: 2px 0 2px 0;
+}
+
+.taskInTasklist > div {
+    margin: auto 5px auto 5px;
 }
