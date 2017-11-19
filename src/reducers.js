@@ -15,6 +15,7 @@ import assigneesReducer from './containers/assignees/reducer'
 import labelsReducer from './containers/labels/reducer'
 import tasksReducer from './containers/taskLists/reducer'
 import cardAttachmentsReducer from './containers/attachments/reducer'
+import cardCommentsReducer from './containers/comments/reducer'
 import forgotPasswordReducer from './containers/forgotPassword/reducer'
 import checkRegistrationReducer from './containers/checkRegistration/reducer'
 
@@ -41,6 +42,7 @@ export default combineReducers({
   cardAssignees: assigneesReducer,
   cardTasks: tasksReducer,
   cardAttachments: cardAttachmentsReducer,
+  cardComments: cardCommentsReducer,
 
   labels: labelsReducer,
 })
